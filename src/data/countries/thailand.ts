@@ -11,11 +11,11 @@ export const thailand: Country = {
   climate: "Tropical, com estação seca e chuvosa",
   transportation: "Tuk-tuks, metrô em Bangkok, trens e ônibus entre cidades",
   gallery: [
-    "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a",
-    "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa",
-    "https://images.unsplash.com/photo-1528181304800-259b08848526",
-    "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4",
-    "https://images.unsplash.com/photo-1552550018-5253c1b171e1"
+    "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a", // Grande Palácio
+    "https://images.unsplash.com/photo-1506665531195-3566af2b4dfa", // Templos de Bangkok
+    "https://images.unsplash.com/photo-1528181304800-259b08848526", // Phi Phi Islands
+    "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4", // Praias de Phuket
+    "https://images.unsplash.com/photo-1552550018-5253c1b171e1", // Templo do Buda de Esmeralda
   ],
   tips: [
     {

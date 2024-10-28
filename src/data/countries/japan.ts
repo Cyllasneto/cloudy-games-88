@@ -11,11 +11,11 @@ export const japan: Country = {
   climate: "Quatro estações bem definidas, com verões quentes e úmidos e invernos frios",
   transportation: "Metrô, trem-bala (Shinkansen), ônibus e táxis",
   gallery: [
-    "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e",
-    "https://images.unsplash.com/photo-1528360983277-13d401cdc186",
-    "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d",
-    "https://images.unsplash.com/photo-1542051841857-5f90071e7989",
-    "https://images.unsplash.com/photo-1545569341-9eb8b30979d9"
+    "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e", // Monte Fuji
+    "https://images.unsplash.com/photo-1545569341-9eb8b30979d9", // Templo Sensoji
+    "https://images.unsplash.com/photo-1480796927426-f609979314bd", // Fushimi Inari
+    "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d", // Shibuya Crossing
+    "https://images.unsplash.com/photo-1578321272176-b7bbc0679853", // Templo Dourado
   ],
   tips: [
     {

@@ -11,11 +11,11 @@ export const greece: Country = {
   climate: "Mediterrâneo, com verões quentes e secos e invernos amenos",
   transportation: "Ferries entre ilhas, ônibus e metrô nas grandes cidades",
   gallery: [
-    "https://images.unsplash.com/photo-1516483638261-f4dbaf036963",
-    "https://images.unsplash.com/photo-1523568129082-a8d6c095638e",
-    "https://images.unsplash.com/photo-1530841377377-3ff06c0ca713",
-    "https://images.unsplash.com/photo-1533105079780-92b9be482077",
-    "https://images.unsplash.com/photo-1504512485720-7d83a16ee930"
+    "https://images.unsplash.com/photo-1603565816030-6b389eeb23cb", // Acrópole
+    "https://images.unsplash.com/photo-1533105079780-92b9be482077", // Santorini
+    "https://images.unsplash.com/photo-1516483638261-f4dbaf036963", // Mykonos
+    "https://images.unsplash.com/photo-1604508230015-5a54fda5db91", // Parthenon
+    "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7", // Meteora
   ],
   tips: [
     {

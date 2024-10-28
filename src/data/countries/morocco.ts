@@ -1,4 +1,4 @@
-import { Country, TipType } from "../types";
+import { Country } from "../types";
 
 export const morocco: Country = {
   title: "Marrocos",
@@ -11,11 +11,11 @@ export const morocco: Country = {
   climate: "Mediterrâneo no litoral, árido no interior",
   transportation: "Trens entre grandes cidades, táxis e ônibus locais",
   gallery: [
-    "https://images.unsplash.com/photo-1548013146-72479768bada",
-    "https://images.unsplash.com/photo-1531375154063-1d3c1b5e6a29",
-    "https://images.unsplash.com/photo-1547644768-5cb16240d705",
-    "https://images.unsplash.com/photo-1553603227-2358aabe821f",
-    "https://images.unsplash.com/photo-1539020140153-e479b8c22e70"
+    "https://images.unsplash.com/photo-1548013146-72479768bada", // Medina de Marrakech
+    "https://images.unsplash.com/photo-1531375154063-1d3c1b5e6a29", // Deserto do Saara
+    "https://images.unsplash.com/photo-1547644768-5cb16240d705", // Chefchaouen
+    "https://images.unsplash.com/photo-1553603227-2358aabe821f", // Fez
+    "https://images.unsplash.com/photo-1539020140153-e479b8c22e70", // Casablanca
   ],
   tips: [
     {

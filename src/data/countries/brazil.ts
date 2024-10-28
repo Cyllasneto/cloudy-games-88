@@ -11,11 +11,11 @@ export const brazil: Country = {
   climate: "Tropical na maior parte do país, com variações regionais",
   transportation: "Voos domésticos, ônibus interestaduais e metrô nas grandes cidades",
   gallery: [
-    "https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f",
-    "https://images.unsplash.com/photo-1518639192441-8fce0a366e2e",
-    "https://images.unsplash.com/photo-1564659907532-6b5f98c8e70f",
-    "https://images.unsplash.com/photo-1554168848-228452c09d60",
-    "https://images.unsplash.com/photo-1612476957058-3927501c0892"
+    "https://images.unsplash.com/photo-1483729558449-99ef09a8c325", // Cristo Redentor
+    "https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f", // Pão de Açúcar
+    "https://images.unsplash.com/photo-1518639192441-8fce0a366e2e", // Cataratas do Iguaçu
+    "https://images.unsplash.com/photo-1564659907532-6b5f98c8e70f", // Pelourinho
+    "https://images.unsplash.com/photo-1612476957058-3927501c0892", // Praia de Copacabana
   ],
   tips: [
     {

@@ -11,11 +11,11 @@ export const italy: Country = {
   climate: "Mediterrâneo, com verões quentes e secos e invernos amenos",
   transportation: "Metrô, ônibus, trem e táxis",
   gallery: [
-    "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07",
-    "https://images.unsplash.com/photo-1504893524553-b855bce32c67",
-    "https://images.unsplash.com/photo-1552832230-c0197dd311b5",
-    "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b",
-    "https://images.unsplash.com/photo-1525874684015-58379d421a52"
+    "https://images.unsplash.com/photo-1552832230-c0197dd311b5", // Coliseu
+    "https://images.unsplash.com/photo-1523531294919-4bcd7c65e216", // Veneza
+    "https://images.unsplash.com/photo-1516483638261-f4dbaf036963", // Cinque Terre
+    "https://images.unsplash.com/photo-1533575770077-052fa2c609fc", // Fontana di Trevi
+    "https://images.unsplash.com/photo-1525874684015-58379d421a52", // Vaticano
   ],
   tips: [
     {

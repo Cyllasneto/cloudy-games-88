@@ -11,11 +11,11 @@ export const france: Country = {
   climate: "Temperado, com verões amenos e invernos frios",
   transportation: "Rede extensa de trens de alta velocidade (TGV), metrô nas grandes cidades",
   gallery: [
-    "https://images.unsplash.com/photo-1499856871958-5b9627545d1a",
-    "https://images.unsplash.com/photo-1520939817895-060bdaf4fe1b",
-    "https://images.unsplash.com/photo-1551634979-2b11f8c946fe",
-    "https://images.unsplash.com/photo-1590490359683-658d3d23f972",
-    "https://images.unsplash.com/photo-1543349689-9a4d426bee8e"
+    "https://images.unsplash.com/photo-1502602898657-3e91760cbb34", // Torre Eiffel
+    "https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f", // Arco do Triunfo
+    "https://images.unsplash.com/photo-1603266439799-d2460346d103", // Versalhes
+    "https://images.unsplash.com/photo-1605883705077-8d3d3cebe78c", // Monte Saint-Michel
+    "https://images.unsplash.com/photo-1520939817895-060bdaf4fe1b", // Louvre
   ],
   tips: [
     {
