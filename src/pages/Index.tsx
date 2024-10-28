@@ -17,6 +17,41 @@ const destinations = [
     country: "Japão",
     imageUrl: "https://images.unsplash.com/photo-1503899036084-c55cdd92da26",
     description: "Tradição e modernidade se encontram nesta metrópole vibrante.",
+  },
+  {
+    id: "italy",
+    title: "Roma",
+    country: "Itália",
+    imageUrl: "https://images.unsplash.com/photo-1504893524553-b855bce32c67",
+    description: "História milenar, arte renascentista e gastronomia incomparável.",
+  },
+  {
+    id: "greece",
+    title: "Atenas",
+    country: "Grécia",
+    imageUrl: "https://images.unsplash.com/photo-1501904831357-99414e58b1c3",
+    description: "Berço da civilização ocidental, com ilhas paradisíacas e história milenar.",
+  },
+  {
+    id: "thailand",
+    title: "Bangkok",
+    country: "Tailândia",
+    imageUrl: "https://images.unsplash.com/photo-1504214208698-ea446addfa7e",
+    description: "Reino do sorriso, com praias paradisíacas e templos budistas.",
+  },
+  {
+    id: "morocco",
+    title: "Marrakech",
+    country: "Marrocos",
+    imageUrl: "https://images.unsplash.com/photo-1489749798305-4fea3ae63d43",
+    description: "Um país de contrastes, com medinas antigas e o deserto do Saara.",
+  },
+  {
+    id: "brazil",
+    title: "Rio de Janeiro",
+    country: "Brasil",
+    imageUrl: "https://images.unsplash.com/photo-1483729558449-99ef09a8c325",
+    description: "Praias paradisíacas, floresta amazônica e cultura vibrante.",
   }
 ]
 
@@ -33,7 +68,7 @@ const Index = () => {
       <main className="container max-w-6xl mx-auto py-16 px-4">
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-8">Destinos em Destaque</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {destinations.map((destination) => (
               <Link key={destination.id} to={`/country/${destination.id}`}>
                 <DestinationCard {...destination} />
