@@ -2,7 +2,25 @@ import { useParams } from "react-router-dom"
 import { Hotel, Map, Utensils } from "lucide-react"
 import TravelTips from "@/components/TravelTips"
 
-const countries = {
+type TipType = "hotel" | "activity" | "restaurant"
+
+interface Tip {
+  type: TipType
+  title: string
+  description: string
+  price: string
+  link?: string
+}
+
+interface Country {
+  title: string
+  description: string
+  heroImage: string
+  gallery: string[]
+  tips: Tip[]
+}
+
+const countries: Record<string, Country> = {
   france: {
     title: "França",
     description: "Descubra a magia da França, um país que combina cultura, história e gastronomia de maneira única.",
@@ -14,27 +32,27 @@ const countries = {
     ],
     tips: [
       {
-        type: "hotel",
+        type: "hotel" as TipType,
         title: "Four Seasons George V",
         description: "Hotel luxuoso próximo aos Champs-Élysées com vista para a Torre Eiffel.",
         price: "€€€€",
         link: "https://www.fourseasons.com/paris/"
       },
       {
-        type: "hotel",
+        type: "hotel" as TipType,
         title: "Ritz Paris",
         description: "Um dos hotéis mais icônicos do mundo, com história e luxo incomparáveis.",
         price: "€€€€",
         link: "https://www.ritzparis.com/"
       },
       {
-        type: "activity",
+        type: "activity" as TipType,
         title: "Museu do Louvre",
         description: "O maior museu de arte do mundo, lar da Mona Lisa.",
         price: "€€"
       },
       {
-        type: "restaurant",
+        type: "restaurant" as TipType,
         title: "L'Abeille",
         description: "Restaurante com 2 estrelas Michelin oferecendo alta gastronomia francesa.",
         price: "€€€€"
@@ -52,27 +70,27 @@ const countries = {
     ],
     tips: [
       {
-        type: "hotel",
+        type: "hotel" as TipType,
         title: "Park Hyatt Tokyo",
         description: "Hotel luxuoso em Shinjuku, famoso pelo filme Lost in Translation.",
         price: "¥¥¥¥",
         link: "https://www.hyatt.com/en-US/hotel/japan/park-hyatt-tokyo/tyoph"
       },
       {
-        type: "hotel",
+        type: "hotel" as TipType,
         title: "Mandarin Oriental Tokyo",
         description: "Vista panorâmica de Tóquio e serviço impecável.",
         price: "¥¥¥¥",
         link: "https://www.mandarinoriental.com/tokyo/"
       },
       {
-        type: "activity",
+        type: "activity" as TipType,
         title: "Templo Senso-ji",
         description: "O templo budista mais antigo de Tóquio.",
         price: "¥"
       },
       {
-        type: "restaurant",
+        type: "restaurant" as TipType,
         title: "Sukiyabashi Jiro",
         description: "Um dos melhores restaurantes de sushi do mundo.",
         price: "¥¥¥¥"
