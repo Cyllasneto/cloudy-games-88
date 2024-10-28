@@ -14,7 +14,7 @@ export const greece: Country = {
     "https://images.unsplash.com/photo-1603565816030-6b389eeb23cb", // Acrópole
     "https://images.unsplash.com/photo-1533105079780-92b9be482077", // Santorini
     "https://images.unsplash.com/photo-1516483638261-f4dbaf036963", // Mykonos
-    "https://images.unsplash.com/photo-1604508230015-5a54fda5db91", // Parthenon
+    "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07", // Parthenon - Updated
     "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7", // Meteora
   ],
   tips: [

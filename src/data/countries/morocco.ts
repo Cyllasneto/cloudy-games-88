@@ -12,9 +12,9 @@ export const morocco: Country = {
   transportation: "Trens entre grandes cidades, táxis e ônibus locais",
   gallery: [
     "https://images.unsplash.com/photo-1548013146-72479768bada", // Medina de Marrakech
-    "https://images.unsplash.com/photo-1531375154063-1d3c1b5e6a29", // Deserto do Saara
-    "https://images.unsplash.com/photo-1547644768-5cb16240d705", // Chefchaouen
-    "https://images.unsplash.com/photo-1553603227-2358aabe821f", // Fez
+    "https://images.unsplash.com/photo-1469474968028-56623f02e42e", // Deserto do Saara - Updated
+    "https://images.unsplash.com/photo-1500375592092-40eb2168fd21", // Chefchaouen - Updated
+    "https://images.unsplash.com/photo-1501854140801-50d01698950b", // Fez - Updated
     "https://images.unsplash.com/photo-1539020140153-e479b8c22e70", // Casablanca
   ],
   tips: [
