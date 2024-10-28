@@ -9,6 +9,13 @@ interface FeaturedDestinationProps {
 }
 
 const FeaturedDestination = ({ title, description, imageUrl, country }: FeaturedDestinationProps) => {
+  const scrollToDestinations = () => {
+    const destinationsSection = document.querySelector('#featured-destinations');
+    if (destinationsSection) {
+      destinationsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="relative h-[70vh] w-full overflow-hidden">
       <img
@@ -22,7 +29,10 @@ const FeaturedDestination = ({ title, description, imageUrl, country }: Featured
           <span className="text-secondary font-medium mb-2 block">{country}</span>
           <h1 className="text-4xl md:text-6xl font-bold mb-4">{title}</h1>
           <p className="text-lg md:text-xl mb-6 max-w-2xl">{description}</p>
-          <Button className="bg-secondary text-primary hover:bg-secondary/90">
+          <Button 
+            onClick={scrollToDestinations}
+            className="bg-secondary text-primary hover:bg-secondary/90"
+          >
             Explorar <ArrowRight className="ml-2" size={16} />
           </Button>
         </div>
