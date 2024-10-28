@@ -8,7 +8,7 @@ const destinations = [
     id: "france",
     title: "Paris",
     country: "França",
-    imageUrl: "https://images.unsplash.com/photo-1500313830540-7b6650a74fd0",
+    imageUrl: "https://www.melhoresdestinos.com.br/wp-content/uploads/2019/02/passagens-aereas-paris-capa2019-02.jpg",
     description: "A cidade luz com sua arquitetura deslumbrante e gastronomia incomparável.",
   },
   {
