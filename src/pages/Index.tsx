@@ -29,7 +29,7 @@ const destinations = [
     id: "greece",
     title: "Atenas",
     country: "Grécia",
-    imageUrl: "https://images.unsplash.com/photo-1501904831357-99414e58b1c3",
+    imageUrl: "https://www.civitatis.com/f/grecia/atenas/atenas.jpg",
     description: "Berço da civilização ocidental, com ilhas paradisíacas e história milenar.",
   },
   {
