@@ -3,7 +3,7 @@ import { Country } from "../types";
 export const greece: Country = {
   title: "Grécia",
   description: "Berço da civilização ocidental, com ilhas paradisíacas e história milenar.",
-  heroImage: "https://images.unsplash.com/photo-1501904831357-99414e58b1c3",
+  heroImage: "https://images.unsplash.com/photo-1603565816030-6b389eeb23cb",
   bestTimeToVisit: "Primavera (abril a junho) e outono (setembro a outubro)",
   currency: "Euro (€)",
   language: "Grego",
@@ -11,10 +11,10 @@ export const greece: Country = {
   climate: "Mediterrâneo, com verões quentes e secos e invernos amenos",
   transportation: "Ferries entre ilhas, ônibus e metrô nas grandes cidades",
   gallery: [
-    "https://images.unsplash.com/photo-1533105079780-92b9be482077",
     "https://images.unsplash.com/photo-1516483638261-f4dbaf036963",
     "https://images.unsplash.com/photo-1523568129082-a8d6c095638e",
-    "https://images.unsplash.com/photo-1603565816030-6b389eeb23cb",
+    "https://images.unsplash.com/photo-1530841377377-3ff06c0ca713",
+    "https://images.unsplash.com/photo-1533105079780-92b9be482077",
     "https://images.unsplash.com/photo-1504512485720-7d83a16ee930"
   ],
   tips: [

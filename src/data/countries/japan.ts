@@ -3,7 +3,7 @@ import { Country } from "../types";
 export const japan: Country = {
   title: "Japão",
   description: "Tóquio é uma metrópole vibrante que combina tradição e modernidade. Conhecida por seus templos antigos, arranha-céus futuristas e uma cultura culinária rica.",
-  heroImage: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
+  heroImage: "https://images.unsplash.com/photo-1536098561742-ca998e48cbcc",
   bestTimeToVisit: "Março a maio (primavera) e outubro a novembro (outono)",
   currency: "Iene japonês (¥)",
   language: "Japonês",
@@ -11,11 +11,11 @@ export const japan: Country = {
   climate: "Quatro estações bem definidas, com verões quentes e úmidos e invernos frios",
   transportation: "Metrô, trem-bala (Shinkansen), ônibus e táxis",
   gallery: [
-    "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
-    "https://images.unsplash.com/photo-1472396961693-142e6e269027",
     "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e",
     "https://images.unsplash.com/photo-1528360983277-13d401cdc186",
-    "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d"
+    "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d",
+    "https://images.unsplash.com/photo-1542051841857-5f90071e7989",
+    "https://images.unsplash.com/photo-1545569341-9eb8b30979d9"
   ],
   tips: [
     {
