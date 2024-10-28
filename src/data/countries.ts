@@ -4,13 +4,17 @@ import { greece } from "./countries/greece";
 import { thailand } from "./countries/thailand";
 import { morocco } from "./countries/morocco";
 import { brazil } from "./countries/brazil";
+import { japan } from "./countries/japan";
+import { italy } from "./countries/italy";
 
 export const countries: Record<string, Country> = {
   france,
   greece,
   thailand,
   morocco,
-  brazil
+  brazil,
+  japan,
+  italy
 };
 
 export type { Country, Tip, TipType } from "./types";
