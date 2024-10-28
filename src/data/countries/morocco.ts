@@ -1,4 +1,4 @@
-import { Country } from "../types";
+import { Country, TipType } from "../types";
 
 export const morocco: Country = {
   title: "Marrocos",
@@ -17,27 +17,27 @@ export const morocco: Country = {
   ],
   tips: [
     {
-      type: "hotel" as TipType,
+      type: "hotel",
       title: "Royal Mansour Marrakech",
       description: "Hotel de luxo com riads privados e serviço impecável.",
       price: "€€€€",
       link: "https://www.royalmansour.com/"
     },
     {
-      type: "hotel" as TipType,
+      type: "hotel",
       title: "La Mamounia",
       description: "Hotel histórico com jardins deslumbrantes em Marrakech.",
       price: "€€€€",
       link: "https://www.mamounia.com/"
     },
     {
-      type: "activity" as TipType,
+      type: "activity",
       title: "Passeio de Camelo no Saara",
       description: "Experiência única no deserto com pernoite em acampamento luxuoso.",
       price: "€€€"
     },
     {
-      type: "restaurant" as TipType,
+      type: "restaurant",
       title: "La Grande Table Marocaine",
       description: "Alta gastronomia marroquina no Royal Mansour.",
       price: "€€€€"
