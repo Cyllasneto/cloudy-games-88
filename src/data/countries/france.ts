@@ -3,7 +3,7 @@ import { Country } from "../types";
 export const france: Country = {
   title: "França",
   description: "Descubra a magia da França, um país que combina cultura, história e gastronomia de maneira única. Das ruas charmosas de Paris aos vinhedos da Provence, cada região oferece experiências inesquecíveis.",
-  heroImage: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34",
+  heroImage: "https://images.unsplash.com/photo-1504893524553-b855bce32c67", // Updated Paris image
   bestTimeToVisit: "Primavera (abril a junho) e outono (setembro a novembro)",
   currency: "Euro (€)",
   language: "Francês",

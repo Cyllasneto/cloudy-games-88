@@ -15,7 +15,7 @@ export const brazil: Country = {
     "https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f", // Pão de Açúcar
     "https://images.unsplash.com/photo-1518639192441-8fce0a366e2e", // Cataratas do Iguaçu
     "https://images.unsplash.com/photo-1564659907532-6b5f98c8e70f", // Pelourinho
-    "https://images.unsplash.com/photo-1612476957058-3927501c0892", // Praia de Copacabana
+    "https://images.unsplash.com/photo-1501854140801-50d01698950b", // Updated Brasil - Imagem 5
   ],
   tips: [
     {

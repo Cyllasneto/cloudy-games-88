@@ -3,7 +3,7 @@ import { Country } from "../types";
 export const thailand: Country = {
   title: "Tailândia",
   description: "Reino do sorriso, com praias paradisíacas, templos budistas e culinária única.",
-  heroImage: "https://images.unsplash.com/photo-1504214208698-ea446addfa7e",
+  heroImage: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07", // Updated Bangkok image
   bestTimeToVisit: "Novembro a março (estação seca)",
   currency: "Baht tailandês (฿)",
   language: "Tailandês",
