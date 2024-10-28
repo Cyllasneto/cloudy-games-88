@@ -301,5 +301,4 @@ export const countries: Record<string, Country> = {
       }
     ]
   }
-}
 };
