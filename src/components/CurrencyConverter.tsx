@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Input } from "./ui/input";
 import { Card } from "./ui/card";
-import { toast } from "./ui/use-toast";
+import { useToast } from "./ui/use-toast";
 
 interface ExchangeRates {
   USDBRL: {
@@ -17,29 +17,19 @@ interface ExchangeRates {
 
 const CurrencyConverter = () => {
   const [brlAmount, setBrlAmount] = useState<string>("");
+  const { toast } = useToast();
   
-  const { data: rates, error } = useQuery<ExchangeRates>({
+  const { data: rates, error } = useQuery({
     queryKey: ["exchange-rates"],
     queryFn: async () => {
       const response = await fetch("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL");
       if (!response.ok) {
         throw new Error("Failed to fetch exchange rates");
       }
-      return response.json();
+      return response.json() as Promise<ExchangeRates>;
     },
-    refetchInterval: 30000, // 30 seconds in milliseconds
-    staleTime: 30000,
+    refetchInterval: 600000, // 10 minutes in milliseconds
   });
-
-  useEffect(() => {
-    if (rates) {
-      toast({
-        title: "Cotações Atualizadas",
-        description: `USD: R$ ${parseFloat(rates.USDBRL.bid).toFixed(2)} | EUR: R$ ${parseFloat(rates.EURBRL.bid).toFixed(2)}`,
-        duration: 3000,
-      });
-    }
-  }, [rates]);
 
   useEffect(() => {
     if (error) {
@@ -47,10 +37,9 @@ const CurrencyConverter = () => {
         title: "Erro",
         description: "Não foi possível atualizar as cotações. Tente novamente mais tarde.",
         variant: "destructive",
-        duration: 3000,
       });
     }
-  }, [error]);
+  }, [error, toast]);
 
   const calculateConversion = (amount: string, rate: string) => {
     const numAmount = parseFloat(amount);
