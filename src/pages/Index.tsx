@@ -82,6 +82,15 @@ const Index = () => {
       />
 
       <main className="container max-w-6xl mx-auto py-16 px-4">
+        <section className="text-center mb-16">
+          <h2 className="text-3xl font-bold mb-6">Sobre a Cloudy Trip</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Somos especialistas em criar experiências de viagem únicas e memoráveis. 
+            Com anos de experiência no mercado, a Cloudy Company oferece as melhores 
+            recomendações de hotéis, restaurantes e atrações em destinos pelo mundo todo.
+          </p>
+        </section>
+
         <section id="featured-destinations" className="mb-16">
           <h2 className="text-3xl font-bold mb-8">Destinos em Destaque</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -95,15 +104,6 @@ const Index = () => {
 
         <section className="mb-16">
           <CurrencyConverter />
-        </section>
-
-        <section className="text-center">
-          <h2 className="text-3xl font-bold mb-6">Sobre a Cloudy Trip</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Somos especialistas em criar experiências de viagem únicas e memoráveis. 
-            Com anos de experiência no mercado, a Cloudy Company oferece as melhores 
-            recomendações de hotéis, restaurantes e atrações em destinos pelo mundo todo.
-          </p>
         </section>
       </main>
     </div>
