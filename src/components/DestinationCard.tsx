@@ -32,7 +32,7 @@ const DestinationCard = ({ title, country, imageUrl, description, highlight }: D
               <img 
                 src="https://png.pngtree.com/png-clipart/20190617/original/pngtree-delicious-baguette-hand-painted-baguette-cartoon-baguette-nutrition-stick-png-image_3864759.jpg" 
                 alt="Baguette"
-                className="w-12 h-12 object-contain mix-blend-multiply"
+                className="w-12 h-12 object-contain"
               />
             ) : (
               <div className="bg-secondary text-primary px-3 py-1 rounded-full text-sm font-medium">
