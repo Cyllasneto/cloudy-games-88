@@ -28,6 +28,15 @@ const Contact = () => {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
+      toast({
+        title: "Erro de configuração",
+        description: "Por favor, configure as variáveis de ambiente do Telegram.",
+        variant: "destructive"
+      })
+      return
+    }
+
     try {
       const message = `
 *Nova mensagem de contato*
