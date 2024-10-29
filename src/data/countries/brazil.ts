@@ -19,17 +19,16 @@ export const brazil: Country = {
   ],
   tips: [
     {
-      type: "hotel",
-      title: "Copacabana Palace",
-      description: "Hotel icônico no Rio de Janeiro com vista para a praia de Copacabana, símbolo de luxo e tradição.",
-      price: "€€€€",
-      link: "https://www.belmond.com/hotels/south-america/brazil/rio-de-janeiro/belmond-copacabana-palace/",
-      image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
+      type: "flight",
+      title: "Passagens para o Rio de Janeiro",
+      description: "Encontre as melhores ofertas de voos para o Rio de Janeiro, com opções de várias companhias aéreas.",
+      price: "A partir de R$400",
+      link: "https://www.skyscanner.com.br/voos-para/rio/voos-baratos-para-rio-de-janeiro.html",
       highlights: [
-        "Piscina semi-olímpica",
-        "Spa de luxo",
-        "Restaurantes premiados",
-        "Localização privilegiada"
+        "Voos diretos de várias cidades",
+        "Comparação de preços",
+        "Múltiplas companhias aéreas",
+        "Alertas de ofertas"
       ]
     },
     {

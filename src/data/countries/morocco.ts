@@ -19,17 +19,16 @@ export const morocco: Country = {
   ],
   tips: [
     {
-      type: "hotel",
-      title: "Royal Mansour Marrakech",
-      description: "Hotel de luxo com riads privados e serviço impecável, oferecendo a verdadeira experiência marroquina.",
-      price: "€€€€",
-      link: "https://www.royalmansour.com/",
-      image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b",
+      type: "flight",
+      title: "Passagens para Marrakech",
+      description: "Encontre as melhores ofertas de voos para Marrakech, principal destino turístico do Marrocos.",
+      price: "A partir de €300",
+      link: "https://www.skyscanner.com.br/voos-para/rak/voos-baratos-para-marrakech.html",
       highlights: [
-        "Riads privados com piscina",
-        "Spa premiado",
-        "Jardins luxuosos",
-        "Restaurantes estrelados"
+        "Voos com conexão na Europa",
+        "Comparação de preços",
+        "Múltiplas companhias aéreas",
+        "Melhores épocas para comprar"
       ]
     },
     {

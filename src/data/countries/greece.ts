@@ -19,6 +19,19 @@ export const greece: Country = {
   ],
   tips: [
     {
+      type: "flight",
+      title: "Passagens para Atenas",
+      description: "Compare preços e encontre as melhores ofertas de voos para Atenas, porta de entrada para as ilhas gregas.",
+      price: "A partir de €450",
+      link: "https://www.skyscanner.com.br/voos-para/ath/voos-baratos-para-atenas.html",
+      highlights: [
+        "Voos diretos e com conexões",
+        "Melhores épocas para comprar",
+        "Múltiplas companhias aéreas",
+        "Calendário de preços flexível"
+      ]
+    },
+    {
       type: "hotel",
       title: "Grace Santorini",
       description: "Hotel boutique com vistas espetaculares do pôr do sol em Santorini, oferecendo serviço personalizado e experiências únicas.",

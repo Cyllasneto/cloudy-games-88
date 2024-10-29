@@ -19,6 +19,19 @@ export const spain: Country = {
   ],
   tips: [
     {
+      type: "flight",
+      title: "Passagens para Ibiza",
+      description: "Encontre as melhores ofertas de voos para Ibiza, com opções de várias companhias aéreas europeias.",
+      price: "A partir de €200",
+      link: "https://www.skyscanner.com.br/voos-para/ibz/voos-baratos-para-ibiza.html",
+      highlights: [
+        "Voos diretos da Europa",
+        "Conexões via Madrid ou Barcelona",
+        "Comparação de preços",
+        "Alertas de ofertas"
+      ]
+    },
+    {
       type: "hotel",
       title: "Ushuaïa Ibiza Beach Hotel",
       description: "Hotel icônico com festas diurnas e DJs internacionais, oferecendo uma experiência única de hospedagem.",
@@ -50,7 +63,7 @@ export const spain: Country = {
       type: "activity",
       title: "Passeio de Barco em Formentera",
       description: "Explore as águas cristalinas de Formentera em um passeio de barco exclusivo.",
-      price: "€€€",
+      price: "€€",
       link: "https://www.formentera.es/en/what-to-do/boat-trips/",
       image: "https://images.unsplash.com/photo-1583974498474-8a0c5c443418",
       highlights: [

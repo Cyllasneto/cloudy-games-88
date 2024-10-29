@@ -19,17 +19,16 @@ export const thailand: Country = {
   ],
   tips: [
     {
-      type: "hotel",
-      title: "Four Seasons Resort Koh Samui",
-      description: "Resort de luxo com vilas privativas e praia particular, oferecendo o melhor da hospitalidade tailandesa.",
-      price: "€€€€",
-      link: "https://www.fourseasons.com/kohsamui/",
-      image: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+      type: "flight",
+      title: "Passagens para Bangkok",
+      description: "Compare preços e encontre as melhores ofertas de voos para Bangkok, principal porta de entrada da Tailândia.",
+      price: "A partir de €600",
+      link: "https://www.skyscanner.com.br/voos-para/bkk/voos-baratos-para-bangkok.html",
       highlights: [
-        "Vilas com piscina privativa",
-        "Spa de classe mundial",
-        "Aulas de culinária tailandesa",
-        "Praia exclusiva"
+        "Voos com conexões",
+        "Comparação entre companhias",
+        "Alertas de preços",
+        "Calendário de preços"
       ]
     },
     {

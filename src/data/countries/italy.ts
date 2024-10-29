@@ -19,6 +19,19 @@ export const italy: Country = {
   ],
   tips: [
     {
+      type: "flight",
+      title: "Passagens para Roma",
+      description: "Encontre as melhores ofertas de voos para Roma, com comparação de preços entre diversas companhias aéreas.",
+      price: "A partir de €400",
+      link: "https://www.skyscanner.com.br/voos-para/rome/voos-baratos-para-roma.html",
+      highlights: [
+        "Voos diretos e com conexões",
+        "Comparação de preços",
+        "Múltiplas companhias aéreas",
+        "Alertas de preços baixos"
+      ]
+    },
+    {
       type: "hotel",
       title: "Hotel de Russie",
       description: "Hotel de luxo próximo à Piazza del Popolo com jardins secretos e spa excepcional.",

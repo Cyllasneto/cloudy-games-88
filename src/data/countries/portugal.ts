@@ -19,6 +19,19 @@ export const portugal: Country = {
   ],
   tips: [
     {
+      type: "flight",
+      title: "Passagens para Lisboa",
+      description: "Compare preços e encontre as melhores ofertas de voos para Lisboa, com opções de várias companhias aéreas.",
+      price: "A partir de €500",
+      link: "https://www.skyscanner.com.br/voos-para/lis/voos-baratos-para-lisboa.html",
+      highlights: [
+        "Voos diretos do Brasil",
+        "Múltiplas companhias aéreas",
+        "Comparação de preços",
+        "Alertas de preços baixos"
+      ]
+    },
+    {
       type: "hotel",
       title: "Four Seasons Hotel Ritz Lisbon",
       description: "Hotel de luxo com vista panorâmica para a cidade e spa premiado.",
