@@ -10,6 +10,7 @@ const destinations = [
     country: "França",
     imageUrl: "https://www.melhoresdestinos.com.br/wp-content/uploads/2019/02/passagens-aereas-paris-capa2019-02.jpg",
     description: "A cidade luz com sua arquitetura deslumbrante e gastronomia incomparável.",
+    highlight: true
   },
   {
     id: "usa",
