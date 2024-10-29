@@ -8,6 +8,7 @@ import Footer from "./components/Footer"
 import Index from "./pages/Index"
 import CountryPage from "./pages/CountryPage"
 import Privacy from "./pages/Privacy"
+import Contact from "./pages/Contact"
 
 const queryClient = new QueryClient()
 
@@ -22,6 +23,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/country/:countryId" element={<CountryPage />} />
               <Route path="/privacy" element={<Privacy />} />
+              <Route path="/contact" element={<Contact />} />
             </Routes>
           </div>
           <Footer />

@@ -28,6 +28,9 @@ const Header = () => {
                   <Link to="/" className="text-sm font-medium hover:text-primary">Home</Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
+                  <Link to="/contact" className="text-sm font-medium hover:text-primary ml-6">Contato</Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
                   <Link to="/privacy" className="text-sm font-medium hover:text-primary ml-6">Política de Privacidade</Link>
                 </NavigationMenuItem>
               </NavigationMenuList>
@@ -53,6 +56,13 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
+              </Link>
+              <Link 
+                to="/contact" 
+                className="text-sm font-medium hover:text-primary"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contato
               </Link>
               <Link 
                 to="/privacy" 
