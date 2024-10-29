@@ -65,7 +65,7 @@ export const japan: Country = {
       title: "Templo Senso-ji",
       description: "O templo budista mais antigo de Tóquio, em Asakusa, com rica história e cultura.",
       price: "€",
-      link: "https://www.senso-ji.jp/",
+      link: "https://www.senso-ji.jp/english/",
       image: "https://images.unsplash.com/photo-1545569341-9eb8b30979d9",
       highlights: [
         "Portão Kaminarimon",

@@ -51,6 +51,7 @@ export const spain: Country = {
       title: "Passeio de Barco em Formentera",
       description: "Explore as águas cristalinas de Formentera em um passeio de barco exclusivo.",
       price: "€€€",
+      link: "https://www.formentera.es/en/what-to-do/boat-trips/",
       image: "https://images.unsplash.com/photo-1583974498474-8a0c5c443418",
       highlights: [
         "Praias paradisíacas",
@@ -64,6 +65,7 @@ export const spain: Country = {
       title: "Ibiza Old Town Tour",
       description: "Explore a cidade antiga fortificada de Ibiza, patrimônio mundial da UNESCO.",
       price: "€€",
+      link: "https://www.ibiza.travel/en/article/dalt-vila",
       image: "https://images.unsplash.com/photo-1582639510494-c80b5de9f148",
       highlights: [
         "Dalt Vila",

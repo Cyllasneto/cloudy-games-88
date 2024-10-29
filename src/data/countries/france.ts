@@ -67,6 +67,7 @@ export const france: Country = {
       title: "Tour Privativo no Louvre",
       description: "Explore o maior museu de arte do mundo com um guia especializado, evitando as filas e descobrindo as obras-primas mais importantes.",
       price: "€€€",
+      link: "https://www.louvre.fr/en/visit/hours-admission",
       duration: "3 horas",
       bestSeason: "Ano todo",
       highlights: [
@@ -81,6 +82,7 @@ export const france: Country = {
       title: "Degustação de Vinhos em Cave Histórica",
       description: "Degustação premium de vinhos franceses em uma cave histórica do século XVII, com sommelier especializado.",
       price: "€€€",
+      link: "https://www.catacombes.paris.fr/en",
       duration: "2 horas",
       bestSeason: "Ano todo",
       highlights: [

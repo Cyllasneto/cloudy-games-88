@@ -51,7 +51,7 @@ export const morocco: Country = {
       title: "Passeio de Camelo no Saara",
       description: "Experiência única no deserto com pernoite em acampamento luxuoso sob as estrelas.",
       price: "€€€",
-      link: "https://www.moroccodesertmagic.com/",
+      link: "https://visitmorocco.com/en/travel-info/sahara-desert-tours",
       image: "https://images.unsplash.com/photo-1563990112129-a9a72c0bf77c",
       highlights: [
         "Acampamento luxuoso no deserto",
@@ -65,7 +65,7 @@ export const morocco: Country = {
       title: "Tour pela Medina de Fez",
       description: "Explore a maior medina medieval do mundo com um guia especializado.",
       price: "€€",
-      link: "https://www.fez-tours.com/",
+      link: "https://visitfes.com/",
       image: "https://images.unsplash.com/photo-1501854140801-50d01698950b",
       highlights: [
         "Curtumes tradicionais",

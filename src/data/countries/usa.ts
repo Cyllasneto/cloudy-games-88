@@ -11,11 +11,11 @@ export const usa: Country = {
   climate: "Subtropical, com verões quentes e úmidos e invernos suaves",
   transportation: "Uber, aluguel de carros, shuttles dos hotéis e ônibus do I-Ride Trolley",
   gallery: [
-    "https://images.unsplash.com/photo-1524008279394-3aed4643b30b", // Magic Kingdom - Vista noturna do Castelo da Cinderela
-    "https://www.mercadoeeventos.com.br/wp-content/uploads/2019/09/unnamed-10.jpg", // Universal Studios - Entrada principal
+    "https://images.unsplash.com/photo-1524008279394-3aed4643b30b", // Magic Kingdom
+    "https://www.mercadoeeventos.com.br/wp-content/uploads/2019/09/unnamed-10.jpg", // Universal Studios
     "https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/630/354/75/dam/wdpro-assets/gallery/attractions/epcot/spaceship-earth/spaceship-earth-gallery00.jpg?1661268822148", // Spaceship Earth
     "https://www.comprarcasaemorlando.com.br/wp-content/uploads/2018/12/disney-springs-01.jpg", // Disney Springs
-    "https://images.unsplash.com/photo-1610641818989-c2051b5e2cfd", // EPCOT - Spaceship Earth
+    "https://images.unsplash.com/photo-1610641818989-c2051b5e2cfd", // EPCOT
   ],
   tips: [
     {
@@ -51,6 +51,7 @@ export const usa: Country = {
       title: "Magic Kingdom",
       description: "O parque mais mágico da Disney, com o icônico Castelo da Cinderela e atrações clássicas.",
       price: "€€€",
+      link: "https://disneyworld.disney.go.com/destinations/magic-kingdom/",
       image: "https://images.unsplash.com/photo-1524008279394-3aed4643b30b",
       highlights: [
         "Shows noturnos de fogos de artifício",
@@ -64,6 +65,7 @@ export const usa: Country = {
       title: "Universal Studios",
       description: "Parque temático com atrações baseadas em filmes e séries famosas.",
       price: "€€€",
+      link: "https://www.universalorlando.com/web/en/us/theme-parks/universal-studios-florida",
       image: "https://images.unsplash.com/photo-1613238359639-50094e05fc54",
       highlights: [
         "The Wizarding World of Harry Potter",
