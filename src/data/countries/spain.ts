@@ -3,7 +3,7 @@ import { Country } from "../types";
 export const spain: Country = {
   title: "Espanha",
   description: "Descubra Ibiza, a ilha paradisíaca do Mediterrâneo conhecida por suas praias deslumbrantes, vida noturna vibrante e cultura única.",
-  heroImage: "https://images.unsplash.com/photo-1582639510494-c80b5de9f148",
+  heroImage: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21",
   bestTimeToVisit: "Maio a outubro (temporada alta)",
   currency: "Euro (€)",
   language: "Espanhol",
@@ -11,11 +11,11 @@ export const spain: Country = {
   climate: "Mediterrâneo, com verões quentes e invernos amenos",
   transportation: "Táxis, ônibus públicos e aluguel de carros ou scooters",
   gallery: [
-    "https://images.unsplash.com/photo-1582639510494-c80b5de9f148", // Ibiza Town
-    "https://images.unsplash.com/photo-1583974498474-8a0c5c443418", // Praias
-    "https://images.unsplash.com/photo-1573074617613-fc8ef27eaa2f", // Pôr do sol
-    "https://images.unsplash.com/photo-1596627116790-af6f46dddbae", // Vida noturna
-    "https://images.unsplash.com/photo-1604327579478-4fad4f10d1e7", // Cala Comte
+    "https://images.unsplash.com/photo-1649972904349-6e44c42644a7", // Imagem 1
+    "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b", // Imagem 2
+    "https://images.unsplash.com/photo-1518770660439-4636190af475", // Imagem 3
+    "https://images.unsplash.com/photo-1461749280684-dccba630e2f6", // Imagem 4
+    "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d", // Imagem 5
   ],
   tips: [
     {

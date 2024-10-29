@@ -14,7 +14,7 @@ export const portugal: Country = {
     "https://images.unsplash.com/photo-1555881400-74d7acaacd8b", // Vista de Lisboa
     "https://images.unsplash.com/photo-1513735492246-483525079686", // Elétrico
     "https://images.unsplash.com/photo-1589452271712-64b8a66c7b71", // Pastéis de Belém
-    "https://images.unsplash.com/photo-1552751753-0fc86a76d30e", // Alfama
+    "https://images.unsplash.com/photo-1461749280684-dccba630e2f6", // Imagem 4
     "https://images.unsplash.com/photo-1562883676-8c7feb83f09b", // Torre de Belém
   ],
   tips: [
