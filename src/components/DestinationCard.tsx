@@ -26,11 +26,11 @@ const DestinationCard = ({ title, country, imageUrl, description, highlight }: D
               <img 
                 src="https://i.etsystatic.com/37030538/r/il/26ebc3/4843127416/il_1080xN.4843127416_tacl.jpg" 
                 alt="Mickey Mouse"
-                className="w-12 h-12 object-contain"
+                className="w-12 h-12 object-contain mix-blend-multiply"
               />
             ) : title === "Paris" ? (
               <img 
-                src="https://i.imgur.com/YZtw0Dg.png" 
+                src="https://png.pngtree.com/png-clipart/20190617/original/pngtree-delicious-baguette-hand-painted-baguette-cartoon-baguette-nutrition-stick-png-image_3864759.jpg" 
                 alt="Baguette"
                 className="w-12 h-12 object-contain"
               />
