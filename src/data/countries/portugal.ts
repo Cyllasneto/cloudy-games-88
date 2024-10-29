@@ -22,7 +22,7 @@ export const portugal: Country = {
       type: "flight",
       title: "Passagens para Lisboa",
       description: "Compare preços e encontre as melhores ofertas de voos para Lisboa, com opções de várias companhias aéreas.",
-      price: "A partir de €500",
+      price: "A partir de R$3.200",
       link: "https://www.skyscanner.com.br/voos-para/lis/voos-baratos-para-lisboa.html",
       highlights: [
         "Voos diretos do Brasil",
@@ -91,6 +91,7 @@ export const portugal: Country = {
       description: "Restaurante com 2 estrelas Michelin do chef José Avillez, reinventando a culinária portuguesa.",
       price: "€€€€",
       image: "https://images.unsplash.com/photo-1589452271712-64b8a66c7b71",
+      link: "https://belcanto.pt/",
       highlights: [
         "Menu degustação criativo",
         "Vinhos portugueses premium",

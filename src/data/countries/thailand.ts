@@ -22,7 +22,7 @@ export const thailand: Country = {
       type: "flight",
       title: "Passagens para Bangkok",
       description: "Compare preços e encontre as melhores ofertas de voos para Bangkok, principal porta de entrada da Tailândia.",
-      price: "A partir de €600",
+      price: "A partir de R$600",
       link: "https://www.skyscanner.com.br/voos-para/bkk/voos-baratos-para-bangkok.html",
       highlights: [
         "Voos com conexões",
@@ -79,6 +79,7 @@ export const thailand: Country = {
       description: "Restaurante premiado com uma abordagem moderna da culinária indiana e tailandesa.",
       price: "€€€€",
       image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b",
+      link: "https://www.gaggan.online/",
       highlights: [
         "Menu progressivo único",
         "Experiência gastronômica inovadora",

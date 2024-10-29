@@ -22,7 +22,7 @@ export const spain: Country = {
       type: "flight",
       title: "Passagens para Ibiza",
       description: "Encontre as melhores ofertas de voos para Ibiza, com opções de várias companhias aéreas europeias.",
-      price: "A partir de €200",
+      price: "A partir de R$2.800",
       link: "https://www.skyscanner.com.br/voos-para/ibz/voos-baratos-para-ibiza.html",
       highlights: [
         "Voos diretos da Europa",
@@ -93,6 +93,7 @@ export const spain: Country = {
       description: "Experiência gastronômica única que combina alta gastronomia com tecnologia e entretenimento.",
       price: "€€€€",
       image: "https://images.unsplash.com/photo-1604327579478-4fad4f10d1e7",
+      link: "https://sublimotionibiza.com/",
       highlights: [
         "Experiência multissensorial",
         "Menu degustação inovador",

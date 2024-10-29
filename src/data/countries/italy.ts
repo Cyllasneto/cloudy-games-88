@@ -22,7 +22,7 @@ export const italy: Country = {
       type: "flight",
       title: "Passagens para Roma",
       description: "Encontre as melhores ofertas de voos para Roma, com comparação de preços entre diversas companhias aéreas.",
-      price: "A partir de €400",
+      price: "A partir de R$3.000",
       link: "https://www.skyscanner.com.br/voos-para/rome/voos-baratos-para-roma.html",
       highlights: [
         "Voos diretos e com conexões",
@@ -93,6 +93,7 @@ export const italy: Country = {
       description: "Restaurante com três estrelas Michelin com vista panorâmica de Roma.",
       price: "€€€€",
       image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b",
+      link: "https://romecavalieri.com/la-pergola/",
       highlights: [
         "Três estrelas Michelin",
         "Vista panorâmica",

@@ -22,7 +22,7 @@ export const greece: Country = {
       type: "flight",
       title: "Passagens para Atenas",
       description: "Compare preços e encontre as melhores ofertas de voos para Atenas, porta de entrada para as ilhas gregas.",
-      price: "A partir de €450",
+      price: "A partir de R$3.500",
       link: "https://www.skyscanner.com.br/voos-para/ath/voos-baratos-para-atenas.html",
       highlights: [
         "Voos diretos e com conexões",
@@ -93,6 +93,7 @@ export const greece: Country = {
       description: "Gastronomia grega contemporânea com ingredientes locais de Santorini e vista deslumbrante.",
       price: "€€€",
       image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5",
+      link: "https://selene-restaurant.com/",
       highlights: [
         "Menu degustação sazonal",
         "Vinhos locais premiados",

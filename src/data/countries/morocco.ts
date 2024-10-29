@@ -22,7 +22,7 @@ export const morocco: Country = {
       type: "flight",
       title: "Passagens para Marrakech",
       description: "Encontre as melhores ofertas de voos para Marrakech, principal destino turístico do Marrocos.",
-      price: "A partir de €300",
+      price: "A partir de R$4.000",
       link: "https://www.skyscanner.com.br/voos-para/rak/voos-baratos-para-marrakech.html",
       highlights: [
         "Voos com conexão na Europa",
@@ -49,7 +49,7 @@ export const morocco: Country = {
       type: "activity",
       title: "Passeio de Camelo no Saara",
       description: "Experiência única no deserto com pernoite em acampamento luxuoso sob as estrelas.",
-      price: "€€€",
+      price: "€€",
       link: "https://visitmorocco.com/en/travel-info/sahara-desert-tours",
       image: "https://images.unsplash.com/photo-1563990112129-a9a72c0bf77c",
       highlights: [
@@ -79,6 +79,7 @@ export const morocco: Country = {
       description: "Alta gastronomia marroquina no Royal Mansour, combinando tradição e modernidade.",
       price: "€€€€",
       image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b",
+      link: "https://www.royalmansour.com/en/dining/la-grande-table-marocaine/",
       highlights: [
         "Cozinha marroquina contemporânea",
         "Ambiente palaciano",

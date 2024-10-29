@@ -63,7 +63,7 @@ export const brazil: Country = {
       type: "activity",
       title: "Cataratas do Iguaçu",
       description: "Explore uma das maiores quedas d'água do mundo em um passeio inesquecível.",
-      price: "€€€",
+      price: "€€",
       link: "https://cataratasdoiguacu.com.br/",
       image: "https://images.unsplash.com/photo-1518639192441-8fce0a366e2e",
       highlights: [
@@ -79,6 +79,7 @@ export const brazil: Country = {
       description: "Restaurante premiado do chef Alex Atala em São Paulo, explorando ingredientes brasileiros.",
       price: "€€€€",
       image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b",
+      link: "https://domrestaurante.com.br/",
       highlights: [
         "Menu degustação amazônico",
         "Ingredientes nativos",
