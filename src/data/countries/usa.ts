@@ -11,10 +11,10 @@ export const usa: Country = {
   climate: "Subtropical, com verões quentes e úmidos e invernos suaves",
   transportation: "Uber, aluguel de carros, shuttles dos hotéis e ônibus do I-Ride Trolley",
   gallery: [
-    "https://images.unsplash.com/photo-1605300045897-8f3bd45c58d6", // Magic Kingdom - Castelo da Cinderela
+    "https://images.unsplash.com/photo-1524008279394-3aed4643b30b", // Magic Kingdom - Vista noturna do Castelo da Cinderela
     "https://images.unsplash.com/photo-1597466599360-3b9775841aec", // Universal Studios - Entrada principal
-    "https://images.unsplash.com/photo-1609184889233-da0e5f540c46", // Disney's Animal Kingdom - Tree of Life
-    "https://images.unsplash.com/photo-1624811072711-3e3481f355fd", // Universal's Islands of Adventure - Hogwarts Castle
+    "https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4", // Disney's Animal Kingdom - Vista panorâmica
+    "https://images.unsplash.com/photo-1613238359639-50094e05fc54", // Universal's Islands of Adventure - Hogwarts Castle
     "https://images.unsplash.com/photo-1610641818989-c2051b5e2cfd", // EPCOT - Spaceship Earth
   ],
   tips: [
