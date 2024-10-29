@@ -21,6 +21,27 @@ const destinations = [
     highlight: true
   },
   {
+    id: "england",
+    title: "Londres",
+    country: "Inglaterra",
+    imageUrl: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad",
+    description: "Uma metrópole global que combina história milenar com modernidade vibrante.",
+  },
+  {
+    id: "turkey",
+    title: "Istambul",
+    country: "Turquia",
+    imageUrl: "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200",
+    description: "Cidade que une dois continentes, com mesquitas majestosas e bazares históricos.",
+  },
+  {
+    id: "norway",
+    title: "Oslo",
+    country: "Noruega",
+    imageUrl: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38",
+    description: "Capital escandinava que combina natureza deslumbrante com design moderno.",
+  },
+  {
     id: "italy",
     title: "Roma",
     country: "Itália",
