@@ -28,21 +28,12 @@ const Contact = () => {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
-      toast({
-        title: "Erro de configuração",
-        description: "Por favor, configure as variáveis de ambiente do Telegram.",
-        variant: "destructive"
-      })
-      return
-    }
-
     try {
       const message = `
-*Nova mensagem de contato*
-*Nome:* ${values.name}
-*Telefone:* ${values.phone}
-*Email:* ${values.email}
+Nova mensagem de contato:
+Nome: ${values.name}
+Telefone: ${values.phone}
+Email: ${values.email}
       `
 
       const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
@@ -53,21 +44,12 @@ const Contact = () => {
         body: JSON.stringify({
           chat_id: TELEGRAM_CHAT_ID,
           text: message,
-          parse_mode: 'Markdown'
+          parse_mode: 'HTML'
         })
       })
 
       if (!response.ok) {
-        const errorData = await response.json()
-        console.error('Erro Telegram:', errorData)
-        throw new Error(errorData.description || 'Erro ao enviar mensagem')
-      }
-
-      const data = await response.json()
-
-      if (!data.ok) {
-        console.error('Erro Telegram:', data)
-        throw new Error(data.description || 'Erro ao enviar mensagem')
+        throw new Error('Erro ao enviar mensagem')
       }
 
       toast({
@@ -75,11 +57,10 @@ const Contact = () => {
         description: "Entraremos em contato em breve.",
       })
       form.reset()
-    } catch (error: any) {
-      console.error('Error:', error)
+    } catch (error) {
       toast({
         title: "Erro ao enviar mensagem",
-        description: error.message || "Por favor, tente novamente mais tarde.",
+        description: "Por favor, tente novamente mais tarde.",
         variant: "destructive"
       })
     }
