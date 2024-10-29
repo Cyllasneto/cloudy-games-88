@@ -29,6 +29,12 @@ const CurrencyConverter = () => {
       return response.json() as Promise<ExchangeRates>;
     },
     refetchInterval: 600000, // 10 minutes in milliseconds
+    onSuccess: (data) => {
+      toast({
+        title: "Cotações Atualizadas",
+        description: `USD: R$ ${parseFloat(data.USDBRL.bid).toFixed(2)} | EUR: R$ ${parseFloat(data.EURBRL.bid).toFixed(2)}`,
+      });
+    },
   });
 
   useEffect(() => {
