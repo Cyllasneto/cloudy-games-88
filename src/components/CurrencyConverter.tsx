@@ -28,7 +28,7 @@ const CurrencyConverter = () => {
       }
       return response.json() as Promise<ExchangeRates>;
     },
-    refetchInterval: 30000, // Refetch every 30 seconds
+    refetchInterval: 30000,
   });
 
   useEffect(() => {
@@ -49,26 +49,26 @@ const CurrencyConverter = () => {
   };
 
   return (
-    <Card className="p-6 bg-white shadow-lg">
-      <h2 className="text-2xl font-bold mb-4">Cotações e Conversor</h2>
+    <Card className="p-4 md:p-6 bg-white shadow-lg">
+      <h2 className="text-xl md:text-2xl font-bold mb-4">Cotações e Conversor</h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <div className="space-y-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-6">
+        <div className="space-y-2 p-4 bg-gray-50 rounded-lg">
           <h3 className="font-semibold">Dólar (USD)</h3>
-          <p className="text-xl">
+          <p className="text-lg md:text-xl">
             R$ {rates?.USDBRL.bid ? parseFloat(rates.USDBRL.bid).toFixed(2) : "---"}
           </p>
-          <p className="text-sm text-gray-500">
+          <p className="text-xs md:text-sm text-gray-500">
             Última atualização: {rates?.USDBRL.create_date ? new Date(rates.USDBRL.create_date).toLocaleTimeString() : "---"}
           </p>
         </div>
         
-        <div className="space-y-2">
+        <div className="space-y-2 p-4 bg-gray-50 rounded-lg">
           <h3 className="font-semibold">Euro (EUR)</h3>
-          <p className="text-xl">
+          <p className="text-lg md:text-xl">
             R$ {rates?.EURBRL.bid ? parseFloat(rates.EURBRL.bid).toFixed(2) : "---"}
           </p>
-          <p className="text-sm text-gray-500">
+          <p className="text-xs md:text-sm text-gray-500">
             Última atualização: {rates?.EURBRL.create_date ? new Date(rates.EURBRL.create_date).toLocaleTimeString() : "---"}
           </p>
         </div>
@@ -87,7 +87,7 @@ const CurrencyConverter = () => {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="p-4 bg-gray-50 rounded-lg">
             <p className="text-sm font-medium mb-2">Em Dólar (USD)</p>
             <p className="text-lg">

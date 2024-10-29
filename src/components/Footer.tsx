@@ -4,12 +4,12 @@ const Footer = () => {
   return (
     <footer className="bg-primary text-white py-8">
       <div className="container max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="text-center sm:text-left">
             <h3 className="text-xl font-bold mb-4">Cloudy Trip</h3>
             <p className="text-sm">Sua melhor experiência em viagens começa aqui.</p>
           </div>
-          <div>
+          <div className="text-center sm:text-left">
             <h4 className="font-semibold mb-4">Links Úteis</h4>
             <ul className="space-y-2">
               <li>
@@ -20,7 +20,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div>
+          <div className="text-center sm:text-left">
             <h4 className="font-semibold mb-4">Contato</h4>
             <p className="text-sm">contato@cloudytrip.com</p>
             <p className="text-sm">+55 11 99999-9999</p>
