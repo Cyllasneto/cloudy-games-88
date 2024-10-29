@@ -6,17 +6,25 @@ interface DestinationCardProps {
   country: string;
   imageUrl: string;
   description: string;
+  highlight?: boolean;
 }
 
-const DestinationCard = ({ title, country, imageUrl, description }: DestinationCardProps) => {
+const DestinationCard = ({ title, country, imageUrl, description, highlight }: DestinationCardProps) => {
   return (
-    <Card className="overflow-hidden group cursor-pointer transition-transform duration-300 hover:scale-105">
+    <Card className={`overflow-hidden group cursor-pointer transition-transform duration-300 hover:scale-105 ${
+      highlight ? 'ring-4 ring-secondary ring-offset-2' : ''
+    }`}>
       <div className="relative h-48 overflow-hidden">
         <img
           src={imageUrl}
           alt={title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
+        {highlight && (
+          <div className="absolute top-2 right-2 bg-secondary text-primary px-3 py-1 rounded-full text-sm font-medium">
+            Destaque
+          </div>
+        )}
       </div>
       <div className="p-4">
         <div className="flex items-center gap-2 text-primary mb-2">

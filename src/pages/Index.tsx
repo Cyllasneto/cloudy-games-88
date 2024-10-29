@@ -17,6 +17,7 @@ const destinations = [
     country: "Estados Unidos",
     imageUrl: "https://images.unsplash.com/photo-1575089776834-8be34696ffb9",
     description: "O lugar mais mágico do mundo, com os parques da Disney e experiências únicas.",
+    highlight: true
   },
   {
     id: "italy",
