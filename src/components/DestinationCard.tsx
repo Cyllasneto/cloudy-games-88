@@ -21,8 +21,18 @@ const DestinationCard = ({ title, country, imageUrl, description, highlight }: D
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
         {highlight && (
-          <div className="absolute top-2 right-2 bg-secondary text-primary px-3 py-1 rounded-full text-sm font-medium">
-            Destaque
+          <div className="absolute top-2 right-2">
+            {title === "Orlando" ? (
+              <img 
+                src="https://e7.pngegg.com/pngimages/298/450/png-clipart-mickey-mouse-minnie-mouse-silhouette-mickey-mouse-heroes-monochrome.png" 
+                alt="Mickey Mouse"
+                className="w-8 h-8 object-contain"
+              />
+            ) : (
+              <div className="bg-secondary text-primary px-3 py-1 rounded-full text-sm font-medium">
+                Destaque
+              </div>
+            )}
           </div>
         )}
       </div>
