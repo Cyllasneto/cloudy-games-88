@@ -11,11 +11,11 @@ export const spain: Country = {
   climate: "Mediterrâneo, com verões quentes e invernos amenos",
   transportation: "Táxis, ônibus públicos e aluguel de carros ou scooters",
   gallery: [
-    "https://images.unsplash.com/photo-1582639510494-c80b5de9f148", // Ibiza Town
-    "https://images.unsplash.com/photo-1583974498474-8a0c5c443418", // Praias
-    "https://images.unsplash.com/photo-1573074617613-fc8ef27eaa2f", // Pôr do sol
-    "https://images.unsplash.com/photo-1596627116790-af6f46dddbae", // Vida noturna
-    "https://images.unsplash.com/photo-1604327579478-4fad4f10d1e7", // Cala Comte
+    "https://images.unsplash.com/photo-1566914447826-6460b49a8ec3", // Ushuaia Club
+    "https://images.unsplash.com/photo-1576878176876-517cdb8006ac", // Praia de Ibiza
+    "https://images.unsplash.com/photo-1566914447826-2d79c01d4eb5", // Festa na praia
+    "https://images.unsplash.com/photo-1576878176876-517cdb8006ae", // Pôr do sol em Café del Mar
+    "https://images.unsplash.com/photo-1576878176876-517cdb8006af", // Vida noturna
   ],
   tips: [
     {
