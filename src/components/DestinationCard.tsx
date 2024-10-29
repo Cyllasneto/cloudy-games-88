@@ -24,9 +24,9 @@ const DestinationCard = ({ title, country, imageUrl, description, highlight }: D
           <div className="absolute top-2 right-2">
             {title === "Orlando" ? (
               <img 
-                src="https://e7.pngegg.com/pngimages/298/450/png-clipart-mickey-mouse-minnie-mouse-silhouette-mickey-mouse-heroes-monochrome.png" 
+                src="https://i.etsystatic.com/37030538/r/il/26ebc3/4843127416/il_1080xN.4843127416_tacl.jpg" 
                 alt="Mickey Mouse"
-                className="w-8 h-8 object-contain"
+                className="w-8 h-8 object-contain mix-blend-multiply"
               />
             ) : (
               <div className="bg-secondary text-primary px-3 py-1 rounded-full text-sm font-medium">
