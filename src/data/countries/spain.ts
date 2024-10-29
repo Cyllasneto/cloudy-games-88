@@ -13,7 +13,7 @@ export const spain: Country = {
   gallery: [
     "https://images.unsplash.com/photo-1558642084-fd07fae5282e", // Praia de Ibiza ao pôr do sol
     "https://images.unsplash.com/photo-1559070169-a3077159ee16", // Festa na praia
-    "https://images.unsplash.com/photo-1571266014066-e5e5f67c1e48", // DJ tocando em festa
+    "https://images.unsplash.com/photo-1559129825-364228df2f34", // Vista aérea da ilha
     "https://images.unsplash.com/photo-1563784462386-044fd95e9852", // Cala d'Hort
     "https://images.unsplash.com/photo-1564678164-f00ad53a38e6", // Vida noturna em Ibiza
   ],
