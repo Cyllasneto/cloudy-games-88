@@ -19,23 +19,27 @@ const CurrencyConverter = () => {
   const [brlAmount, setBrlAmount] = useState<string>("");
   const { toast } = useToast();
   
-  const { data: rates, error } = useQuery({
+  const { data: rates, error } = useQuery<ExchangeRates>({
     queryKey: ["exchange-rates"],
     queryFn: async () => {
       const response = await fetch("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL");
       if (!response.ok) {
         throw new Error("Failed to fetch exchange rates");
       }
-      return response.json() as Promise<ExchangeRates>;
+      return response.json();
     },
-    refetchInterval: 600000, // 10 minutes in milliseconds
-    onSuccess: (data) => {
+    refetchInterval: 600000, // 10 minutes in milliseconds,
+    staleTime: 600000,
+  });
+
+  useEffect(() => {
+    if (rates) {
       toast({
         title: "Cotações Atualizadas",
-        description: `USD: R$ ${parseFloat(data.USDBRL.bid).toFixed(2)} | EUR: R$ ${parseFloat(data.EURBRL.bid).toFixed(2)}`,
+        description: `USD: R$ ${parseFloat(rates.USDBRL.bid).toFixed(2)} | EUR: R$ ${parseFloat(rates.EURBRL.bid).toFixed(2)}`,
       });
-    },
-  });
+    }
+  }, [rates, toast]);
 
   useEffect(() => {
     if (error) {
