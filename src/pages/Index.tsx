@@ -69,7 +69,7 @@ const destinations = [
     imageUrl: "https://images.unsplash.com/photo-1483729558449-99ef09a8c325",
     description: "Praias paradisíacas, floresta amazônica e cultura vibrante.",
   }
-]
+];
 
 const Index = () => {
   return (
@@ -98,12 +98,19 @@ const Index = () => {
         </section>
 
         <section className="text-center">
-          <h2 className="text-3xl font-bold mb-4">Sobre a Cloudy Trip</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Somos especialistas em criar experiências de viagem únicas e memoráveis. 
-            Com anos de experiência no mercado, a Cloudy Company oferece as melhores 
-            recomendações de hotéis, restaurantes e atrações em destinos pelo mundo todo.
-          </p>
+          <h2 className="text-3xl font-bold mb-6">Sobre a Cloudy Trip</h2>
+          <div className="flex flex-col items-center gap-8">
+            <img 
+              src="https://media.discordapp.net/attachments/1092950839364157461/1300630953726578759/885f96b2-91f6-4ea4-9c8a-74e3c5c495ab.jpg" 
+              alt="Cloudy Trip Logo" 
+              className="w-48 h-48 object-contain"
+            />
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Somos especialistas em criar experiências de viagem únicas e memoráveis. 
+              Com anos de experiência no mercado, a Cloudy Company oferece as melhores 
+              recomendações de hotéis, restaurantes e atrações em destinos pelo mundo todo.
+            </p>
+          </div>
         </section>
       </main>
     </div>
