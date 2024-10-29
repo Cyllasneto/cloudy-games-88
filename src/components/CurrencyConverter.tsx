@@ -28,7 +28,7 @@ const CurrencyConverter = () => {
       }
       return response.json() as Promise<ExchangeRates>;
     },
-    refetchInterval: 30000,
+    refetchInterval: 600000, // 10 minutes in milliseconds
   });
 
   useEffect(() => {
