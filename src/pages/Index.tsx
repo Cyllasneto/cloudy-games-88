@@ -8,7 +8,7 @@ const destinations = [
     id: "france",
     title: "Paris",
     country: "França",
-    imageUrl: "https://www.teatur.com.br/wp-content/uploads/2023/01/Tailandia.jpg",
+    imageUrl: "https://www.melhoresdestinos.com.br/wp-content/uploads/2019/02/passagens-aereas-paris-capa2019-02.jpg",
     description: "A cidade luz com sua arquitetura deslumbrante e gastronomia incomparável.",
   },
   {
@@ -36,7 +36,7 @@ const destinations = [
     id: "thailand",
     title: "Bangkok",
     country: "Tailândia",
-    imageUrl: "https://images.unsplash.com/photo-1504214208698-ea446addfa7e",
+    imageUrl: "https://www.teatur.com.br/wp-content/uploads/2023/01/Tailandia.jpg",
     description: "Reino do sorriso, com praias paradisíacas e templos budistas.",
   },
   {
