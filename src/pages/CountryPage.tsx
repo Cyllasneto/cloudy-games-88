@@ -5,12 +5,54 @@ import CountryGallery from "@/components/country/CountryGallery";
 import TravelTips from "@/components/TravelTips";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { 
+  Globe2,
+  Calendar,
+  Coins,
+  Languages,
+  Clock,
+  CloudSun,
+  Bus
+} from "lucide-react";
 
 const CountryPage = () => {
   const { countryId } = useParams();
   const country = countries[countryId as keyof typeof countries];
 
   if (!country) return <div>País não encontrado</div>;
+
+  const generalInfoCards = [
+    {
+      icon: <Calendar className="w-6 h-6" />,
+      title: "Melhor Época para Visitar",
+      content: country.bestTimeToVisit,
+    },
+    {
+      icon: <Coins className="w-6 h-6" />,
+      title: "Moeda",
+      content: country.currency,
+    },
+    {
+      icon: <Languages className="w-6 h-6" />,
+      title: "Idioma",
+      content: country.language,
+    },
+    {
+      icon: <Clock className="w-6 h-6" />,
+      title: "Fuso Horário",
+      content: country.timeZone,
+    },
+    {
+      icon: <CloudSun className="w-6 h-6" />,
+      title: "Clima",
+      content: country.climate,
+    },
+    {
+      icon: <Bus className="w-6 h-6" />,
+      title: "Transporte",
+      content: country.transportation,
+    },
+  ];
 
   return (
     <div>
@@ -24,19 +66,17 @@ const CountryPage = () => {
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-8">Informações Gerais</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="p-6">
-              <h3 className="font-semibold mb-4">Melhor Época para Visitar</h3>
-              <p>{country.bestTimeToVisit}</p>
-            </Card>
-            <Card className="p-6">
-              <h3 className="font-semibold mb-4">Moeda e Idioma</h3>
-              <p>Moeda: {country.currency}</p>
-              <p>Idioma: {country.language}</p>
-            </Card>
-            <Card className="p-6">
-              <h3 className="font-semibold mb-4">Clima</h3>
-              <p>{country.climate}</p>
-            </Card>
+            {generalInfoCards.map((card, index) => (
+              <Card key={index} className="p-6">
+                <div className="flex items-start gap-4">
+                  <div className="text-primary">{card.icon}</div>
+                  <div>
+                    <h3 className="font-semibold mb-2">{card.title}</h3>
+                    <p className="text-gray-600">{card.content}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
           </div>
         </section>
 
