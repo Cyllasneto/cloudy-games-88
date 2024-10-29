@@ -13,8 +13,8 @@ export const usa: Country = {
   gallery: [
     "https://images.unsplash.com/photo-1524008279394-3aed4643b30b", // Magic Kingdom - Vista noturna do Castelo da Cinderela
     "https://images.unsplash.com/photo-1597466599360-3b9775841aec", // Universal Studios - Entrada principal
-    "https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4", // Disney's Animal Kingdom - Vista panorâmica
-    "https://images.unsplash.com/photo-1613238359639-50094e05fc54", // Universal's Islands of Adventure - Hogwarts Castle
+    "https://images.unsplash.com/photo-1600300365767-1e1b48038e84", // Universal's Islands of Adventure - Hogwarts Castle
+    "https://images.unsplash.com/photo-1609375478712-ffe776c70dcd", // EPCOT - Spaceship Earth
     "https://images.unsplash.com/photo-1610641818989-c2051b5e2cfd", // EPCOT - Spaceship Earth
   ],
   tips: [
