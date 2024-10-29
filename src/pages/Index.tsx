@@ -28,6 +28,20 @@ const destinations = [
     description: "História milenar, arte renascentista e gastronomia incomparável.",
   },
   {
+    id: "spain",
+    title: "Ibiza",
+    country: "Espanha",
+    imageUrl: "https://images.unsplash.com/photo-1582639510494-c80b5de9f148",
+    description: "Ilha paradisíaca com praias deslumbrantes e vida noturna vibrante.",
+  },
+  {
+    id: "portugal",
+    title: "Lisboa",
+    country: "Portugal",
+    imageUrl: "https://images.unsplash.com/photo-1555881400-74d7acaacd8b",
+    description: "Cidade histórica com charme único e rica gastronomia.",
+  },
+  {
     id: "greece",
     title: "Atenas",
     country: "Grécia",

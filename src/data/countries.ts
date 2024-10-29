@@ -7,6 +7,8 @@ import { brazil } from "./countries/brazil";
 import { japan } from "./countries/japan";
 import { italy } from "./countries/italy";
 import { usa } from "./countries/usa";
+import { spain } from "./countries/spain";
+import { portugal } from "./countries/portugal";
 
 export const countries: Record<string, Country> = {
   france,
@@ -16,7 +18,9 @@ export const countries: Record<string, Country> = {
   brazil,
   japan,
   italy,
-  usa
+  usa,
+  spain,
+  portugal
 };
 
 export type { Country, Tip, TipType } from "./types";
