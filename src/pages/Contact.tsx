@@ -30,10 +30,10 @@ const Contact = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       const message = `
-Nova mensagem de contato:
-Nome: ${values.name}
-Telefone: ${values.phone}
-Email: ${values.email}
+*Nova mensagem de contato*
+*Nome:* ${values.name}
+*Telefone:* ${values.phone}
+*Email:* ${values.email}
       `
 
       const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
@@ -44,12 +44,14 @@ Email: ${values.email}
         body: JSON.stringify({
           chat_id: TELEGRAM_CHAT_ID,
           text: message,
-          parse_mode: 'HTML'
+          parse_mode: 'Markdown'
         })
       })
 
-      if (!response.ok) {
-        throw new Error('Erro ao enviar mensagem')
+      const data = await response.json()
+
+      if (!data.ok) {
+        throw new Error(data.description || 'Erro ao enviar mensagem')
       }
 
       toast({
@@ -58,6 +60,7 @@ Email: ${values.email}
       })
       form.reset()
     } catch (error) {
+      console.error('Error:', error)
       toast({
         title: "Erro ao enviar mensagem",
         description: "Por favor, tente novamente mais tarde.",
