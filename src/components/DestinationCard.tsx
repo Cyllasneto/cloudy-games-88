@@ -26,7 +26,7 @@ const DestinationCard = ({ title, country, imageUrl, description, highlight }: D
               <img 
                 src="https://i.etsystatic.com/37030538/r/il/26ebc3/4843127416/il_1080xN.4843127416_tacl.jpg" 
                 alt="Mickey Mouse"
-                className="w-8 h-8 object-contain mix-blend-multiply"
+                className="w-12 h-12 object-contain mix-blend-multiply"
               />
             ) : (
               <div className="bg-secondary text-primary px-3 py-1 rounded-full text-sm font-medium">
