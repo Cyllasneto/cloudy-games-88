@@ -1,4 +1,4 @@
-export type TipType = "hotel" | "activity" | "restaurant";
+export type TipType = "hotel" | "activity" | "restaurant" | "flight";
 
 export interface Tip {
   type: TipType;

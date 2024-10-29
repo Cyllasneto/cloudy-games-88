@@ -19,6 +19,19 @@ export const usa: Country = {
   ],
   tips: [
     {
+      type: "flight",
+      title: "Passagens para Orlando",
+      description: "Compare preços e encontre as melhores ofertas de voos para Orlando, com opções de várias companhias aéreas.",
+      price: "A partir de $600",
+      link: "https://www.skyscanner.com.br/voos-para/orl/voos-baratos-para-orlando.html",
+      highlights: [
+        "Voos diretos e com conexões",
+        "Melhores épocas para comprar",
+        "Múltiplas companhias aéreas",
+        "Alertas de preços baixos"
+      ]
+    },
+    {
       type: "hotel",
       title: "Disney's Grand Floridian Resort & Spa",
       description: "Hotel de luxo com arquitetura vitoriana, localização privilegiada e acesso direto ao Magic Kingdom via monotrilho.",

@@ -12,7 +12,8 @@ import {
   Languages,
   Clock,
   CloudSun,
-  Bus
+  Bus,
+  Plane
 } from "lucide-react";
 
 const CountryPage = () => {
@@ -54,6 +55,8 @@ const CountryPage = () => {
     },
   ];
 
+  const flightTips = country.tips.filter(tip => tip.type === "flight");
+
   return (
     <div>
       <CountryHero
@@ -80,12 +83,41 @@ const CountryPage = () => {
           </div>
         </section>
 
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold mb-8">Passagens Aéreas</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {flightTips.map((tip, index) => (
+              <Card key={index} className="p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <Plane className="w-5 h-5 text-primary" />
+                  <h3 className="font-semibold text-lg">{tip.title}</h3>
+                </div>
+                <p className="text-gray-600 mb-4">{tip.description}</p>
+                <div className="flex justify-between items-center">
+                  <span className="text-primary font-medium">{tip.price}</span>
+                  {tip.link && (
+                    <a
+                      href={tip.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline flex items-center gap-2"
+                    >
+                      Comprar passagens
+                      <Globe2 className="w-4 h-4" />
+                    </a>
+                  )}
+                </div>
+              </Card>
+            ))}
+          </div>
+        </section>
+
         <CountryGallery images={country.gallery} title={country.title} />
 
         <section>
           <h2 className="text-3xl font-bold mb-8">Dicas e Recomendações</h2>
           <div className="space-y-8">
-            {country.tips.map((tip, index) => (
+            {country.tips.filter(tip => tip.type !== "flight").map((tip, index) => (
               <Card key={index} className="p-6">
                 <div className="flex flex-col md:flex-row gap-6">
                   <div className="flex-1">

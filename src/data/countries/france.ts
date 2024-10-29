@@ -19,6 +19,19 @@ export const france: Country = {
   ],
   tips: [
     {
+      type: "flight",
+      title: "Passagens para Paris",
+      description: "Encontre as melhores ofertas de voos para Paris com comparação de preços entre várias companhias aéreas.",
+      price: "A partir de €500",
+      link: "https://www.skyscanner.com.br/voos-para/pari/voos-baratos-para-paris.html",
+      highlights: [
+        "Comparação de preços",
+        "Alertas de preços",
+        "Várias companhias aéreas",
+        "Calendário de preços"
+      ]
+    },
+    {
       type: "hotel",
       title: "Four Seasons George V",
       description: "Hotel luxuoso próximo aos Champs-Élysées com vista para a Torre Eiffel. Quartos decorados em estilo clássico francês e três restaurantes estrelados Michelin.",
@@ -81,7 +94,7 @@ export const france: Country = {
       type: "activity",
       title: "Degustação de Vinhos em Cave Histórica",
       description: "Degustação premium de vinhos franceses em uma cave histórica do século XVII, com sommelier especializado.",
-      price: "€€€",
+      price: "€€",
       link: "https://www.catacombes.paris.fr/en",
       duration: "2 horas",
       bestSeason: "Ano todo",
