@@ -3,7 +3,7 @@ import { Country } from "../types";
 export const spain: Country = {
   title: "Espanha",
   description: "Descubra Ibiza, a ilha paradisíaca do Mediterrâneo conhecida por suas praias deslumbrantes, vida noturna vibrante e cultura única.",
-  heroImage: "https://images.unsplash.com/photo-1582639510494-c80b5de9f148",
+  heroImage: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21",
   bestTimeToVisit: "Maio a outubro (temporada alta)",
   currency: "Euro (€)",
   language: "Espanhol",
@@ -11,11 +11,11 @@ export const spain: Country = {
   climate: "Mediterrâneo, com verões quentes e invernos amenos",
   transportation: "Táxis, ônibus públicos e aluguel de carros ou scooters",
   gallery: [
-    "https://images.unsplash.com/photo-1566914447826-6460b49a8ec3", // Ushuaia Club
-    "https://images.unsplash.com/photo-1576878176876-517cdb8006ac", // Praia de Ibiza
-    "https://images.unsplash.com/photo-1566914447826-2d79c01d4eb5", // Festa na praia
-    "https://images.unsplash.com/photo-1576878176876-517cdb8006ae", // Pôr do sol em Café del Mar
-    "https://images.unsplash.com/photo-1576878176876-517cdb8006af", // Vida noturna
+    "https://images.unsplash.com/photo-1558642084-fd07fae5282e", // Praia de Ibiza ao pôr do sol
+    "https://images.unsplash.com/photo-1559070169-a3077159ee16", // Festa na praia
+    "https://images.unsplash.com/photo-1559129825-364228df2f34", // Vista aérea da ilha
+    "https://images.unsplash.com/photo-1563784462386-044fd95e9852", // Cala d'Hort
+    "https://images.unsplash.com/photo-1564678164-f00ad53a38e6", // Vida noturna em Ibiza
   ],
   tips: [
     {
