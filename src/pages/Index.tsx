@@ -31,7 +31,7 @@ const destinations = [
     id: "spain",
     title: "Ibiza",
     country: "Espanha",
-    imageUrl: "https://images.unsplash.com/photo-1582639510494-c80b5de9f148",
+    imageUrl: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21",
     description: "Ilha paradisíaca com praias deslumbrantes e vida noturna vibrante.",
   },
   {
