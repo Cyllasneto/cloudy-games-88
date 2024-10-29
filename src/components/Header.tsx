@@ -2,6 +2,7 @@ import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@/compon
 import { Link } from "react-router-dom"
 import { Cloud, Menu, X } from "lucide-react"
 import { useState } from "react"
+import LanguageSelector from "./LanguageSelector"
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,7 +22,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex md:items-center md:gap-4">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
@@ -35,6 +36,7 @@ const Header = () => {
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
+            <LanguageSelector />
           </div>
 
           {/* Mobile Menu Button */}
@@ -71,12 +73,15 @@ const Header = () => {
               >
                 Política de Privacidade
               </Link>
+              <div className="pt-2">
+                <LanguageSelector />
+              </div>
             </nav>
           </div>
         )}
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
