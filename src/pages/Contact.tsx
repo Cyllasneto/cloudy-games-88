@@ -60,6 +60,7 @@ const Contact = () => {
       const data = await response.json()
 
       if (!data.ok) {
+        console.error('Erro Telegram:', data)
         throw new Error(data.description || 'Erro ao enviar mensagem')
       }
 
@@ -68,11 +69,11 @@ const Contact = () => {
         description: "Entraremos em contato em breve.",
       })
       form.reset()
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error:', error)
       toast({
         title: "Erro ao enviar mensagem",
-        description: "Por favor, tente novamente mais tarde.",
+        description: error.message || "Por favor, tente novamente mais tarde.",
         variant: "destructive"
       })
     }
