@@ -7,13 +7,12 @@ interface DestinationCardProps {
   imageUrl: string;
   description: string;
   highlight?: boolean;
-  highlightIcon?: string;
 }
 
-const DestinationCard = ({ title, country, imageUrl, description, highlight, highlightIcon }: DestinationCardProps) => {
+const DestinationCard = ({ title, country, imageUrl, description, highlight }: DestinationCardProps) => {
   return (
     <Card className={`overflow-hidden group cursor-pointer transition-transform duration-300 hover:scale-105 ${
-      highlight ? 'ring-4 ring-[#F4C430] ring-offset-2 bg-gradient-to-r from-[#E6E6FA] to-[#F0F8FF]' : ''
+      highlight ? 'ring-4 ring-secondary ring-offset-2' : ''
     }`}>
       <div className="relative h-48 overflow-hidden">
         <img
@@ -21,13 +20,9 @@ const DestinationCard = ({ title, country, imageUrl, description, highlight, hig
           alt={title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
-        {highlight && highlightIcon && (
-          <div className="absolute top-2 right-2 w-12 h-12 rounded-full overflow-hidden border-4 border-[#F4C430] bg-white p-1">
-            <img
-              src={highlightIcon}
-              alt="Destaque"
-              className="w-full h-full object-cover"
-            />
+        {highlight && (
+          <div className="absolute top-2 right-2 bg-secondary text-primary px-3 py-1 rounded-full text-sm font-medium">
+            Destaque
           </div>
         )}
       </div>

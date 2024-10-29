@@ -15,10 +15,9 @@ const destinations = [
     id: "usa",
     title: "Orlando",
     country: "Estados Unidos",
-    imageUrl: "https://images.unsplash.com/photo-1620843437920-ead942b3c22c",
+    imageUrl: "https://images.unsplash.com/photo-1575089776834-8be34696ffb9",
     description: "O lugar mais mágico do mundo, com os parques da Disney e experiências únicas.",
-    highlight: true,
-    highlightIcon: "https://images.unsplash.com/photo-1620843437920-ead942b3c22c"
+    highlight: true
   },
   {
     id: "italy",
