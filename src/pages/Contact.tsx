@@ -57,6 +57,12 @@ const Contact = () => {
         })
       })
 
+      if (!response.ok) {
+        const errorData = await response.json()
+        console.error('Erro Telegram:', errorData)
+        throw new Error(errorData.description || 'Erro ao enviar mensagem')
+      }
+
       const data = await response.json()
 
       if (!data.ok) {
