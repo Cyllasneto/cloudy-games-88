@@ -62,6 +62,10 @@ export const es = {
   messageSent: "¡Mensaje enviado con éxito!",
   messageError: "Error al enviar el mensaje. Por favor, inténtelo de nuevo.",
   
+  // Contact Form Messages
+  messageSuccess: "Nos pondremos en contacto pronto.",
+  tryAgain: "Por favor, inténtelo de nuevo más tarde.",
+  
   // Footer
   usefulLinks: "Enlaces Útiles",
   followUs: "Síguenos",

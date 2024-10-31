@@ -61,6 +61,8 @@ export const en = {
   sendMessage: "Send Message",
   messageSent: "Message sent successfully!",
   messageError: "Error sending message. Please try again.",
+  messageSuccess: "We'll contact you soon.",
+  tryAgain: "Please try again later.",
   
   // Footer
   usefulLinks: "Useful Links",

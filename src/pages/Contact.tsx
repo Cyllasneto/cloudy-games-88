@@ -53,14 +53,14 @@ Email: ${values.email}
       }
 
       toast({
-        title: t.messageSent,
-        description: t.messageSuccess,
+        title: String(t.messageSent),
+        description: String(t.messageSuccess),
       })
       form.reset()
     } catch (error) {
       toast({
-        title: t.messageError,
-        description: t.tryAgain,
+        title: String(t.messageError),
+        description: String(t.tryAgain),
         variant: "destructive"
       })
     }
@@ -68,7 +68,7 @@ Email: ${values.email}
 
   return (
     <div className="container max-w-2xl mx-auto py-16 px-4">
-      <h1 className="text-4xl font-bold mb-8 text-center">{t.contact}</h1>
+      <h1 className="text-4xl font-bold mb-8 text-center">{String(t.contact)}</h1>
       
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -79,11 +79,11 @@ Email: ${values.email}
               name={field.id as keyof z.infer<typeof formSchema>}
               render={({ field: formField }) => (
                 <FormItem>
-                  <FormLabel>{t[field.translationKey as keyof typeof t]}</FormLabel>
+                  <FormLabel>{String(t[field.translationKey as keyof typeof t])}</FormLabel>
                   <FormControl>
                     <Input 
                       type={field.type} 
-                      placeholder={t[field.translationKey as keyof typeof t]} 
+                      placeholder={String(t[field.translationKey as keyof typeof t])} 
                       {...formField} 
                     />
                   </FormControl>
@@ -94,7 +94,7 @@ Email: ${values.email}
           ))}
 
           <Button type="submit" className="w-full">
-            {t[contactFormData.submitButton.translationKey]}
+            {String(t[contactFormData.submitButton.translationKey])}
           </Button>
         </form>
       </Form>

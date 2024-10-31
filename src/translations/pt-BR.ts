@@ -62,6 +62,10 @@ export const ptBR = {
   messageSent: "Mensagem enviada com sucesso!",
   messageError: "Erro ao enviar mensagem. Tente novamente.",
   
+  // Contact Form Messages
+  messageSuccess: "Entraremos em contato em breve.",
+  tryAgain: "Por favor, tente novamente mais tarde.",
+  
   // Footer
   usefulLinks: "Links Úteis",
   followUs: "Siga-nos",
