@@ -29,12 +29,13 @@ const Contact = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      // Formatando a mensagem em HTML para melhor legibilidade no Telegram
       const message = `
-Nova mensagem de contato:
-Nome: ${values.name}
-Telefone: ${values.phone}
-Email: ${values.email}
-      `
+<b>Nova mensagem de contato:</b>
+<b>Nome:</b> ${values.name}
+<b>Telefone:</b> ${values.phone}
+<b>Email:</b> ${values.email}
+      `.trim()
 
       const response = await fetch(`https://api.telegram.org/bot${import.meta.env.VITE_TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: 'POST',
@@ -42,14 +43,16 @@ Email: ${values.email}
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          chat_id: import.meta.env.VITE_TELEGRAM_CHAT_ID,
+          chat_id: String(import.meta.env.VITE_TELEGRAM_CHAT_ID),
           text: message,
           parse_mode: 'HTML'
         })
       })
 
-      if (!response.ok) {
-        throw new Error('Erro ao enviar mensagem')
+      const data = await response.json()
+
+      if (!response.ok || !data.ok) {
+        throw new Error(data.description || 'Erro ao enviar mensagem')
       }
 
       toast({
@@ -58,6 +61,7 @@ Email: ${values.email}
       })
       form.reset()
     } catch (error) {
+      console.error('Erro ao enviar mensagem:', error)
       toast({
         title: String(t.messageError),
         description: String(t.tryAgain),
