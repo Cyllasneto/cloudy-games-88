@@ -3,7 +3,7 @@ export const es = {
   home: "Inicio",
   contact: "Contacto",
   privacy: "Política de Privacidad",
-  about: "Sobre",
+  about: "Acerca de",
   
   // Header
   cloudyTrip: "Cloudy Trip",
@@ -13,6 +13,7 @@ export const es = {
   aboutCloudyTrip: "Sobre Cloudy Trip",
   aboutDescription: "Somos especialistas en crear experiencias de viaje únicas y memorables. Con años de experiencia en el mercado, Cloudy Company ofrece las mejores recomendaciones de hoteles, restaurantes y atracciones en destinos de todo el mundo.",
   featuredDestinations: "Destinos Destacados",
+  exploreDestinations: "Explorar Destinos",
   
   // Country pages
   generalInfo: "Información General",
@@ -22,14 +23,15 @@ export const es = {
   timeZone: "Zona Horaria",
   climate: "Clima",
   transportation: "Transporte",
-  flightTickets: "Pasajes Aéreos",
-  buyTickets: "Comprar pasajes",
+  flightTickets: "Billetes de Avión",
+  buyTickets: "Comprar Billetes",
   tipsAndRecommendations: "Consejos y Recomendaciones",
   highlights: "Destacados",
   book: "Reservar",
   address: "Dirección",
   duration: "Duración",
-
+  viewMore: "Ver Más",
+  
   // Tips
   hotel: "Hotel",
   activity: "Actividad",
@@ -46,6 +48,32 @@ export const es = {
   hotelInfo: "Información del Hotel",
   activityInfo: "Información de la Actividad",
   restaurantInfo: "Información del Restaurante",
+  bookNow: "Reservar Ahora",
+  visitWebsite: "Visitar Sitio Web",
+  readMore: "Leer Más",
+  
+  // Contact Form
+  name: "Nombre",
+  email: "Correo Electrónico",
+  phone: "Teléfono",
+  message: "Mensaje",
+  send: "Enviar",
+  sendMessage: "Enviar Mensaje",
+  messageSent: "¡Mensaje enviado con éxito!",
+  messageError: "Error al enviar el mensaje. Por favor, inténtelo de nuevo.",
+  
+  // Footer
+  usefulLinks: "Enlaces Útiles",
+  followUs: "Síguenos",
+  allRightsReserved: "Todos los derechos reservados",
+  
+  // Currency Converter
+  currencyConverter: "Conversor de Monedas",
+  from: "De",
+  to: "A",
+  amount: "Cantidad",
+  convert: "Convertir",
+  result: "Resultado",
 
   // Countries
   france: {
@@ -75,5 +103,25 @@ export const es = {
   turkey: {
     title: "Turquía",
     description: "Estambul, ciudad que une dos continentes, es un fascinante encuentro entre Oriente y Occidente, con mezquitas majestuosas y bazares históricos."
+  },
+  greece: {
+    title: "Grecia",
+    description: "Cuna de la civilización occidental, con islas paradisíacas e historia milenaria."
+  },
+  thailand: {
+    title: "Tailandia",
+    description: "Reino de la sonrisa, con playas paradisíacas, templos budistas y gastronomía única."
+  },
+  morocco: {
+    title: "Marruecos",
+    description: "Un país de contrastes, con medinas antiguas, desierto del Sahara y rica cultura."
+  },
+  norway: {
+    title: "Noruega",
+    description: "Oslo, la capital de Noruega, combina naturaleza impresionante con diseño escandinavo."
+  },
+  italy: {
+    title: "Italia",
+    description: "Historia milenaria, arte renacentista y gastronomía incomparable."
   }
 };
