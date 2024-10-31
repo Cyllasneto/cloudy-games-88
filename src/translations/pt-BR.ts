@@ -29,6 +29,23 @@ export const ptBR = {
   book: "Reservar",
   address: "Endereço",
   duration: "Duração",
+  
+  // Tips
+  hotel: "Hotel",
+  activity: "Atividade",
+  restaurant: "Restaurante",
+  flight: "Voo",
+  buyNow: "Comprar Agora",
+  learnMore: "Saiba Mais",
+  price: "Preço",
+  rating: "Avaliação",
+  bestSeason: "Melhor Época",
+  viewGallery: "Ver Galeria",
+  recommendations: "Recomendações",
+  flightInfo: "Informações de Voo",
+  hotelInfo: "Informações do Hotel",
+  activityInfo: "Informações da Atividade",
+  restaurantInfo: "Informações do Restaurante",
 
   // Countries
   france: {

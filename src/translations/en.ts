@@ -30,6 +30,23 @@ export const en = {
   address: "Address",
   duration: "Duration",
 
+  // Tips
+  hotel: "Hotel",
+  activity: "Activity",
+  restaurant: "Restaurant",
+  flight: "Flight",
+  buyNow: "Buy Now",
+  learnMore: "Learn More",
+  price: "Price",
+  rating: "Rating",
+  bestSeason: "Best Season",
+  viewGallery: "View Gallery",
+  recommendations: "Recommendations",
+  flightInfo: "Flight Information",
+  hotelInfo: "Hotel Information",
+  activityInfo: "Activity Information",
+  restaurantInfo: "Restaurant Information",
+
   // Countries
   france: {
     title: "France",

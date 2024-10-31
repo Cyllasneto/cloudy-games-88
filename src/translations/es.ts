@@ -30,6 +30,23 @@ export const es = {
   address: "Dirección",
   duration: "Duración",
 
+  // Tips
+  hotel: "Hotel",
+  activity: "Actividad",
+  restaurant: "Restaurante",
+  flight: "Vuelo",
+  buyNow: "Comprar Ahora",
+  learnMore: "Saber Más",
+  price: "Precio",
+  rating: "Valoración",
+  bestSeason: "Mejor Temporada",
+  viewGallery: "Ver Galería",
+  recommendations: "Recomendaciones",
+  flightInfo: "Información de Vuelo",
+  hotelInfo: "Información del Hotel",
+  activityInfo: "Información de la Actividad",
+  restaurantInfo: "Información del Restaurante",
+
   // Countries
   france: {
     title: "Francia",
