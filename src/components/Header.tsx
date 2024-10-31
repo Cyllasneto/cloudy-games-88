@@ -3,9 +3,11 @@ import { Link } from "react-router-dom"
 import { Cloud, Menu, X } from "lucide-react"
 import { useState } from "react"
 import LanguageSelector from "./LanguageSelector"
+import { useTranslations } from "@/hooks/useTranslations"
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const t = useTranslations();
 
   return (
     <header className="border-b bg-white shadow-sm sticky top-0 z-50">
@@ -17,7 +19,7 @@ const Header = () => {
           >
             <Cloud className="w-6 h-6 md:w-8 md:h-8" />
             <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Cloudy Trip
+              {t.cloudyTrip}
             </span>
           </Link>
 
@@ -26,13 +28,13 @@ const Header = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <Link to="/" className="text-sm font-medium hover:text-primary">Home</Link>
+                  <Link to="/" className="text-sm font-medium hover:text-primary">{t.home}</Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Link to="/contact" className="text-sm font-medium hover:text-primary ml-6">Contato</Link>
+                  <Link to="/contact" className="text-sm font-medium hover:text-primary ml-6">{t.contact}</Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Link to="/privacy" className="text-sm font-medium hover:text-primary ml-6">Política de Privacidade</Link>
+                  <Link to="/privacy" className="text-sm font-medium hover:text-primary ml-6">{t.privacy}</Link>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
@@ -57,21 +59,21 @@ const Header = () => {
                 className="text-sm font-medium hover:text-primary"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Home
+                {t.home}
               </Link>
               <Link 
                 to="/contact" 
                 className="text-sm font-medium hover:text-primary"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Contato
+                {t.contact}
               </Link>
               <Link 
                 to="/privacy" 
                 className="text-sm font-medium hover:text-primary"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Política de Privacidade
+                {t.privacy}
               </Link>
               <div className="pt-2">
                 <LanguageSelector />

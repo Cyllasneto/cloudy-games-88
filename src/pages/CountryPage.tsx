@@ -2,9 +2,9 @@ import { useParams } from "react-router-dom";
 import { countries } from "@/data/countries";
 import CountryHero from "@/components/country/CountryHero";
 import CountryGallery from "@/components/country/CountryGallery";
-import TravelTips from "@/components/TravelTips";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useTranslations } from "@/hooks/useTranslations";
 import { 
   Globe2,
   Calendar,
@@ -19,38 +19,39 @@ import {
 const CountryPage = () => {
   const { countryId } = useParams();
   const country = countries[countryId as keyof typeof countries];
+  const t = useTranslations();
 
   if (!country) return <div>País não encontrado</div>;
 
   const generalInfoCards = [
     {
       icon: <Calendar className="w-6 h-6" />,
-      title: "Melhor Época para Visitar",
+      title: t.bestTimeToVisit,
       content: country.bestTimeToVisit,
     },
     {
       icon: <Coins className="w-6 h-6" />,
-      title: "Moeda",
+      title: t.currency,
       content: country.currency,
     },
     {
       icon: <Languages className="w-6 h-6" />,
-      title: "Idioma",
+      title: t.language,
       content: country.language,
     },
     {
       icon: <Clock className="w-6 h-6" />,
-      title: "Fuso Horário",
+      title: t.timeZone,
       content: country.timeZone,
     },
     {
       icon: <CloudSun className="w-6 h-6" />,
-      title: "Clima",
+      title: t.climate,
       content: country.climate,
     },
     {
       icon: <Bus className="w-6 h-6" />,
-      title: "Transporte",
+      title: t.transportation,
       content: country.transportation,
     },
   ];
@@ -60,14 +61,14 @@ const CountryPage = () => {
   return (
     <div>
       <CountryHero
-        title={country.title}
-        description={country.description}
+        title={t[countryId as keyof typeof t]?.title || country.title}
+        description={t[countryId as keyof typeof t]?.description || country.description}
         heroImage={country.heroImage}
       />
 
       <main className="container max-w-6xl mx-auto py-16 px-4">
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8">Informações Gerais</h2>
+          <h2 className="text-3xl font-bold mb-8">{t.generalInfo}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {generalInfoCards.map((card, index) => (
               <Card key={index} className="p-6">
@@ -84,7 +85,7 @@ const CountryPage = () => {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8">Passagens Aéreas</h2>
+          <h2 className="text-3xl font-bold mb-8">{t.flightTickets}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {flightTips.map((tip, index) => (
               <Card key={index} className="p-6">
@@ -102,7 +103,7 @@ const CountryPage = () => {
                       rel="noopener noreferrer"
                       className="text-primary hover:underline flex items-center gap-2"
                     >
-                      Comprar passagens
+                      {t.buyTickets}
                       <Globe2 className="w-4 h-4" />
                     </a>
                   )}
@@ -115,7 +116,7 @@ const CountryPage = () => {
         <CountryGallery images={country.gallery} title={country.title} />
 
         <section>
-          <h2 className="text-3xl font-bold mb-8">Dicas e Recomendações</h2>
+          <h2 className="text-3xl font-bold mb-8">{t.tipsAndRecommendations}</h2>
           <div className="space-y-8">
             {country.tips.filter(tip => tip.type !== "flight").map((tip, index) => (
               <Card key={index} className="p-6">
@@ -128,7 +129,7 @@ const CountryPage = () => {
                     <p className="text-gray-600 mb-4">{tip.description}</p>
                     {tip.highlights && (
                       <div className="mt-4">
-                        <h4 className="font-semibold mb-2">Destaques:</h4>
+                        <h4 className="font-semibold mb-2">{t.highlights}:</h4>
                         <ul className="list-disc pl-5 space-y-1">
                           {tip.highlights.map((highlight, idx) => (
                             <li key={idx}>{highlight}</li>
@@ -138,7 +139,7 @@ const CountryPage = () => {
                     )}
                     {tip.address && (
                       <p className="text-sm text-gray-500 mt-4">
-                        Endereço: {tip.address}
+                        {t.address}: {tip.address}
                       </p>
                     )}
                   </div>
@@ -148,7 +149,7 @@ const CountryPage = () => {
                     </div>
                     {tip.duration && (
                       <div className="text-sm text-gray-500">
-                        Duração: {tip.duration}
+                        {t.duration}: {tip.duration}
                       </div>
                     )}
                     {tip.link && (
@@ -158,7 +159,7 @@ const CountryPage = () => {
                         rel="noopener noreferrer"
                         className="text-primary hover:underline mt-4"
                       >
-                        Reservar
+                        {t.book}
                       </a>
                     )}
                   </div>
