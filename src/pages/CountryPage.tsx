@@ -23,6 +23,10 @@ const CountryPage = () => {
 
   if (!country) return <div>País não encontrado</div>;
 
+  const countryTranslation = countryId && t[countryId as keyof typeof t];
+  const translatedTitle = typeof countryTranslation === 'object' ? countryTranslation.title : country.title;
+  const translatedDescription = typeof countryTranslation === 'object' ? countryTranslation.description : country.description;
+
   const generalInfoCards = [
     {
       icon: <Calendar className="w-6 h-6" />,
@@ -61,8 +65,8 @@ const CountryPage = () => {
   return (
     <div>
       <CountryHero
-        title={t[countryId as keyof typeof t]?.title || country.title}
-        description={t[countryId as keyof typeof t]?.description || country.description}
+        title={translatedTitle}
+        description={translatedDescription}
         heroImage={country.heroImage}
       />
 
