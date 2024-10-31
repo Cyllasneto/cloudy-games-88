@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
+import { useTranslations } from "@/hooks/useTranslations"
+import { contactFormData } from "@/data/contactForm"
 
 const formSchema = z.object({
   name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
@@ -12,11 +14,9 @@ const formSchema = z.object({
   email: z.string().email("Email inválido"),
 })
 
-const TELEGRAM_BOT_TOKEN = import.meta.env.VITE_TELEGRAM_BOT_TOKEN
-const TELEGRAM_CHAT_ID = import.meta.env.VITE_TELEGRAM_CHAT_ID
-
 const Contact = () => {
   const { toast } = useToast()
+  const t = useTranslations()
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -36,13 +36,13 @@ Telefone: ${values.phone}
 Email: ${values.email}
       `
 
-      const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      const response = await fetch(`https://api.telegram.org/bot${import.meta.env.VITE_TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          chat_id: TELEGRAM_CHAT_ID,
+          chat_id: import.meta.env.VITE_TELEGRAM_CHAT_ID,
           text: message,
           parse_mode: 'HTML'
         })
@@ -53,14 +53,14 @@ Email: ${values.email}
       }
 
       toast({
-        title: "Mensagem enviada!",
-        description: "Entraremos em contato em breve.",
+        title: t.messageSent,
+        description: t.messageSuccess,
       })
       form.reset()
     } catch (error) {
       toast({
-        title: "Erro ao enviar mensagem",
-        description: "Por favor, tente novamente mais tarde.",
+        title: t.messageError,
+        description: t.tryAgain,
         variant: "destructive"
       })
     }
@@ -68,53 +68,34 @@ Email: ${values.email}
 
   return (
     <div className="container max-w-2xl mx-auto py-16 px-4">
-      <h1 className="text-4xl font-bold mb-8 text-center">Contato</h1>
+      <h1 className="text-4xl font-bold mb-8 text-center">{t.contact}</h1>
       
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nome</FormLabel>
-                <FormControl>
-                  <Input placeholder="Seu nome completo" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          
-          <FormField
-            control={form.control}
-            name="phone"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Celular</FormLabel>
-                <FormControl>
-                  <Input placeholder="(11) 99999-9999" type="tel" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          {contactFormData.fields.map((field) => (
+            <FormField
+              key={field.id}
+              control={form.control}
+              name={field.id as keyof z.infer<typeof formSchema>}
+              render={({ field: formField }) => (
+                <FormItem>
+                  <FormLabel>{t[field.translationKey as keyof typeof t]}</FormLabel>
+                  <FormControl>
+                    <Input 
+                      type={field.type} 
+                      placeholder={t[field.translationKey as keyof typeof t]} 
+                      {...formField} 
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          ))}
 
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input placeholder="seu@email.com" type="email" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <Button type="submit" className="w-full">Enviar mensagem</Button>
+          <Button type="submit" className="w-full">
+            {t[contactFormData.submitButton.translationKey]}
+          </Button>
         </form>
       </Form>
     </div>
