@@ -31,6 +31,7 @@ export const en = {
   address: "Address",
   duration: "Duration",
   viewMore: "View More",
+  gallery: "Gallery",
   
   // Tips
   hotel: "Hotel",

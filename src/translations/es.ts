@@ -31,6 +31,7 @@ export const es = {
   address: "Dirección",
   duration: "Duración",
   viewMore: "Ver Más",
+  gallery: "Galería",
   
   // Tips
   hotel: "Hotel",
@@ -60,9 +61,7 @@ export const es = {
   send: "Enviar",
   sendMessage: "Enviar Mensaje",
   messageSent: "¡Mensaje enviado con éxito!",
-  messageError: "Error al enviar el mensaje. Por favor, inténtelo de nuevo.",
-  
-  // Contact Form Messages
+  messageError: "Error al enviar mensaje. Por favor, inténtelo de nuevo.",
   messageSuccess: "Nos pondremos en contacto pronto.",
   tryAgain: "Por favor, inténtelo de nuevo más tarde.",
   

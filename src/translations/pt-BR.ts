@@ -31,6 +31,7 @@ export const ptBR = {
   address: "Endereço",
   duration: "Duração",
   viewMore: "Ver Mais",
+  gallery: "Galeria",
   
   // Tips
   hotel: "Hotel",
@@ -61,8 +62,6 @@ export const ptBR = {
   sendMessage: "Enviar Mensagem",
   messageSent: "Mensagem enviada com sucesso!",
   messageError: "Erro ao enviar mensagem. Tente novamente.",
-  
-  // Contact Form Messages
   messageSuccess: "Entraremos em contato em breve.",
   tryAgain: "Por favor, tente novamente mais tarde.",
   
