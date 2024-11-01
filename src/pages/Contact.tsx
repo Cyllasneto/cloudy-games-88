@@ -62,19 +62,27 @@ const Contact = () => {
       }
 
       toast({
-        title: String(t.messageSent),
+        title: (
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="h-5 w-5 text-green-500" />
+            <span>{String(t.messageSent)}</span>
+          </div>
+        ),
         description: String(t.messageSuccess),
         className: "bg-green-50 border-green-200",
-        icon: <CheckCircle2 className="h-5 w-5 text-green-500" />,
       })
       form.reset()
     } catch (error) {
       console.error('Erro ao enviar mensagem:', error)
       toast({
-        title: String(t.messageError),
+        title: (
+          <div className="flex items-center gap-2">
+            <XCircle className="h-5 w-5" />
+            <span>{String(t.messageError)}</span>
+          </div>
+        ),
         description: String(t.tryAgain),
         variant: "destructive",
-        icon: <XCircle className="h-5 w-5" />,
       })
     }
   }
