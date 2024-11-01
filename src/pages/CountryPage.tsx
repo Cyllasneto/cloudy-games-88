@@ -4,7 +4,7 @@ import CountryHero from "@/components/country/CountryHero";
 import CountryGallery from "@/components/country/CountryGallery";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { useTranslations } from "@/hooks/useTranslations";
 import { 
   Globe2,
   Calendar,
@@ -15,99 +15,64 @@ import {
   Bus,
   Plane
 } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Country } from "@/data/types";
 
 const CountryPage = () => {
   const { countryId } = useParams();
-  const baseCountry = countries[countryId as keyof typeof countries];
-  const { translateContent, language } = useLanguage();
-  const [translatedCountry, setTranslatedCountry] = useState<Country>(baseCountry);
+  const country = countries[countryId as keyof typeof countries];
+  const { rawTranslations: t } = useTranslations();
 
-  useEffect(() => {
-    const translateCountryData = async () => {
-      if (!baseCountry) return;
+  if (!country) return <div>País não encontrado</div>;
 
-      const translated: Country = {
-        ...baseCountry,
-        title: await translateContent(baseCountry.title, language),
-        description: await translateContent(baseCountry.description, language),
-        bestTimeToVisit: await translateContent(baseCountry.bestTimeToVisit, language),
-        currency: await translateContent(baseCountry.currency, language),
-        language: await translateContent(baseCountry.language, language),
-        climate: await translateContent(baseCountry.climate, language),
-        transportation: await translateContent(baseCountry.transportation, language),
-        tips: await Promise.all(
-          baseCountry.tips.map(async (tip) => ({
-            ...tip,
-            title: await translateContent(tip.title, language),
-            description: await translateContent(tip.description, language),
-            price: await translateContent(tip.price, language),
-            ...(tip.address && { address: await translateContent(tip.address, language) }),
-            ...(tip.duration && { duration: await translateContent(tip.duration, language) }),
-            ...(tip.highlights && {
-              highlights: await Promise.all(
-                tip.highlights.map((highlight) => translateContent(highlight, language))
-              ),
-            }),
-          }))
-        ),
-      };
-
-      setTranslatedCountry(translated);
-    };
-
-    translateCountryData();
-  }, [baseCountry, language, translateContent]);
-
-  if (!baseCountry) return <div>País não encontrado</div>;
+  const countryTranslation = countryId && t[countryId as keyof typeof t];
+  const translatedTitle = typeof countryTranslation === 'object' ? countryTranslation.title : country.title;
+  const translatedDescription = typeof countryTranslation === 'object' ? countryTranslation.description : country.description;
 
   const generalInfoCards = [
     {
       icon: <Calendar className="w-6 h-6" />,
-      title: translatedCountry.bestTimeToVisit,
-      content: translatedCountry.bestTimeToVisit,
+      title: t.bestTimeToVisit,
+      content: country.bestTimeToVisit,
     },
     {
       icon: <Coins className="w-6 h-6" />,
-      title: translatedCountry.currency,
-      content: translatedCountry.currency,
+      title: t.currency,
+      content: country.currency,
     },
     {
       icon: <Languages className="w-6 h-6" />,
-      title: translatedCountry.language,
-      content: translatedCountry.language,
+      title: t.language,
+      content: country.language,
     },
     {
       icon: <Clock className="w-6 h-6" />,
-      title: translatedCountry.timeZone,
-      content: translatedCountry.timeZone,
+      title: t.timeZone,
+      content: country.timeZone,
     },
     {
       icon: <CloudSun className="w-6 h-6" />,
-      title: translatedCountry.climate,
-      content: translatedCountry.climate,
+      title: t.climate,
+      content: country.climate,
     },
     {
       icon: <Bus className="w-6 h-6" />,
-      title: translatedCountry.transportation,
-      content: translatedCountry.transportation,
+      title: t.transportation,
+      content: country.transportation,
     },
   ];
 
-  const flightTips = translatedCountry.tips.filter(tip => tip.type === "flight");
+  const flightTips = country.tips.filter(tip => tip.type === "flight");
 
   return (
     <div>
       <CountryHero
-        title={translatedCountry.title}
-        description={translatedCountry.description}
-        heroImage={translatedCountry.heroImage}
+        title={translatedTitle}
+        description={translatedDescription}
+        heroImage={country.heroImage}
       />
 
       <main className="container max-w-6xl mx-auto py-16 px-4">
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8">{translatedCountry.title}</h2>
+          <h2 className="text-3xl font-bold mb-8">{t.generalInfo}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {generalInfoCards.map((card, index) => (
               <Card key={index} className="p-6">
@@ -124,7 +89,7 @@ const CountryPage = () => {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8">{translatedCountry.tips.length > 0 ? translatedCountry.tips[0].type : ''}</h2>
+          <h2 className="text-3xl font-bold mb-8">{t.flightTickets}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {flightTips.map((tip, index) => (
               <Card key={index} className="p-6">
@@ -142,7 +107,7 @@ const CountryPage = () => {
                       rel="noopener noreferrer"
                       className="text-primary hover:underline flex items-center gap-2"
                     >
-                      Comprar Bilhetes
+                      {t.buyTickets}
                       <Globe2 className="w-4 h-4" />
                     </a>
                   )}
@@ -152,12 +117,12 @@ const CountryPage = () => {
           </div>
         </section>
 
-        <CountryGallery images={translatedCountry.gallery} title={translatedCountry.title} />
+        <CountryGallery images={country.gallery} title={country.title} />
 
         <section>
-          <h2 className="text-3xl font-bold mb-8">{translatedCountry.tips.length > 0 ? translatedCountry.tips[0].type : ''}</h2>
+          <h2 className="text-3xl font-bold mb-8">{t.tipsAndRecommendations}</h2>
           <div className="space-y-8">
-            {translatedCountry.tips.filter(tip => tip.type !== "flight").map((tip, index) => (
+            {country.tips.filter(tip => tip.type !== "flight").map((tip, index) => (
               <Card key={index} className="p-6">
                 <div className="flex flex-col md:flex-row gap-6">
                   <div className="flex-1">
@@ -168,7 +133,7 @@ const CountryPage = () => {
                     <p className="text-gray-600 mb-4">{tip.description}</p>
                     {tip.highlights && (
                       <div className="mt-4">
-                        <h4 className="font-semibold mb-2">Destaques:</h4>
+                        <h4 className="font-semibold mb-2">{t.highlights}:</h4>
                         <ul className="list-disc pl-5 space-y-1">
                           {tip.highlights.map((highlight, idx) => (
                             <li key={idx}>{highlight}</li>
@@ -178,7 +143,7 @@ const CountryPage = () => {
                     )}
                     {tip.address && (
                       <p className="text-sm text-gray-500 mt-4">
-                        Endereço: {tip.address}
+                        {t.address}: {tip.address}
                       </p>
                     )}
                   </div>
@@ -188,7 +153,7 @@ const CountryPage = () => {
                     </div>
                     {tip.duration && (
                       <div className="text-sm text-gray-500">
-                        Duração: {tip.duration}
+                        {t.duration}: {tip.duration}
                       </div>
                     )}
                     {tip.link && (
@@ -198,7 +163,7 @@ const CountryPage = () => {
                         rel="noopener noreferrer"
                         className="text-primary hover:underline mt-4"
                       >
-                        Reservar
+                        {t.book}
                       </a>
                     )}
                   </div>

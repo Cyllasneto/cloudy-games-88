@@ -30,9 +30,9 @@ const App = () => (
             </div>
             <Footer />
           </div>
-          <Toaster />
-          <Sonner />
         </BrowserRouter>
+        <Toaster />
+        <Sonner />
       </LanguageProvider>
     </TooltipProvider>
   </QueryClientProvider>
