@@ -13,8 +13,8 @@ const formSchema = z.object({
   name: z.string().min(2, {
     message: "Nome deve ter pelo menos 2 caracteres"
   }),
-  phone: z.string().regex(/^\(11\)\s?[0-9]{9}$/, {
-    message: "Telefone deve estar no formato (11) 999999999"
+  phone: z.string().regex(/^[0-9]+$/, {
+    message: "Telefone deve conter apenas números"
   }),
   email: z.string().email({
     message: "Formato de email inválido (exemplo: exemplo@exemplo.com)"

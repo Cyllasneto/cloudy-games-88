@@ -19,10 +19,10 @@ export const contactFormData = {
       id: "phone",
       type: "tel",
       translationKey: "phone",
-      placeholder: "(11) 999999999",
+      placeholder: "999999999",
       validation: {
         required: true,
-        pattern: "^\\(11\\)\\s?[0-9]{9}$"
+        pattern: "^[0-9]+$"
       }
     },
     {
