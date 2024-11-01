@@ -1,6 +1,9 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
-import { translateText } from '../services/translationService';
+import { translateText, translateObject } from '../services/translationService';
 import { useToast } from "@/components/ui/use-toast";
+import { en } from '@/translations/en';
+import { ptBR } from '@/translations/pt-BR';
+import { es } from '@/translations/es';
 
 type Language = 'pt-BR' | 'en' | 'es';
 
@@ -8,9 +11,16 @@ interface LanguageContextType {
   language: Language;
   setLanguage: (language: Language) => void;
   translateContent: (text: string, targetLang: Language) => Promise<string>;
+  translations: typeof en;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+
+const baseTranslations = {
+  "en": en,
+  "pt-BR": ptBR,
+  "es": es,
+};
 
 const getLanguageCode = (lang: Language): string => {
   switch (lang) {
@@ -26,7 +36,8 @@ const getLanguageCode = (lang: Language): string => {
 };
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>('pt-BR');
+  const [language, setLanguageState] = useState<Language>('en');
+  const [translations, setTranslations] = useState(baseTranslations[language]);
   const { toast } = useToast();
 
   const translateContent = useCallback(async (text: string, targetLang: Language) => {
@@ -41,17 +52,46 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       const translatedText = await translateText(text, sourceLang, targetLangCode);
       return translatedText;
     } catch (error) {
+      console.error('Translation error:', error);
+      return text;
+    }
+  }, [language]);
+
+  const setLanguage = useCallback(async (newLanguage: Language) => {
+    try {
+      const currentLangCode = getLanguageCode(language);
+      const newLangCode = getLanguageCode(newLanguage);
+
+      if (currentLangCode !== newLangCode) {
+        toast({
+          title: "Traduzindo conteúdo...",
+          description: "Por favor, aguarde enquanto traduzimos o site.",
+        });
+
+        const translatedContent = await translateObject(
+          baseTranslations[language],
+          currentLangCode,
+          newLangCode
+        );
+
+        setTranslations(translatedContent);
+      }
+
+      setLanguageState(newLanguage);
+    } catch (error) {
+      console.error('Error changing language:', error);
       toast({
-        title: "Translation Error",
-        description: "Failed to translate content. Using original text.",
+        title: "Erro na tradução",
+        description: "Não foi possível traduzir o conteúdo. Usando traduções padrão.",
         variant: "destructive",
       });
-      return text;
+      setTranslations(baseTranslations[newLanguage]);
+      setLanguageState(newLanguage);
     }
   }, [language, toast]);
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, translateContent }}>
+    <LanguageContext.Provider value={{ language, setLanguage, translateContent, translations }}>
       {children}
     </LanguageContext.Provider>
   );
