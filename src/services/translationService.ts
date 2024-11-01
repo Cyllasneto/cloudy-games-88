@@ -23,19 +23,3 @@ export async function translateText(text: string, source: string, target: string
     throw error;
   }
 }
-
-export async function translateObject(obj: any, source: string, target: string): Promise<any> {
-  const translatedObj: any = {};
-
-  for (const key in obj) {
-    if (typeof obj[key] === 'string') {
-      translatedObj[key] = await translateText(obj[key], source, target);
-    } else if (typeof obj[key] === 'object' && obj[key] !== null) {
-      translatedObj[key] = await translateObject(obj[key], source, target);
-    } else {
-      translatedObj[key] = obj[key];
-    }
-  }
-
-  return translatedObj;
-}
