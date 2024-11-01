@@ -2,6 +2,8 @@ const LIBRETRANSLATE_API = "https://translate.argosopentech.com";
 
 export async function translateText(text: string, source: string, target: string) {
   try {
+    if (!text || source === target) return text;
+    
     const response = await fetch(`${LIBRETRANSLATE_API}/translate`, {
       method: "POST",
       body: JSON.stringify({
@@ -20,22 +22,38 @@ export async function translateText(text: string, source: string, target: string
     return data.translatedText;
   } catch (error) {
     console.error('Translation error:', error);
-    throw error;
+    return text;
   }
 }
 
 export async function translateObject(obj: any, source: string, target: string): Promise<any> {
-  const translatedObj: any = {};
-
-  for (const key in obj) {
-    if (typeof obj[key] === 'string') {
-      translatedObj[key] = await translateText(obj[key], source, target);
-    } else if (typeof obj[key] === 'object' && obj[key] !== null) {
-      translatedObj[key] = await translateObject(obj[key], source, target);
-    } else {
-      translatedObj[key] = obj[key];
-    }
+  if (!obj) return obj;
+  
+  if (Array.isArray(obj)) {
+    return Promise.all(obj.map(item => translateObject(item, source, target)));
   }
 
-  return translatedObj;
+  if (typeof obj === 'object' && obj !== null) {
+    const translatedObj: any = {};
+    for (const key in obj) {
+      if (typeof obj[key] === 'string') {
+        translatedObj[key] = await translateText(obj[key], source, target);
+      } else if (Array.isArray(obj[key])) {
+        translatedObj[key] = await Promise.all(
+          obj[key].map((item: any) => 
+            typeof item === 'string' 
+              ? translateText(item, source, target)
+              : translateObject(item, source, target)
+          )
+        );
+      } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+        translatedObj[key] = await translateObject(obj[key], source, target);
+      } else {
+        translatedObj[key] = obj[key];
+      }
+    }
+    return translatedObj;
+  }
+
+  return obj;
 }
