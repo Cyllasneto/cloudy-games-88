@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
 import { useTranslations } from "@/hooks/useTranslations"
 import { contactFormData } from "@/data/contactForm"
+import { CheckCircle2, XCircle } from "lucide-react"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -63,6 +64,8 @@ const Contact = () => {
       toast({
         title: String(t.messageSent),
         description: String(t.messageSuccess),
+        className: "bg-green-50 border-green-200",
+        icon: <CheckCircle2 className="h-5 w-5 text-green-500" />,
       })
       form.reset()
     } catch (error) {
@@ -70,7 +73,8 @@ const Contact = () => {
       toast({
         title: String(t.messageError),
         description: String(t.tryAgain),
-        variant: "destructive"
+        variant: "destructive",
+        icon: <XCircle className="h-5 w-5" />,
       })
     }
   }
