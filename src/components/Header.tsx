@@ -7,7 +7,7 @@ import { useTranslations } from "@/hooks/useTranslations"
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const t = useTranslations();
+  const { rawTranslations: t } = useTranslations();
 
   return (
     <header className="border-b bg-white shadow-sm sticky top-0 z-50">

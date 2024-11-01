@@ -19,7 +19,7 @@ import {
 const CountryPage = () => {
   const { countryId } = useParams();
   const country = countries[countryId as keyof typeof countries];
-  const t = useTranslations();
+  const { rawTranslations: t } = useTranslations();
 
   if (!country) return <div>País não encontrado</div>;
 

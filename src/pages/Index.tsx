@@ -94,7 +94,7 @@ const destinations = [
 ];
 
 const Index = () => {
-  const t = useTranslations();
+  const { rawTranslations: t } = useTranslations();
 
   return (
     <div className="min-h-screen">

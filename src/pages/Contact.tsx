@@ -16,7 +16,7 @@ const formSchema = z.object({
 
 const Contact = () => {
   const { toast } = useToast()
-  const t = useTranslations()
+  const { rawTranslations: t } = useTranslations()
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -29,7 +29,6 @@ const Contact = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      // Formatando a mensagem em HTML para melhor legibilidade no Telegram
       const message = `
 <b>Nova mensagem de contato:</b>
 <b>Nome:</b> ${values.name}
@@ -56,15 +55,15 @@ const Contact = () => {
       }
 
       toast({
-        title: String(t.messageSent),
-        description: String(t.messageSuccess),
+        title: t.messageSent,
+        description: t.messageSuccess,
       })
       form.reset()
     } catch (error) {
       console.error('Erro ao enviar mensagem:', error)
       toast({
-        title: String(t.messageError),
-        description: String(t.tryAgain),
+        title: t.messageError,
+        description: t.tryAgain,
         variant: "destructive"
       })
     }
@@ -72,7 +71,7 @@ const Contact = () => {
 
   return (
     <div className="container max-w-2xl mx-auto py-16 px-4">
-      <h1 className="text-4xl font-bold mb-8 text-center">{String(t.contact)}</h1>
+      <h1 className="text-4xl font-bold mb-8 text-center">{t.contact}</h1>
       
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -83,11 +82,11 @@ const Contact = () => {
               name={field.id as keyof z.infer<typeof formSchema>}
               render={({ field: formField }) => (
                 <FormItem>
-                  <FormLabel>{String(t[field.translationKey as keyof typeof t])}</FormLabel>
+                  <FormLabel>{t[field.translationKey as keyof typeof t]}</FormLabel>
                   <FormControl>
                     <Input 
                       type={field.type} 
-                      placeholder={String(t[field.translationKey as keyof typeof t])} 
+                      placeholder={t[field.translationKey as keyof typeof t]} 
                       {...formField} 
                     />
                   </FormControl>
@@ -98,7 +97,7 @@ const Contact = () => {
           ))}
 
           <Button type="submit" className="w-full">
-            {String(t[contactFormData.submitButton.translationKey])}
+            {t[contactFormData.submitButton.translationKey]}
           </Button>
         </form>
       </Form>
