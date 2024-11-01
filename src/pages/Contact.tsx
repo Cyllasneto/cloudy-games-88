@@ -65,10 +65,10 @@ const Contact = () => {
         title: (
           <div className="flex items-center gap-2">
             <CheckCircle2 className="h-5 w-5 text-green-500" />
-            <span>{String(t.messageSent)}</span>
+            <span>{t.messageSent}</span>
           </div>
-        ),
-        description: String(t.messageSuccess),
+        ) as unknown as string,
+        description: t.messageSuccess,
         className: "bg-green-50 border-green-200",
       })
       form.reset()
@@ -78,10 +78,10 @@ const Contact = () => {
         title: (
           <div className="flex items-center gap-2">
             <XCircle className="h-5 w-5" />
-            <span>{String(t.messageError)}</span>
+            <span>{t.messageError}</span>
           </div>
-        ),
-        description: String(t.tryAgain),
+        ) as unknown as string,
+        description: t.tryAgain,
         variant: "destructive",
       })
     }
@@ -89,7 +89,7 @@ const Contact = () => {
 
   return (
     <div className="container max-w-2xl mx-auto py-16 px-4">
-      <h1 className="text-4xl font-bold mb-8 text-center">{String(t.contact)}</h1>
+      <h1 className="text-4xl font-bold mb-8 text-center">{t.contact}</h1>
       
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -100,7 +100,7 @@ const Contact = () => {
               name={field.id as keyof z.infer<typeof formSchema>}
               render={({ field: formField }) => (
                 <FormItem>
-                  <FormLabel>{String(t[field.translationKey as keyof typeof t])}</FormLabel>
+                  <FormLabel>{t[field.translationKey as keyof typeof t]}</FormLabel>
                   <FormControl>
                     <Input 
                       type={field.type} 
@@ -115,7 +115,7 @@ const Contact = () => {
           ))}
 
           <Button type="submit" className="w-full">
-            {String(t[contactFormData.submitButton.translationKey])}
+            {t[contactFormData.submitButton.translationKey]}
           </Button>
         </form>
       </Form>
