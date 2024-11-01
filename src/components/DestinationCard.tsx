@@ -21,6 +21,13 @@ const DestinationCard = ({ title, country, imageUrl, description, highlight }: D
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
         {highlight && (
+          <div className="absolute top-2 left-2">
+            <div className="bg-secondary text-primary px-3 py-1 rounded-full text-sm font-medium">
+              Destaque
+            </div>
+          </div>
+        )}
+        {highlight && (
           <div className="absolute top-2 right-2">
             {title === "Orlando" ? (
               <img 
