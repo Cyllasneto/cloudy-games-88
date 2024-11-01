@@ -64,6 +64,8 @@ export const es = {
   messageError: "Error al enviar mensaje. Por favor, inténtelo de nuevo.",
   messageSuccess: "Nos pondremos en contacto pronto.",
   tryAgain: "Por favor, inténtelo de nuevo más tarde.",
+  invalidPhone: "El teléfono debe tener 11 dígitos (ejemplo: 11999999999)",
+  invalidEmail: "Formato de correo electrónico inválido (ejemplo: ejemplo@ejemplo.com)",
   
   // Footer
   usefulLinks: "Enlaces Útiles",

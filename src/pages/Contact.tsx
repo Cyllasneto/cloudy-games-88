@@ -9,9 +9,15 @@ import { useTranslations } from "@/hooks/useTranslations"
 import { contactFormData } from "@/data/contactForm"
 
 const formSchema = z.object({
-  name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
-  phone: z.string().min(11, "Celular deve ter pelo menos 11 dígitos"),
-  email: z.string().email("Email inválido"),
+  name: z.string().min(2, {
+    message: "Nome deve ter pelo menos 2 caracteres"
+  }),
+  phone: z.string().regex(/^[0-9]{11}$/, {
+    message: "Telefone deve ter 11 dígitos (exemplo: 11999999999)"
+  }),
+  email: z.string().email({
+    message: "Formato de email inválido (exemplo: exemplo@exemplo.com)"
+  }),
 })
 
 const Contact = () => {
@@ -86,7 +92,7 @@ const Contact = () => {
                   <FormControl>
                     <Input 
                       type={field.type} 
-                      placeholder={String(t[field.translationKey as keyof typeof t])} 
+                      placeholder={field.placeholder}
                       {...formField} 
                     />
                   </FormControl>

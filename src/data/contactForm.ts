@@ -9,6 +9,7 @@ export const contactFormData = {
       id: "name",
       type: "text",
       translationKey: "name",
+      placeholder: "Nome",
       validation: {
         required: true,
         minLength: 2
@@ -18,18 +19,20 @@ export const contactFormData = {
       id: "phone",
       type: "tel",
       translationKey: "phone",
+      placeholder: "11999999999",
       validation: {
         required: true,
-        minLength: 11
+        pattern: "^[0-9]{11}$"
       }
     },
     {
       id: "email",
       type: "email",
       translationKey: "email",
+      placeholder: "exemplo@exemplo.com",
       validation: {
         required: true,
-        pattern: "email"
+        pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
       }
     }
   ],
