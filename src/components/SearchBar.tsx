@@ -38,7 +38,7 @@ const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
           if (!searchResults.some(result => result.title === gem.country)) {
             searchResults.push({ 
               title: gem.country,
-              countryId: gem.country.toLowerCase().replace(/\s+/g, '-') // Cria um ID baseado no nome do país
+              countryId: gem.country.toLowerCase().replace(/\s+/g, '-')
             });
           }
         }
@@ -66,26 +66,28 @@ const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={`relative ${className}`}>
-      <div className="relative w-full">
-        <Input
-          type="search"
-          placeholder="Pesquisar países..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => {
-            setTimeout(() => setIsFocused(false), 200);
-          }}
-          className="w-full pr-10"
-        />
-        <button
-          type="submit"
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-        >
-          <Search className="h-4 w-4" />
-        </button>
-      </div>
+    <div className={`relative ${className}`}>
+      <form onSubmit={handleSubmit}>
+        <div className="relative w-full">
+          <Input
+            type="search"
+            placeholder="Pesquisar países..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => {
+              setTimeout(() => setIsFocused(false), 200);
+            }}
+            className="w-full pr-10"
+          />
+          <button
+            type="submit"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+          >
+            <Search className="h-4 w-4" />
+          </button>
+        </div>
+      </form>
       
       {isFocused && suggestions.length > 0 && (
         <div className="absolute z-50 w-full mt-1 bg-white border rounded-md shadow-lg">
@@ -101,7 +103,7 @@ const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
           ))}
         </div>
       )}
-    </form>
+    </div>
   );
 };
 
