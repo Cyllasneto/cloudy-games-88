@@ -1,69 +1,59 @@
-import { Card } from "@/components/ui/card"
-import { Landmark, UtensilsCrossed, Palette, MapPin } from "lucide-react"
+import DestinationCard from "@/components/DestinationCard"
 
 const hiddenGems = [
   {
-    title: "Luang Prabang, Laos",
-    attractions: ["Templo Wat Xieng Thong", "Cachoeira Kuang Si", "Monte Phousi"],
-    culture: "Antiga capital real com forte influência budista",
-    cuisine: ["Laap", "Tam Mak Hoong", "Or Lam"],
-    experiences: ["Almsgiving aos monges", "Curso de tecelagem", "Passeio de barco no Mekong"]
+    title: "Luang Prabang",
+    country: "Laos",
+    imageUrl: "https://images.unsplash.com/photo-1558862107-d49ef2a04d72",
+    description: "Antiga capital real com forte influência budista, templos dourados e cachoeiras deslumbrantes."
   },
   {
-    title: "Ljubljana, Eslovênia",
-    attractions: ["Castelo de Ljubljana", "Ponte do Dragão", "Mercado Central"],
-    culture: "Cidade verde com rica herança arquitetônica",
-    cuisine: ["Štruklji", "Kranjska klobasa", "Potica"],
-    experiences: ["Tour de bicicleta", "Degustação de méis", "Festival de verão"]
+    title: "Ljubljana",
+    country: "Eslovênia",
+    imageUrl: "https://images.unsplash.com/photo-1587974928442-77dc3e0dba72",
+    description: "Cidade verde com rica herança arquitetônica, castelo medieval e mercados vibrantes."
   },
   {
-    title: "Chefchaouen, Marrocos",
-    attractions: ["Medina Azul", "Kasbah", "Praça Uta el-Hammam"],
-    culture: "Cidade das mil cores de azul nas montanhas do Rife",
-    cuisine: ["Tajine", "Pastilla", "Harira"],
-    experiences: ["Banho tradicional Hammam", "Trekking nas montanhas", "Workshop de artesanato"]
+    title: "Chefchaouen",
+    country: "Marrocos",
+    imageUrl: "https://images.unsplash.com/photo-1553244323-0dd677782ef8",
+    description: "A cidade azul nas montanhas do Rife, com medina encantadora e cultura berbere."
   },
   {
-    title: "Vigan, Filipinas",
-    attractions: ["Cidade Colonial Espanhola", "Rua Crisologo", "Plaza Salcedo"],
-    culture: "Patrimônio histórico com arquitetura colonial espanhola preservada",
-    cuisine: ["Longganisa de Vigan", "Empanada", "Okoy"],
-    experiences: ["Passeio de calesa", "Oficina de cerâmica", "Tour gastronômico noturno"]
+    title: "Vigan",
+    country: "Filipinas",
+    imageUrl: "https://images.unsplash.com/photo-1616486788371-62d930495c44",
+    description: "Patrimônio histórico com arquitetura colonial espanhola preservada e rica gastronomia local."
   },
   {
-    title: "Plovdiv, Bulgária",
-    attractions: ["Cidade Antiga", "Teatro Romano", "Kapana"],
-    culture: "Uma das cidades mais antigas da Europa com história milenar",
-    cuisine: ["Banitsa", "Shopska Salata", "Kavarma"],
-    experiences: ["Festival de arte urbana", "Degustação de vinhos", "Tour arqueológico"]
+    title: "Plovdiv",
+    country: "Bulgária",
+    imageUrl: "https://images.unsplash.com/photo-1601284705699-9ac3067d1e04",
+    description: "Uma das cidades mais antigas da Europa com história milenar e vibrante cena cultural."
   },
   {
-    title: "Huacachina, Peru",
-    attractions: ["Oásis no Deserto", "Dunas gigantes", "Lagoa de Huacachina"],
-    culture: "Pequeno oásis cercado por dunas douradas",
-    cuisine: ["Ceviche", "Pisco Sour", "Lomo Saltado"],
-    experiences: ["Sandboard", "Passeio de buggy", "Observação do pôr do sol"]
+    title: "Huacachina",
+    country: "Peru",
+    imageUrl: "https://images.unsplash.com/photo-1580192985016-7e15ef081dd9",
+    description: "Oásis mágico no deserto peruano, cercado por dunas douradas ideais para sandboard."
   },
   {
-    title: "Battambang, Camboja",
-    attractions: ["Templo Wat Banan", "Bamboo Train", "Phare Circus"],
-    culture: "Centro artístico e cultural com arquitetura colonial francesa",
-    cuisine: ["Fish Amok", "Lok Lak", "Nom Banh Chok"],
-    experiences: ["Aula de culinária khmer", "Tour de bicicleta rural", "Visita a vilas flutuantes"]
+    title: "Battambang",
+    country: "Camboja",
+    imageUrl: "https://images.unsplash.com/photo-1571660247638-53ea2f4ebd61",
+    description: "Centro artístico e cultural com arquitetura colonial francesa e templos antigos."
   },
   {
-    title: "Kotor, Montenegro",
-    attractions: ["Cidade Antiga Medieval", "Fortaleza de São João", "Baía de Kotor"],
-    culture: "Cidade fortificada veneziana com rica história marítima",
-    cuisine: ["Njeguški Pršut", "Černogorski Pršut", "Buzara"],
-    experiences: ["Hiking nas muralhas", "Passeio de barco pela baía", "Tour fotográfico"]
+    title: "Kotor",
+    country: "Montenegro",
+    imageUrl: "https://images.unsplash.com/photo-1555990793-da11153b2473",
+    description: "Cidade fortificada veneziana com baía deslumbrante e rica história marítima."
   },
   {
-    title: "Göreme, Turquia",
-    attractions: ["Vale do Amor", "Museu ao Ar Livre", "Igrejas Rupestres"],
-    culture: "Paisagem única com casas e igrejas escavadas na rocha",
-    cuisine: ["Testi Kebab", "Gözleme", "Manti"],
-    experiences: ["Voo de balão", "Hospedagem em hotel caverna", "Workshop de cerâmica"]
+    title: "Göreme",
+    country: "Turquia",
+    imageUrl: "https://images.unsplash.com/photo-1641128324972-af3212f0f6bd",
+    description: "Paisagem única na Capadócia com casas e igrejas escavadas na rocha."
   }
 ]
 
@@ -71,58 +61,10 @@ const HiddenGems = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {hiddenGems.map((destination, index) => (
-        <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
-          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-            <MapPin className="text-primary" />
-            {destination.title}
-          </h3>
-          
-          <div className="space-y-4">
-            <div>
-              <div className="flex items-center gap-2 font-semibold mb-2">
-                <Landmark className="text-primary" />
-                Pontos Turísticos
-              </div>
-              <ul className="list-disc list-inside text-gray-600">
-                {destination.attractions.map((attraction, idx) => (
-                  <li key={idx}>{attraction}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <div className="flex items-center gap-2 font-semibold mb-2">
-                <Palette className="text-primary" />
-                Cultura
-              </div>
-              <p className="text-gray-600">{destination.culture}</p>
-            </div>
-
-            <div>
-              <div className="flex items-center gap-2 font-semibold mb-2">
-                <UtensilsCrossed className="text-primary" />
-                Gastronomia
-              </div>
-              <ul className="list-disc list-inside text-gray-600">
-                {destination.cuisine.map((dish, idx) => (
-                  <li key={idx}>{dish}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <div className="flex items-center gap-2 font-semibold mb-2">
-                <MapPin className="text-primary" />
-                Experiências
-              </div>
-              <ul className="list-disc list-inside text-gray-600">
-                {destination.experiences.map((experience, idx) => (
-                  <li key={idx}>{experience}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </Card>
+        <DestinationCard
+          key={index}
+          {...destination}
+        />
       ))}
     </div>
   )
