@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import FeaturedDestination from "@/components/FeaturedDestination"
 import DestinationCard from "@/components/DestinationCard"
 import CurrencyConverter from "@/components/CurrencyConverter"
+import DestinationGuides from "@/components/destinations/DestinationGuides"
 import { useTranslations } from "@/hooks/useTranslations"
 
 const destinations = [
@@ -124,6 +125,8 @@ const Index = () => {
           </div>
         </section>
 
+        <DestinationGuides />
+
         <section className="mb-16">
           <CurrencyConverter />
         </section>
@@ -132,4 +135,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Index
