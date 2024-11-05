@@ -133,5 +133,53 @@ export const france: Country = {
         "Chef premiado"
       ]
     }
-  ]
+  ],
+  itinerary: {
+    mapCenter: [48.8566, 2.3522], // Coordenadas de Paris
+    mapZoom: 12,
+    routes: [
+      {
+        day: 1,
+        description: "Comece sua viagem explorando os principais pontos turísticos de Paris",
+        locations: [
+          {
+            name: "Torre Eiffel",
+            coordinates: [48.8584, 2.2945],
+            description: "Visite o ícone mais famoso de Paris logo cedo para evitar filas"
+          },
+          {
+            name: "Arco do Triunfo",
+            coordinates: [48.8738, 2.2950],
+            description: "Caminhe pela Champs-Élysées até o Arco do Triunfo"
+          },
+          {
+            name: "Museu do Louvre",
+            coordinates: [48.8606, 2.3376],
+            description: "Dedique a tarde para explorar um dos museus mais famosos do mundo"
+          }
+        ]
+      },
+      {
+        day: 2,
+        description: "Explore o charme histórico e cultural de Paris",
+        locations: [
+          {
+            name: "Notre-Dame",
+            coordinates: [48.8530, 2.3499],
+            description: "Visite a catedral histórica (visualização externa durante restauração)"
+          },
+          {
+            name: "Quartier Latin",
+            coordinates: [48.8489, 2.3469],
+            description: "Almoce no charmoso bairro universitário"
+          },
+          {
+            name: "Montmartre",
+            coordinates: [48.8867, 2.3431],
+            description: "Termine o dia no bairro dos artistas e Sacré-Cœur"
+          }
+        ]
+      }
+    ]
+  }
 };

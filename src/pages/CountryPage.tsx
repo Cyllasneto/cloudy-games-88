@@ -2,19 +2,9 @@ import { useParams } from "react-router-dom";
 import { countries } from "@/data/countries";
 import CountryHero from "@/components/country/CountryHero";
 import CountryGallery from "@/components/country/CountryGallery";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import CountryContent from "@/components/country/CountryContent";
+import CountryItinerary from "@/components/country/CountryItinerary";
 import { useTranslations } from "@/hooks/useTranslations";
-import { 
-  Globe2,
-  Calendar,
-  Coins,
-  Languages,
-  Clock,
-  CloudSun,
-  Bus,
-  Plane
-} from "lucide-react";
 import { useEffect, useState } from "react";
 
 const CountryPage = () => {
@@ -73,41 +63,6 @@ const CountryPage = () => {
   const translatedTitle = typeof countryTranslation === 'object' ? countryTranslation.title : country.title;
   const translatedDescription = typeof countryTranslation === 'object' ? countryTranslation.description : country.description;
 
-  const generalInfoCards = [
-    {
-      icon: <Calendar className="w-6 h-6" />,
-      title: translations.bestTimeToVisit,
-      content: translatedInfo.bestTimeToVisit || country.bestTimeToVisit,
-    },
-    {
-      icon: <Coins className="w-6 h-6" />,
-      title: translations.currency,
-      content: translatedInfo.currency || country.currency,
-    },
-    {
-      icon: <Languages className="w-6 h-6" />,
-      title: translations.language,
-      content: translatedInfo.language || country.language,
-    },
-    {
-      icon: <Clock className="w-6 h-6" />,
-      title: translations.timeZone,
-      content: translatedInfo.timeZone || country.timeZone,
-    },
-    {
-      icon: <CloudSun className="w-6 h-6" />,
-      title: translations.climate,
-      content: translatedInfo.climate || country.climate,
-    },
-    {
-      icon: <Bus className="w-6 h-6" />,
-      title: translations.transportation,
-      content: translatedInfo.transportation || country.transportation,
-    },
-  ];
-
-  const flightTips = country.tips.filter(tip => tip.type === "flight");
-
   return (
     <div>
       <CountryHero
@@ -116,109 +71,25 @@ const CountryPage = () => {
         heroImage={country.heroImage}
       />
 
-      <main className="container max-w-6xl mx-auto py-16 px-4">
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8">{translations.generalInfo}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {generalInfoCards.map((card, index) => (
-              <Card key={index} className="p-6">
-                <div className="flex items-start gap-4">
-                  <div className="text-primary">{card.icon}</div>
-                  <div>
-                    <h3 className="font-semibold mb-2">{card.title}</h3>
-                    <p className="text-gray-600">{card.content}</p>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </section>
+      <CountryContent 
+        country={country}
+        translations={translations}
+        translatedInfo={translatedInfo}
+      />
 
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8">{translations.flightTickets}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {flightTips.map((tip, index) => (
-              <Card key={index} className="p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <Plane className="w-5 h-5 text-primary" />
-                  <h3 className="font-semibold text-lg">{tip.title}</h3>
-                </div>
-                <p className="text-gray-600 mb-4">{tip.description}</p>
-                <div className="flex justify-between items-center">
-                  <span className="text-primary font-medium">{tip.price}</span>
-                  {tip.link && (
-                    <a
-                      href={tip.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:underline flex items-center gap-2"
-                    >
-                      {translations.buyTickets}
-                      <Globe2 className="w-4 h-4" />
-                    </a>
-                  )}
-                </div>
-              </Card>
-            ))}
-          </div>
-        </section>
-
+      <div className="container max-w-6xl mx-auto px-4 mb-16">
         <CountryGallery images={country.gallery} title={country.title} />
+      </div>
 
-        <section>
-          <h2 className="text-3xl font-bold mb-8">{translations.tipsAndRecommendations}</h2>
-          <div className="space-y-8">
-            {country.tips.filter(tip => tip.type !== "flight").map((tip, index) => (
-              <Card key={index} className="p-6">
-                <div className="flex flex-col md:flex-row gap-6">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-4">
-                      <Badge variant="secondary">{tip.type}</Badge>
-                      <h3 className="text-xl font-semibold">{tip.title}</h3>
-                    </div>
-                    <p className="text-gray-600 mb-4">{tip.description}</p>
-                    {tip.highlights && (
-                      <div className="mt-4">
-                        <h4 className="font-semibold mb-2">{translations.highlights}:</h4>
-                        <ul className="list-disc pl-5 space-y-1">
-                          {tip.highlights.map((highlight, idx) => (
-                            <li key={idx}>{highlight}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                    {tip.address && (
-                      <p className="text-sm text-gray-500 mt-4">
-                        {translations.address}: {tip.address}
-                      </p>
-                    )}
-                  </div>
-                  <div className="flex flex-col items-end justify-between">
-                    <div className="text-lg font-semibold text-primary">
-                      {tip.price}
-                    </div>
-                    {tip.duration && (
-                      <div className="text-sm text-gray-500">
-                        {translations.duration}: {tip.duration}
-                      </div>
-                    )}
-                    {tip.link && (
-                      <a
-                        href={tip.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary hover:underline mt-4"
-                      >
-                        {translations.book}
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </section>
-      </main>
+      {country.itinerary && (
+        <div className="container max-w-6xl mx-auto px-4 mb-16">
+          <CountryItinerary
+            itinerary={country.itinerary.routes}
+            center={country.itinerary.mapCenter}
+            zoom={country.itinerary.mapZoom}
+          />
+        </div>
+      )}
     </div>
   );
 };

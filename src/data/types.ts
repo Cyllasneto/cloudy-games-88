@@ -14,6 +14,18 @@ export interface Tip {
   highlights?: string[];
 }
 
+interface Location {
+  name: string;
+  coordinates: [number, number];
+  description: string;
+}
+
+interface DayItinerary {
+  day: number;
+  locations: Location[];
+  description: string;
+}
+
 export interface Country {
   title: string;
   description: string;
@@ -26,4 +38,9 @@ export interface Country {
   timeZone: string;
   climate: string;
   transportation: string;
+  itinerary?: {
+    routes: DayItinerary[];
+    mapCenter: [number, number];
+    mapZoom: number;
+  };
 }
