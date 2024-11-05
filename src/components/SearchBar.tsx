@@ -11,28 +11,28 @@ interface SearchBarProps {
 
 const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [suggestions, setSuggestions] = useState<Array<{ title: string; type: 'country' | 'city' }>>([]);
+  const [suggestions, setSuggestions] = useState<Array<{ title: string; type: 'country' | 'city'; countryId: string }>>([]);
   const [isFocused, setIsFocused] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (searchQuery.trim()) {
-      const searchResults: Array<{ title: string; type: 'country' | 'city' }> = [];
+      const searchResults: Array<{ title: string; type: 'country' | 'city'; countryId: string }> = [];
       const searchTerm = searchQuery.toLowerCase();
       
       // Busca por países
       Object.entries(countries).forEach(([countryId, country]) => {
         if (country.title.toLowerCase().includes(searchTerm)) {
-          searchResults.push({ title: country.title, type: 'country' });
+          searchResults.push({ title: country.title, type: 'country', countryId });
         }
       });
 
       // Busca por cidades
-      Object.entries(countries).forEach(([_, country]) => {
+      Object.entries(countries).forEach(([countryId, country]) => {
         country.tips.forEach(tip => {
           if (tip.title.toLowerCase().includes(searchTerm)) {
             if (!searchResults.some(result => result.title === tip.title)) {
-              searchResults.push({ title: tip.title, type: 'city' });
+              searchResults.push({ title: tip.title, type: 'city', countryId });
             }
           }
         });
@@ -44,32 +44,12 @@ const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
     }
   }, [searchQuery]);
 
-  const handleResultClick = (result: { title: string; type: 'country' | 'city' }) => {
-    if (result.type === 'country') {
-      const countryId = Object.entries(countries).find(
-        ([_, country]) => country.title === result.title
-      )?.[0];
-      
-      if (countryId) {
-        setSearchQuery("");
-        setSuggestions([]);
-        setIsFocused(false);
-        if (onClose) onClose();
-        navigate(`/country/${countryId}`);
-      }
-    } else {
-      // Para cidades, encontra o país que contém esta cidade
-      for (const [countryId, country] of Object.entries(countries)) {
-        if (country.tips.some(tip => tip.title === result.title)) {
-          setSearchQuery("");
-          setSuggestions([]);
-          setIsFocused(false);
-          if (onClose) onClose();
-          navigate(`/country/${countryId}`);
-          break;
-        }
-      }
-    }
+  const handleResultClick = (result: { title: string; type: 'country' | 'city'; countryId: string }) => {
+    setSearchQuery("");
+    setSuggestions([]);
+    setIsFocused(false);
+    if (onClose) onClose();
+    navigate(`/country/${result.countryId}`);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
