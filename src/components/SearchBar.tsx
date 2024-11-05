@@ -20,22 +20,14 @@ const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
       const searchResults: Array<{ title: string; countryId: string }> = [];
       const searchTerm = searchQuery.toLowerCase();
       
-      // Busca por países
+      // Busca apenas por países
       Object.entries(countries).forEach(([countryId, country]) => {
         if (country.title.toLowerCase().includes(searchTerm)) {
-          searchResults.push({ title: country.title, countryId });
+          searchResults.push({ 
+            title: country.title,
+            countryId 
+          });
         }
-      });
-
-      // Busca por cidades
-      Object.entries(countries).forEach(([countryId, country]) => {
-        country.tips.forEach(tip => {
-          if (tip.title.toLowerCase().includes(searchTerm)) {
-            if (!searchResults.some(result => result.title === tip.title)) {
-              searchResults.push({ title: tip.title, countryId });
-            }
-          }
-        });
       });
       
       setSuggestions(searchResults);
@@ -44,18 +36,18 @@ const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
     }
   }, [searchQuery]);
 
-  const handleResultClick = (result: { title: string; countryId: string }) => {
+  const handleResultClick = (countryId: string) => {
     setSearchQuery("");
     setSuggestions([]);
     setIsFocused(false);
     if (onClose) onClose();
-    navigate(`/country/${result.countryId}`);
+    navigate(`/country/${countryId}`);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (suggestions.length > 0) {
-      handleResultClick(suggestions[0]);
+      handleResultClick(suggestions[0].countryId);
     }
   };
 
@@ -64,7 +56,7 @@ const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
       <div className="relative w-full">
         <Input
           type="search"
-          placeholder="Pesquisar países ou cidades..."
+          placeholder="Pesquisar países..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onFocus={() => setIsFocused(true)}
@@ -87,7 +79,7 @@ const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
             <button
               key={index}
               className="w-full px-4 py-2 text-left hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
-              onClick={() => handleResultClick(result)}
+              onClick={() => handleResultClick(result.countryId)}
               type="button"
             >
               {result.title}
