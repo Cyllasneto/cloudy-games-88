@@ -17,30 +17,28 @@ const queryClient = new QueryClient()
 
 const App = () => {
   return (
-    <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <LanguageProvider>
-          <TooltipProvider>
-            <BrowserRouter>
-              <div className="min-h-screen flex flex-col">
-                <Header />
-                <div className="flex-1">
-                  <Routes>
-                    <Route path="/" element={<Index />} />
-                    <Route path="/country/:countryId" element={<CountryPage />} />
-                    <Route path="/privacy" element={<Privacy />} />
-                    <Route path="/contact" element={<Contact />} />
-                  </Routes>
-                </div>
-                <Footer />
+    <QueryClientProvider client={queryClient}>
+      <LanguageProvider>
+        <TooltipProvider>
+          <BrowserRouter>
+            <div className="min-h-screen flex flex-col">
+              <Header />
+              <div className="flex-1">
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/country/:countryId" element={<CountryPage />} />
+                  <Route path="/privacy" element={<Privacy />} />
+                  <Route path="/contact" element={<Contact />} />
+                </Routes>
               </div>
-              <Toaster />
-              <Sonner />
-            </BrowserRouter>
-          </TooltipProvider>
-        </LanguageProvider>
-      </QueryClientProvider>
-    </React.StrictMode>
+              <Footer />
+            </div>
+            <Toaster />
+            <Sonner />
+          </BrowserRouter>
+        </TooltipProvider>
+      </LanguageProvider>
+    </QueryClientProvider>
   )
 }
 
