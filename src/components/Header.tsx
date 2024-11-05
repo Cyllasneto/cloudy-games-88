@@ -1,18 +1,26 @@
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@/components/ui/navigation-menu"
 import { Link } from "react-router-dom"
-import { Cloud, Menu, X } from "lucide-react"
+import { Cloud, Menu, Search, X } from "lucide-react"
 import { useState } from "react"
 import LanguageSelector from "./LanguageSelector"
 import { useTranslations } from "@/hooks/useTranslations"
+import { Input } from "@/components/ui/input"
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { rawTranslations: t } = useTranslations();
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Future search functionality can be implemented here
+    console.log("Searching for:", searchQuery);
+  };
 
   return (
     <header className="border-b bg-white shadow-sm sticky top-0 z-50">
       <div className="container max-w-6xl mx-auto py-4 px-4">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           <Link 
             to="/" 
             className="flex items-center gap-2 text-2xl md:text-3xl font-bold text-primary hover:scale-105 transition-transform duration-200"
@@ -22,6 +30,25 @@ const Header = () => {
               {t.cloudyTrip}
             </span>
           </Link>
+
+          {/* Search Bar */}
+          <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-md">
+            <div className="relative w-full">
+              <Input
+                type="search"
+                placeholder="Pesquisar destinos..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pr-10"
+              />
+              <button 
+                type="submit"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              >
+                <Search className="h-4 w-4" />
+              </button>
+            </div>
+          </form>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:gap-4">
@@ -53,6 +80,24 @@ const Header = () => {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden py-4">
+            {/* Mobile Search Bar */}
+            <form onSubmit={handleSearch} className="mb-4">
+              <div className="relative w-full">
+                <Input
+                  type="search"
+                  placeholder="Pesquisar destinos..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pr-10"
+                />
+                <button 
+                  type="submit"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  <Search className="h-4 w-4" />
+                </button>
+              </div>
+            </form>
             <nav className="flex flex-col space-y-4">
               <Link 
                 to="/" 
