@@ -15,48 +15,94 @@ import {
   Bus,
   Plane
 } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const CountryPage = () => {
   const { countryId } = useParams();
   const country = countries[countryId as keyof typeof countries];
-  const { rawTranslations: t } = useTranslations();
+  const { t, rawTranslations: translations } = useTranslations();
+  const [translatedInfo, setTranslatedInfo] = useState({
+    bestTimeToVisit: "",
+    currency: "",
+    language: "",
+    timeZone: "",
+    climate: "",
+    transportation: ""
+  });
+
+  useEffect(() => {
+    const translateInfo = async () => {
+      try {
+        const [
+          bestTime,
+          currencyInfo,
+          languageInfo,
+          timeZoneInfo,
+          climateInfo,
+          transportationInfo
+        ] = await Promise.all([
+          t(country.bestTimeToVisit),
+          t(country.currency),
+          t(country.language),
+          t(country.timeZone),
+          t(country.climate),
+          t(country.transportation)
+        ]);
+
+        setTranslatedInfo({
+          bestTimeToVisit: bestTime,
+          currency: currencyInfo,
+          language: languageInfo,
+          timeZone: timeZoneInfo,
+          climate: climateInfo,
+          transportation: transportationInfo
+        });
+      } catch (error) {
+        console.error("Translation error:", error);
+      }
+    };
+
+    if (country) {
+      translateInfo();
+    }
+  }, [country, t]);
 
   if (!country) return <div>País não encontrado</div>;
 
-  const countryTranslation = countryId && t[countryId as keyof typeof t];
+  const countryTranslation = countryId && translations[countryId as keyof typeof translations];
   const translatedTitle = typeof countryTranslation === 'object' ? countryTranslation.title : country.title;
   const translatedDescription = typeof countryTranslation === 'object' ? countryTranslation.description : country.description;
 
   const generalInfoCards = [
     {
       icon: <Calendar className="w-6 h-6" />,
-      title: t.bestTimeToVisit,
-      content: country.bestTimeToVisit,
+      title: translations.bestTimeToVisit,
+      content: translatedInfo.bestTimeToVisit || country.bestTimeToVisit,
     },
     {
       icon: <Coins className="w-6 h-6" />,
-      title: t.currency,
-      content: country.currency,
+      title: translations.currency,
+      content: translatedInfo.currency || country.currency,
     },
     {
       icon: <Languages className="w-6 h-6" />,
-      title: t.language,
-      content: country.language,
+      title: translations.language,
+      content: translatedInfo.language || country.language,
     },
     {
       icon: <Clock className="w-6 h-6" />,
-      title: t.timeZone,
-      content: country.timeZone,
+      title: translations.timeZone,
+      content: translatedInfo.timeZone || country.timeZone,
     },
     {
       icon: <CloudSun className="w-6 h-6" />,
-      title: t.climate,
-      content: country.climate,
+      title: translations.climate,
+      content: translatedInfo.climate || country.climate,
     },
     {
       icon: <Bus className="w-6 h-6" />,
-      title: t.transportation,
-      content: country.transportation,
+      title: translations.transportation,
+      content: translatedInfo.transportation || country.transportation,
     },
   ];
 
@@ -72,7 +118,7 @@ const CountryPage = () => {
 
       <main className="container max-w-6xl mx-auto py-16 px-4">
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8">{t.generalInfo}</h2>
+          <h2 className="text-3xl font-bold mb-8">{translations.generalInfo}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {generalInfoCards.map((card, index) => (
               <Card key={index} className="p-6">
@@ -89,7 +135,7 @@ const CountryPage = () => {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8">{t.flightTickets}</h2>
+          <h2 className="text-3xl font-bold mb-8">{translations.flightTickets}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {flightTips.map((tip, index) => (
               <Card key={index} className="p-6">
@@ -107,7 +153,7 @@ const CountryPage = () => {
                       rel="noopener noreferrer"
                       className="text-primary hover:underline flex items-center gap-2"
                     >
-                      {t.buyTickets}
+                      {translations.buyTickets}
                       <Globe2 className="w-4 h-4" />
                     </a>
                   )}
@@ -120,7 +166,7 @@ const CountryPage = () => {
         <CountryGallery images={country.gallery} title={country.title} />
 
         <section>
-          <h2 className="text-3xl font-bold mb-8">{t.tipsAndRecommendations}</h2>
+          <h2 className="text-3xl font-bold mb-8">{translations.tipsAndRecommendations}</h2>
           <div className="space-y-8">
             {country.tips.filter(tip => tip.type !== "flight").map((tip, index) => (
               <Card key={index} className="p-6">
@@ -133,7 +179,7 @@ const CountryPage = () => {
                     <p className="text-gray-600 mb-4">{tip.description}</p>
                     {tip.highlights && (
                       <div className="mt-4">
-                        <h4 className="font-semibold mb-2">{t.highlights}:</h4>
+                        <h4 className="font-semibold mb-2">{translations.highlights}:</h4>
                         <ul className="list-disc pl-5 space-y-1">
                           {tip.highlights.map((highlight, idx) => (
                             <li key={idx}>{highlight}</li>
@@ -143,7 +189,7 @@ const CountryPage = () => {
                     )}
                     {tip.address && (
                       <p className="text-sm text-gray-500 mt-4">
-                        {t.address}: {tip.address}
+                        {translations.address}: {tip.address}
                       </p>
                     )}
                   </div>
@@ -153,7 +199,7 @@ const CountryPage = () => {
                     </div>
                     {tip.duration && (
                       <div className="text-sm text-gray-500">
-                        {t.duration}: {tip.duration}
+                        {translations.duration}: {tip.duration}
                       </div>
                     )}
                     {tip.link && (
@@ -163,7 +209,7 @@ const CountryPage = () => {
                         rel="noopener noreferrer"
                         className="text-primary hover:underline mt-4"
                       >
-                        {t.book}
+                        {translations.book}
                       </a>
                     )}
                   </div>
