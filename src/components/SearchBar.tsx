@@ -11,19 +11,19 @@ interface SearchBarProps {
 
 const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [suggestions, setSuggestions] = useState<Array<{ title: string; type: 'country' | 'city'; countryId: string }>>([]);
+  const [suggestions, setSuggestions] = useState<Array<{ title: string; countryId: string }>>([]);
   const [isFocused, setIsFocused] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (searchQuery.trim()) {
-      const searchResults: Array<{ title: string; type: 'country' | 'city'; countryId: string }> = [];
+      const searchResults: Array<{ title: string; countryId: string }> = [];
       const searchTerm = searchQuery.toLowerCase();
       
       // Busca por países
       Object.entries(countries).forEach(([countryId, country]) => {
         if (country.title.toLowerCase().includes(searchTerm)) {
-          searchResults.push({ title: country.title, type: 'country', countryId });
+          searchResults.push({ title: country.title, countryId });
         }
       });
 
@@ -32,7 +32,7 @@ const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
         country.tips.forEach(tip => {
           if (tip.title.toLowerCase().includes(searchTerm)) {
             if (!searchResults.some(result => result.title === tip.title)) {
-              searchResults.push({ title: tip.title, type: 'city', countryId });
+              searchResults.push({ title: tip.title, countryId });
             }
           }
         });
@@ -44,7 +44,7 @@ const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
     }
   }, [searchQuery]);
 
-  const handleResultClick = (result: { title: string; type: 'country' | 'city'; countryId: string }) => {
+  const handleResultClick = (result: { title: string; countryId: string }) => {
     setSearchQuery("");
     setSuggestions([]);
     setIsFocused(false);
