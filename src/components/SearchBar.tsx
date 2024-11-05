@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { countries } from "@/data/countries";
+import { hiddenGems } from "@/data/hiddenGems";
 
 interface SearchBarProps {
   className?: string;
@@ -20,13 +21,26 @@ const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
       const searchResults: Array<{ title: string; countryId: string }> = [];
       const searchTerm = searchQuery.toLowerCase();
       
-      // Busca apenas por países
+      // Busca por países cadastrados
       Object.entries(countries).forEach(([countryId, country]) => {
         if (country.title.toLowerCase().includes(searchTerm)) {
           searchResults.push({ 
             title: country.title,
             countryId 
           });
+        }
+      });
+
+      // Busca por países das joias escondidas
+      hiddenGems.forEach(gem => {
+        if (gem.country.toLowerCase().includes(searchTerm)) {
+          // Verifica se o país já não foi adicionado
+          if (!searchResults.some(result => result.title === gem.country)) {
+            searchResults.push({ 
+              title: gem.country,
+              countryId: gem.country.toLowerCase().replace(/\s+/g, '-') // Cria um ID baseado no nome do país
+            });
+          }
         }
       });
       
