@@ -11,39 +11,66 @@ interface SearchBarProps {
 
 const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [suggestions, setSuggestions] = useState<Array<{ title: string; type: 'country' | 'city' }>>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (searchQuery.trim()) {
-      const matchingCountries = Object.entries(countries)
-        .filter(([_, country]) =>
-          country.title.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-        .map(([_, country]) => country.title);
-      setSuggestions(matchingCountries);
+      const searchResults: Array<{ title: string; type: 'country' | 'city' }> = [];
+      
+      // Search through countries
+      Object.entries(countries).forEach(([countryId, country]) => {
+        if (country.title.toLowerCase().includes(searchQuery.toLowerCase())) {
+          searchResults.push({ title: country.title, type: 'country' });
+        }
+        
+        // Search through tips for cities
+        country.tips.forEach(tip => {
+          if (tip.title.toLowerCase().includes(searchQuery.toLowerCase())) {
+            // Avoid duplicate cities
+            if (!searchResults.some(result => result.title === tip.title)) {
+              searchResults.push({ title: tip.title, type: 'city' });
+            }
+          }
+        });
+      });
+      
+      setSuggestions(searchResults);
     } else {
       setSuggestions([]);
     }
   }, [searchQuery]);
 
-  const handleCountryClick = (countryName: string) => {
-    const countryId = Object.entries(countries).find(
-      ([_, country]) => country.title === countryName
-    )?.[0];
-    
-    if (countryId) {
-      setSearchQuery("");
-      setSuggestions([]);
-      if (onClose) onClose();
-      navigate(`/country/${countryId}`);
+  const handleResultClick = (result: { title: string; type: 'country' | 'city' }) => {
+    if (result.type === 'country') {
+      const countryId = Object.entries(countries).find(
+        ([_, country]) => country.title === result.title
+      )?.[0];
+      
+      if (countryId) {
+        setSearchQuery("");
+        setSuggestions([]);
+        if (onClose) onClose();
+        navigate(`/country/${countryId}`);
+      }
+    } else {
+      // For cities, find the country that contains this city
+      for (const [countryId, country] of Object.entries(countries)) {
+        if (country.tips.some(tip => tip.title === result.title)) {
+          setSearchQuery("");
+          setSuggestions([]);
+          if (onClose) onClose();
+          navigate(`/country/${countryId}`);
+          break;
+        }
+      }
     }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (suggestions.length > 0) {
-      handleCountryClick(suggestions[0]);
+      handleResultClick(suggestions[0]);
     }
   };
 
@@ -67,14 +94,17 @@ const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
       
       {suggestions.length > 0 && (
         <div className="absolute z-50 w-full mt-1 bg-white border rounded-md shadow-lg">
-          {suggestions.map((country, index) => (
+          {suggestions.map((result, index) => (
             <button
               key={index}
-              className="w-full px-4 py-2 text-left hover:bg-gray-100 focus:bg-gray-100 focus:outline-none"
-              onClick={() => handleCountryClick(country)}
+              className="w-full px-4 py-2 text-left hover:bg-gray-100 focus:bg-gray-100 focus:outline-none flex items-center justify-between"
+              onClick={() => handleResultClick(result)}
               type="button"
             >
-              {country}
+              <span>{result.title}</span>
+              <span className="text-xs text-gray-500">
+                {result.type === 'country' ? 'País' : 'Cidade'}
+              </span>
             </button>
           ))}
         </div>
