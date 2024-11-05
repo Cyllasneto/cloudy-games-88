@@ -12,6 +12,7 @@ interface SearchBarProps {
 const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState<Array<{ title: string; type: 'country' | 'city' }>>([]);
+  const [isFocused, setIsFocused] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -50,6 +51,7 @@ const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
       if (countryId) {
         setSearchQuery("");
         setSuggestions([]);
+        setIsFocused(false);
         if (onClose) onClose();
         navigate(`/country/${countryId}`);
       }
@@ -59,6 +61,7 @@ const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
         if (country.tips.some(tip => tip.title === result.title)) {
           setSearchQuery("");
           setSuggestions([]);
+          setIsFocused(false);
           if (onClose) onClose();
           navigate(`/country/${countryId}`);
           break;
@@ -82,6 +85,11 @@ const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
           placeholder="Pesquisar destinos..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => {
+            // Small delay to allow clicking on suggestions
+            setTimeout(() => setIsFocused(false), 200);
+          }}
           className="w-full pr-10"
         />
         <button
@@ -92,7 +100,7 @@ const SearchBar = ({ className = "", onClose }: SearchBarProps) => {
         </button>
       </div>
       
-      {suggestions.length > 0 && (
+      {isFocused && suggestions.length > 0 && (
         <div className="absolute z-50 w-full mt-1 bg-white border rounded-md shadow-lg">
           {suggestions.map((result, index) => (
             <button
