@@ -50,7 +50,7 @@ export const japan: Country = {
       type: "activity",
       title: "Monte Fuji",
       description: "Excursão ao icônico Monte Fuji com experiências culturais únicas.",
-      price: "€€€",
+      price: "€€",
       link: "https://www.fujisan-climb.jp/en/",
       image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e",
       highlights: [
@@ -87,5 +87,53 @@ export const japan: Country = {
         "Ingredientes premium"
       ]
     }
-  ]
+  ],
+  itinerary: {
+    mapCenter: [35.6762, 139.6503], // Coordenadas de Tóquio
+    mapZoom: 12,
+    routes: [
+      {
+        day: 1,
+        description: "Explore os contrastes de Tóquio",
+        locations: [
+          {
+            name: "Templo Senso-ji",
+            coordinates: [35.7147, 139.7966],
+            description: "Visite o templo budista mais antigo de Tóquio"
+          },
+          {
+            name: "Shibuya Crossing",
+            coordinates: [35.6595, 139.7004],
+            description: "Experimente a famosa faixa de pedestres mais movimentada do mundo"
+          },
+          {
+            name: "Tokyo Skytree",
+            coordinates: [35.7100, 139.8107],
+            description: "Aprecie a vista panorâmica da cidade"
+          }
+        ]
+      },
+      {
+        day: 2,
+        description: "Conheça o Monte Fuji e arredores",
+        locations: [
+          {
+            name: "Monte Fuji 5ª Estação",
+            coordinates: [35.3606, 138.7278],
+            description: "Ponto de partida para trilhas e vista privilegiada"
+          },
+          {
+            name: "Lago Kawaguchiko",
+            coordinates: [35.5171, 138.7510],
+            description: "Relaxe com vista para o Monte Fuji"
+          },
+          {
+            name: "Chureito Pagoda",
+            coordinates: [35.5015, 138.8019],
+            description: "Fotografe a icônica vista do Monte Fuji com a pagoda"
+          }
+        ]
+      }
+    ]
+  }
 };

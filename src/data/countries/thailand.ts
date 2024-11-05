@@ -87,5 +87,53 @@ export const thailand: Country = {
         "Chef premiado internacionalmente"
       ]
     }
-  ]
+  ],
+  itinerary: {
+    mapCenter: [13.7563, 100.5018], // Coordenadas de Bangkok
+    mapZoom: 12,
+    routes: [
+      {
+        day: 1,
+        description: "Descubra os templos de Bangkok",
+        locations: [
+          {
+            name: "Grande Palácio",
+            coordinates: [13.7500, 100.4913],
+            description: "Complexo de templos e antiga residência real"
+          },
+          {
+            name: "Wat Pho",
+            coordinates: [13.7465, 100.4933],
+            description: "Templo do Buda Reclinado"
+          },
+          {
+            name: "Wat Arun",
+            coordinates: [13.7437, 100.4888],
+            description: "Templo do Amanhecer às margens do rio"
+          }
+        ]
+      },
+      {
+        day: 2,
+        description: "Praias paradisíacas",
+        locations: [
+          {
+            name: "Phi Phi Islands",
+            coordinates: [7.7407, 98.7784],
+            description: "Ilhas tropicais deslumbrantes"
+          },
+          {
+            name: "Maya Bay",
+            coordinates: [7.6783, 98.7694],
+            description: "Praia famosa pelo filme 'A Praia'"
+          },
+          {
+            name: "Railay Beach",
+            coordinates: [8.0055, 98.8372],
+            description: "Praia cercada por falésias calcárias"
+          }
+        ]
+      }
+    ]
+  }
 };

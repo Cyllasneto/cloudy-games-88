@@ -71,5 +71,53 @@ export const norway: Country = {
         "Experiência única"
       ]
     }
-  ]
+  ],
+  itinerary: {
+    mapCenter: [59.9139, 10.7522], // Coordenadas de Oslo
+    mapZoom: 12,
+    routes: [
+      {
+        day: 1,
+        description: "Descubra Oslo e sua cultura",
+        locations: [
+          {
+            name: "Opera House",
+            coordinates: [59.9074, 10.7526],
+            description: "Visite o icônico edifício à beira-mar"
+          },
+          {
+            name: "Parque Vigeland",
+            coordinates: [59.9270, 10.7001],
+            description: "Explore o maior parque de esculturas do mundo"
+          },
+          {
+            name: "Museu Viking",
+            coordinates: [59.9044, 10.6843],
+            description: "Conheça a história dos vikings"
+          }
+        ]
+      },
+      {
+        day: 2,
+        description: "Explore os fiordes noruegueses",
+        locations: [
+          {
+            name: "Geirangerfjord",
+            coordinates: [62.1049, 7.0752],
+            description: "Um dos fiordes mais espetaculares da Noruega"
+          },
+          {
+            name: "Trolltunga",
+            coordinates: [60.1241, 6.7400],
+            description: "Vista panorâmica impressionante"
+          },
+          {
+            name: "Bergen",
+            coordinates: [60.3913, 5.3221],
+            description: "Cidade histórica dos fiordes"
+          }
+        ]
+      }
+    ]
+  }
 };

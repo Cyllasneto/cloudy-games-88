@@ -71,5 +71,53 @@ export const turkey: Country = {
         "Chef renomado"
       ]
     }
-  ]
+  ],
+  itinerary: {
+    mapCenter: [41.0082, 28.9784], // Coordenadas de Istambul
+    mapZoom: 13,
+    routes: [
+      {
+        day: 1,
+        description: "Descubra as maravilhas de Istambul",
+        locations: [
+          {
+            name: "Santa Sofia",
+            coordinates: [41.0086, 28.9802],
+            description: "Antiga basílica, agora mesquita, símbolo da cidade"
+          },
+          {
+            name: "Mesquita Azul",
+            coordinates: [41.0054, 28.9768],
+            description: "Famosa por seus seis minaretes e azulejos azuis"
+          },
+          {
+            name: "Grande Bazar",
+            coordinates: [41.0106, 28.9682],
+            description: "Um dos maiores e mais antigos mercados cobertos do mundo"
+          }
+        ]
+      },
+      {
+        day: 2,
+        description: "Explore o Bósforo",
+        locations: [
+          {
+            name: "Palácio Topkapi",
+            coordinates: [41.0115, 28.9833],
+            description: "Antiga residência dos sultões otomanos"
+          },
+          {
+            name: "Torre Galata",
+            coordinates: [41.0256, 28.9741],
+            description: "Vista panorâmica do Bósforo"
+          },
+          {
+            name: "Bazar das Especiarias",
+            coordinates: [41.0165, 28.9707],
+            description: "Mercado histórico de especiarias e produtos locais"
+          }
+        ]
+      }
+    ]
+  }
 };

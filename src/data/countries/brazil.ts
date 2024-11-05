@@ -87,5 +87,53 @@ export const brazil: Country = {
         "Experiência gastronômica única"
       ]
     }
-  ]
+  ],
+  itinerary: {
+    mapCenter: [-22.9068, -43.1729], // Coordenadas do Rio de Janeiro
+    mapZoom: 12,
+    routes: [
+      {
+        day: 1,
+        description: "Conheça os cartões-postais do Rio",
+        locations: [
+          {
+            name: "Cristo Redentor",
+            coordinates: [-22.9519, -43.2105],
+            description: "Uma das 7 maravilhas do mundo moderno"
+          },
+          {
+            name: "Pão de Açúcar",
+            coordinates: [-22.9492, -43.1545],
+            description: "Vista panorâmica da cidade maravilhosa"
+          },
+          {
+            name: "Praia de Copacabana",
+            coordinates: [-22.9698, -43.1837],
+            description: "A praia mais famosa do Brasil"
+          }
+        ]
+      },
+      {
+        day: 2,
+        description: "Cultura e História Carioca",
+        locations: [
+          {
+            name: "Centro Histórico",
+            coordinates: [-22.9068, -43.1729],
+            description: "Conheça o Rio antigo"
+          },
+          {
+            name: "Escadaria Selarón",
+            coordinates: [-22.9154, -43.1809],
+            description: "Obra de arte ao ar livre"
+          },
+          {
+            name: "Maracanã",
+            coordinates: [-22.9122, -43.2302],
+            description: "O templo do futebol brasileiro"
+          }
+        ]
+      }
+    ]
+  }
 };

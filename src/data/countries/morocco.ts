@@ -87,5 +87,53 @@ export const morocco: Country = {
         "Serviço impecável"
       ]
     }
-  ]
+  ],
+  itinerary: {
+    mapCenter: [31.6295, -7.9811], // Coordenadas de Marrakech
+    mapZoom: 12,
+    routes: [
+      {
+        day: 1,
+        description: "Explore a magia de Marrakech",
+        locations: [
+          {
+            name: "Medina",
+            coordinates: [31.6295, -7.9811],
+            description: "Cidade antiga murada, Patrimônio Mundial"
+          },
+          {
+            name: "Jardins Majorelle",
+            coordinates: [31.6417, -7.9889],
+            description: "Oásis urbano criado por Yves Saint Laurent"
+          },
+          {
+            name: "Praça Jemaa el-Fnaa",
+            coordinates: [31.6287, -7.9847],
+            description: "O coração pulsante de Marrakech"
+          }
+        ]
+      },
+      {
+        day: 2,
+        description: "Aventura no Deserto",
+        locations: [
+          {
+            name: "Deserto do Saara",
+            coordinates: [31.1527, -4.0293],
+            description: "Experiência única no deserto"
+          },
+          {
+            name: "Ouarzazate",
+            coordinates: [30.9335, -6.9370],
+            description: "A porta do deserto"
+          },
+          {
+            name: "Vale do Dadès",
+            coordinates: [31.9167, -5.5833],
+            description: "Paisagens deslumbrantes e casbás"
+          }
+        ]
+      }
+    ]
+  }
 };

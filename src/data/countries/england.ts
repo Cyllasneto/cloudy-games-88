@@ -71,5 +71,53 @@ export const england: Country = {
         "Experiência única"
       ]
     }
-  ]
+  ],
+  itinerary: {
+    mapCenter: [51.5074, -0.1278], // Coordenadas de Londres
+    mapZoom: 12,
+    routes: [
+      {
+        day: 1,
+        description: "Explore os ícones de Londres",
+        locations: [
+          {
+            name: "Big Ben",
+            coordinates: [51.5007, -0.1246],
+            description: "O famoso relógio símbolo de Londres"
+          },
+          {
+            name: "London Eye",
+            coordinates: [51.5033, -0.1195],
+            description: "Vista panorâmica da cidade"
+          },
+          {
+            name: "Tower Bridge",
+            coordinates: [51.5055, -0.0754],
+            description: "A ponte mais famosa de Londres"
+          }
+        ]
+      },
+      {
+        day: 2,
+        description: "Arte e História Britânica",
+        locations: [
+          {
+            name: "British Museum",
+            coordinates: [51.5194, -0.1269],
+            description: "Um dos maiores museus do mundo"
+          },
+          {
+            name: "Buckingham Palace",
+            coordinates: [51.5014, -0.1419],
+            description: "Residência oficial da família real"
+          },
+          {
+            name: "Hyde Park",
+            coordinates: [51.5073, -0.1657],
+            description: "O maior parque real de Londres"
+          }
+        ]
+      }
+    ]
+  }
 };

@@ -101,5 +101,53 @@ export const greece: Country = {
         "Experiência gastronômica única"
       ]
     }
-  ]
+  ],
+  itinerary: {
+    mapCenter: [37.9838, 23.7275], // Coordenadas de Atenas
+    mapZoom: 12,
+    routes: [
+      {
+        day: 1,
+        description: "Explore os principais pontos históricos de Atenas",
+        locations: [
+          {
+            name: "Acrópole",
+            coordinates: [37.9715, 23.7267],
+            description: "Visite o símbolo mais importante da antiga civilização grega"
+          },
+          {
+            name: "Plaka",
+            coordinates: [37.9735, 23.7283],
+            description: "Almoce no charmoso bairro histórico"
+          },
+          {
+            name: "Ágora Antiga",
+            coordinates: [37.9747, 23.7229],
+            description: "Explore o centro da vida pública da antiga Atenas"
+          }
+        ]
+      },
+      {
+        day: 2,
+        description: "Descubra as belezas de Santorini",
+        locations: [
+          {
+            name: "Oia",
+            coordinates: [36.4618, 25.3753],
+            description: "Assista ao pôr do sol mais famoso da Grécia"
+          },
+          {
+            name: "Fira",
+            coordinates: [36.4167, 25.4317],
+            description: "Explore a capital de Santorini"
+          },
+          {
+            name: "Praia Vermelha",
+            coordinates: [36.3477, 25.3881],
+            description: "Relaxe na praia vulcânica única"
+          }
+        ]
+      }
+    ]
+  }
 };
