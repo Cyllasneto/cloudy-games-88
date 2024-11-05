@@ -11,6 +11,7 @@ import Index from "./pages/Index"
 import CountryPage from "./pages/CountryPage"
 import Privacy from "./pages/Privacy"
 import Contact from "./pages/Contact"
+import Itineraries from "./pages/Itineraries"
 
 // Create a client
 const queryClient = new QueryClient()
@@ -29,6 +30,7 @@ const App = () => {
                   <Route path="/country/:countryId" element={<CountryPage />} />
                   <Route path="/privacy" element={<Privacy />} />
                   <Route path="/contact" element={<Contact />} />
+                  <Route path="/itineraries" element={<Itineraries />} />
                 </Routes>
               </div>
               <Footer />
