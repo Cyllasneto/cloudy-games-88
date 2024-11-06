@@ -1,14 +1,11 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Cloud, Menu, X } from "lucide-react";
+import { Cloud, Menu } from "lucide-react";
 import { TripPlanner } from "./TripPlanner";
 import { MyItineraries } from "./MyItineraries";
-import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <header className="border-b">
       <div className="container max-w-6xl mx-auto px-4 py-4">
@@ -30,6 +27,9 @@ const Header = () => {
             </Button>
             <MyItineraries />
             <TripPlanner />
+            <Button variant="default" asChild>
+              <Link to="/login">Login</Link>
+            </Button>
           </div>
 
           <div className="md:hidden flex items-center gap-2">
@@ -42,16 +42,19 @@ const Header = () => {
               </SheetTrigger>
               <SheetContent>
                 <div className="flex flex-col gap-4 mt-8">
-                  <Button variant="ghost" asChild onClick={() => setIsOpen(false)}>
+                  <Button variant="ghost" asChild>
                     <Link to="/">Home</Link>
                   </Button>
-                  <Button variant="ghost" asChild onClick={() => setIsOpen(false)}>
+                  <Button variant="ghost" asChild>
                     <Link to="/contact">Contato</Link>
                   </Button>
-                  <Button variant="ghost" asChild onClick={() => setIsOpen(false)}>
+                  <Button variant="ghost" asChild>
                     <Link to="/privacy">Políticas de Privacidade</Link>
                   </Button>
                   <MyItineraries />
+                  <Button variant="default" asChild>
+                    <Link to="/login">Login</Link>
+                  </Button>
                 </div>
               </SheetContent>
             </Sheet>
