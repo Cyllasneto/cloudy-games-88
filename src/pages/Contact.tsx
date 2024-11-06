@@ -95,26 +95,56 @@ ${values.comment ? `<b>Comentário:</b> ${values.comment}` : ''}
       
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          {contactFormData.fields.map((field) => (
-            <FormField
-              key={field.id}
-              control={form.control}
-              name={field.id as keyof z.infer<typeof formSchema>}
-              render={({ field: formField }) => (
-                <FormItem>
-                  <FormLabel>{field.placeholder}</FormLabel>
-                  <FormControl>
-                    <Input 
-                      type={field.type} 
-                      placeholder={field.placeholder}
-                      {...formField} 
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          ))}
+          {contactFormData.fields.map((field) => {
+            if (field.id === 'phone') {
+              return (
+                <FormField
+                  key={field.id}
+                  control={form.control}
+                  name="phone"
+                  render={({ field: formField }) => (
+                    <FormItem>
+                      <FormLabel>Telefone</FormLabel>
+                      <FormControl>
+                        <Input 
+                          type="tel"
+                          inputMode="numeric"
+                          pattern="[0-9]*"
+                          placeholder="Digite apenas números"
+                          {...formField}
+                          onChange={(e) => {
+                            const value = e.target.value.replace(/\D/g, '')
+                            formField.onChange(value)
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )
+            }
+            return (
+              <FormField
+                key={field.id}
+                control={form.control}
+                name={field.id as keyof z.infer<typeof formSchema>}
+                render={({ field: formField }) => (
+                  <FormItem>
+                    <FormLabel>{field.placeholder}</FormLabel>
+                    <FormControl>
+                      <Input 
+                        type={field.type} 
+                        placeholder={field.placeholder}
+                        {...formField} 
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )
+          })}
 
           <FormField
             control={form.control}
