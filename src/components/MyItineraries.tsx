@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -22,14 +23,27 @@ interface Itinerary {
 
 export function MyItineraries() {
   const [itineraries, setItineraries] = useState<Itinerary[]>([]);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const savedItineraries = JSON.parse(localStorage.getItem('myItineraries') || '[]');
-    setItineraries(savedItineraries);
+    const loadItineraries = () => {
+      const savedItineraries = localStorage.getItem('myItineraries');
+      if (savedItineraries) {
+        setItineraries(JSON.parse(savedItineraries));
+      }
+    };
+
+    loadItineraries();
+    // Adiciona um event listener para atualizar os roteiros quando houver mudanças
+    window.addEventListener('storage', loadItineraries);
+
+    return () => {
+      window.removeEventListener('storage', loadItineraries);
+    };
   }, []);
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="ghost" className="gap-2">
           <MapPin className="h-4 w-4" />
@@ -39,6 +53,9 @@ export function MyItineraries() {
       <DialogContent className="sm:max-w-[525px]">
         <DialogHeader>
           <DialogTitle>Meus Roteiros</DialogTitle>
+          <DialogDescription>
+            Aqui estão todos os seus roteiros personalizados.
+          </DialogDescription>
         </DialogHeader>
         <ScrollArea className="h-[400px] pr-4">
           {itineraries.length === 0 ? (

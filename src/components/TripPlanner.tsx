@@ -35,6 +35,7 @@ export function TripPlanner() {
   const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
   const [date, setDate] = useState<Date>();
   const [selectedCountry, setSelectedCountry] = useState<string>();
+  const [open, setOpen] = useState(false);
   const { toast } = useToast();
 
   const handlePreferenceToggle = (prefId: string) => {
@@ -76,7 +77,7 @@ export function TripPlanner() {
     const itinerary = {
       country: selectedCountry,
       days: selectedDays,
-      date: date,
+      date: date.toISOString(),
       preferences: selectedPreferences,
     };
 
@@ -85,14 +86,19 @@ export function TripPlanner() {
     savedItineraries.push(itinerary);
     localStorage.setItem('myItineraries', JSON.stringify(savedItineraries));
 
+    // Disparar evento para atualizar MyItineraries
+    window.dispatchEvent(new Event('storage'));
+
     toast({
       title: "Roteiro Personalizado Gerado!",
       description: `${selectedDays} dias em ${countries[selectedCountry].title} com foco em ${selectedPreferences.join(", ")}`,
     });
+
+    setOpen(false);
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" className="gap-2">
           <CalendarDays className="h-4 w-4" />
@@ -102,6 +108,9 @@ export function TripPlanner() {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Planeje sua Viagem</DialogTitle>
+          <DialogDescription>
+            Crie um roteiro personalizado para sua próxima aventura.
+          </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="space-y-2">
