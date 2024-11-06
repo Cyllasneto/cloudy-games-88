@@ -36,7 +36,7 @@ const CountryItinerary = ({ itinerary, center, zoom }: CountryItineraryProps) =>
       
       <div className="h-[400px] w-full rounded-lg overflow-hidden mb-6">
         <MapContainer 
-          center={center as L.LatLngExpression}
+          center={center}
           zoom={zoom}
           scrollWheelZoom={false}
           style={{ height: '100%', width: '100%' }}
@@ -49,7 +49,7 @@ const CountryItinerary = ({ itinerary, center, zoom }: CountryItineraryProps) =>
             day.locations.map((location, index) => (
               <Marker 
                 key={`${day.day}-${index}`}
-                position={location.coordinates as L.LatLngExpression}
+                position={location.coordinates}
               >
                 <Popup>
                   <div className="p-2">
