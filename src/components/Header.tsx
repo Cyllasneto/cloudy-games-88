@@ -19,9 +19,6 @@ const Header = () => {
               <Link to="/">Home</Link>
             </Button>
             <Button variant="ghost" asChild>
-              <Link to="/destinations">Destinos</Link>
-            </Button>
-            <Button variant="ghost" asChild>
               <Link to="/contact">Contato</Link>
             </Button>
             <MyItineraries />
