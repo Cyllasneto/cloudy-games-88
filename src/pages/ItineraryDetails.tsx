@@ -5,8 +5,7 @@ import { Card } from "@/components/ui/card"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import { countries } from "@/data/countries"
-import { ArrowLeft, Calendar, MapPin, Clock } from "lucide-react"
-import CountryItinerary from "@/components/country/CountryItinerary"
+import { ArrowLeft, Calendar, Clock } from "lucide-react"
 
 interface DailyActivity {
   day: number
@@ -57,7 +56,6 @@ const ItineraryDetails = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
       <div 
         className="relative h-[300px] bg-cover bg-center"
         style={{ backgroundImage: `url(${country.heroImage})` }}
@@ -90,7 +88,6 @@ const ItineraryDetails = () => {
       </div>
 
       <div className="container max-w-4xl mx-auto px-4 py-8">
-        {/* Preferences Section */}
         <div className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">Preferências da Viagem</h2>
           <div className="flex flex-wrap gap-2">
@@ -105,7 +102,6 @@ const ItineraryDetails = () => {
           </div>
         </div>
 
-        {/* Country Info */}
         <Card className="p-6 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div>
@@ -127,7 +123,6 @@ const ItineraryDetails = () => {
           </div>
         </Card>
 
-        {/* Daily Activities */}
         <div className="space-y-6">
           {itinerary.dailyActivities.map((activity) => (
             <Card key={activity.day} className="p-6">
@@ -152,20 +147,9 @@ const ItineraryDetails = () => {
             </Card>
           ))}
         </div>
-
-        {/* Map Section */}
-        {country.itinerary && (
-          <div className="mt-8">
-            <CountryItinerary 
-              itinerary={country.itinerary.routes}
-              center={country.itinerary.mapCenter}
-              zoom={country.itinerary.mapZoom}
-            />
-          </div>
-        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ItineraryDetails
+export default ItineraryDetails;

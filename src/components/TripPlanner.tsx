@@ -9,15 +9,16 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { TripPlannerForm } from "./trip-planner/TripPlannerForm";
-import { TripPlannerActions } from "./trip-planner/TripPlannerActions";
 import { CalendarDays } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { generateDailyItinerary } from "./trip-planner/tripPlannerUtils";
 import { countries } from "@/data/countries";
+import { useNavigate } from "react-router-dom";
 
 export function TripPlanner() {
   const [open, setOpen] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleGenerateItinerary = (formData: any) => {
     const { selectedCountry, date, selectedDays, selectedPreferences } = formData;
@@ -25,8 +26,9 @@ export function TripPlanner() {
     // Gerar roteiro detalhado
     const dailyActivities = generateDailyItinerary(selectedCountry, selectedDays, selectedPreferences);
 
+    const itineraryId = crypto.randomUUID();
     const itinerary = {
-      id: crypto.randomUUID(), // Garantir que cada roteiro tenha um ID único
+      id: itineraryId,
       country: selectedCountry,
       days: selectedDays,
       date: date.toISOString(),
@@ -48,6 +50,7 @@ export function TripPlanner() {
     });
 
     setOpen(false);
+    navigate(`/itinerary/${itineraryId}`);
   };
 
   return (
