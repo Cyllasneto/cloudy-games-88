@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { MapPin } from "lucide-react";
+import { MapPin, Cloud } from "lucide-react";
 import { TripPlanner } from "./TripPlanner";
 
 const Header = () => {
@@ -8,8 +8,9 @@ const Header = () => {
     <header className="border-b">
       <div className="container max-w-6xl mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
-          <Link to="/" className="text-xl font-bold">
-            Cloudy Trip
+          <Link to="/" className="text-xl font-bold flex items-center gap-2">
+            <Cloud className="h-6 w-6" />
+            <span>Cloudy <span className="text-[#E8C547]">Trip</span></span>
           </Link>
 
           <div className="hidden md:flex items-center gap-4">
