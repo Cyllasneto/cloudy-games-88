@@ -26,8 +26,22 @@ export function TripPlanner({ isEditing, editData, onClose }: TripPlannerProps) 
   const { toast } = useToast();
   const navigate = useNavigate();
 
+  const handleClick = () => {
+    const user = localStorage.getItem('user');
+    if (!user) {
+      toast({
+        title: "Login Necessário",
+        description: "Faça login para planejar sua viagem",
+      });
+      navigate('/login');
+      return;
+    }
+    setOpen(true);
+  };
+
   const handleGenerateItinerary = (formData: any) => {
     const { selectedCountry, date, selectedDays, selectedPreferences } = formData;
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
     
     // Gerar roteiro detalhado
     const dailyActivities = generateDailyItinerary(selectedCountry, selectedDays, selectedPreferences);
@@ -35,6 +49,7 @@ export function TripPlanner({ isEditing, editData, onClose }: TripPlannerProps) 
     const itineraryId = editData?.id || crypto.randomUUID();
     const itinerary = {
       id: itineraryId,
+      userId: user.id,
       country: selectedCountry,
       days: selectedDays,
       date: date.toISOString(),
@@ -42,15 +57,17 @@ export function TripPlanner({ isEditing, editData, onClose }: TripPlannerProps) 
       dailyActivities: dailyActivities
     };
 
-    // Salvar no localStorage
+    // Salvar no localStorage com userId
     const savedItineraries = JSON.parse(localStorage.getItem('myItineraries') || '[]');
-    const updatedItineraries = editData 
-      ? savedItineraries.map((it: any) => it.id === editData.id ? itinerary : it)
-      : [...savedItineraries, itinerary];
+    const userItineraries = savedItineraries.filter((it: any) => it.userId === user.id);
+    const otherItineraries = savedItineraries.filter((it: any) => it.userId !== user.id);
     
-    localStorage.setItem('myItineraries', JSON.stringify(updatedItineraries));
+    const updatedUserItineraries = editData 
+      ? userItineraries.map((it: any) => it.id === editData.id ? itinerary : it)
+      : [...userItineraries, itinerary];
+    
+    localStorage.setItem('myItineraries', JSON.stringify([...otherItineraries, ...updatedUserItineraries]));
 
-    // Disparar evento para atualizar MyItineraries
     window.dispatchEvent(new Event('storage'));
 
     toast({
@@ -67,7 +84,7 @@ export function TripPlanner({ isEditing, editData, onClose }: TripPlannerProps) 
     <Dialog open={isEditing ? true : open} onOpenChange={isEditing ? onClose : setOpen}>
       {!isEditing && (
         <DialogTrigger asChild>
-          <Button variant="outline" className="gap-2">
+          <Button variant="outline" className="gap-2" onClick={handleClick}>
             <CalendarDays className="h-4 w-4" />
             Planejar Viagem
           </Button>

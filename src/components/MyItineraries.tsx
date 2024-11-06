@@ -38,6 +38,7 @@ interface DailyActivity {
 
 interface Itinerary {
   id?: string
+  userId: string
   country: string
   days: number
   date: string
@@ -54,13 +55,22 @@ export function MyItineraries() {
   
   useEffect(() => {
     const loadItineraries = () => {
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      if (!user.id) {
+        setItineraries([]);
+        return;
+      }
+
       const saved = localStorage.getItem('myItineraries')
       if (saved) {
-        const parsedItineraries = JSON.parse(saved).map((itinerary: Itinerary) => ({
-          ...itinerary,
-          id: itinerary.id || crypto.randomUUID()
-        }))
-        setItineraries(parsedItineraries)
+        const allItineraries = JSON.parse(saved);
+        const userItineraries = allItineraries
+          .filter((itinerary: Itinerary) => itinerary.userId === user.id)
+          .map((itinerary: Itinerary) => ({
+            ...itinerary,
+            id: itinerary.id || crypto.randomUUID()
+          }));
+        setItineraries(userItineraries);
       }
     }
 
@@ -69,9 +79,24 @@ export function MyItineraries() {
     return () => window.removeEventListener('storage', loadItineraries)
   }, [])
 
+  const handleClick = () => {
+    const user = localStorage.getItem('user');
+    if (!user) {
+      toast({
+        title: "Login Necessário",
+        description: "Faça login para ver seus roteiros",
+      });
+      navigate('/login');
+      return;
+    }
+  };
+
   const handleDeleteItinerary = (id: string) => {
     const updatedItineraries = itineraries.filter(itinerary => itinerary.id !== id)
-    localStorage.setItem('myItineraries', JSON.stringify(updatedItineraries))
+    const allItineraries = JSON.parse(localStorage.getItem('myItineraries') || '[]');
+    const otherItineraries = allItineraries.filter((it: Itinerary) => it.id !== id);
+    
+    localStorage.setItem('myItineraries', JSON.stringify(otherItineraries))
     window.dispatchEvent(new Event('storage'))
     setDeleteItineraryId(null)
     
@@ -81,15 +106,11 @@ export function MyItineraries() {
     })
   }
 
-  if (itineraries.length === 0) {
-    return null
-  }
-
   return (
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="outline">Meus Roteiros</Button>
+          <Button variant="outline" onClick={handleClick}>Meus Roteiros</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[625px]">
           <DialogHeader>
