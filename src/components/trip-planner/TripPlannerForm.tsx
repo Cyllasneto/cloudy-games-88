@@ -3,6 +3,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 import {
   Select,
   SelectContent,
@@ -23,13 +24,23 @@ export function TripPlannerForm({ onSubmit, initialData }: TripPlannerFormProps)
   const [selectedPreferences, setSelectedPreferences] = useState<string[]>(initialData?.preferences || []);
   const [date, setDate] = useState<Date>(initialData?.date ? new Date(initialData.date) : undefined);
   const [selectedCountry, setSelectedCountry] = useState<string>(initialData?.country || undefined);
+  const { toast } = useToast();
 
   const handlePreferenceToggle = (prefId: string) => {
-    setSelectedPreferences((current) =>
-      current.includes(prefId)
-        ? current.filter((id) => id !== prefId)
-        : [...current, prefId]
-    );
+    setSelectedPreferences((current) => {
+      if (current.includes(prefId)) {
+        return current.filter((id) => id !== prefId);
+      } else {
+        if (current.length >= 5) {
+          toast({
+            title: "Limite atingido",
+            description: "Você pode selecionar no máximo 5 preferências",
+          });
+          return current;
+        }
+        return [...current, prefId];
+      }
+    });
   };
 
   const handleSubmit = () => {
@@ -86,7 +97,7 @@ export function TripPlannerForm({ onSubmit, initialData }: TripPlannerFormProps)
       </div>
 
       <div className="space-y-2">
-        <h4 className="font-medium">O que você gosta?</h4>
+        <h4 className="font-medium">O que você gosta? (máximo 5)</h4>
         <div className="flex flex-wrap gap-2">
           {preferences.map((pref) => (
             <Badge
