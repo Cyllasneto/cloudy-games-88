@@ -12,6 +12,13 @@ import { portugal } from "./countries/portugal";
 import { norway } from "./countries/norway";
 import { turkey } from "./countries/turkey";
 import { england } from "./countries/england";
+import { laos } from "./countries/laos";
+import { slovenia } from "./countries/slovenia";
+import { philippines } from "./countries/philippines";
+import { bulgaria } from "./countries/bulgaria";
+import { peru } from "./countries/peru";
+import { cambodia } from "./countries/cambodia";
+import { montenegro } from "./countries/montenegro";
 
 export const countries: Record<string, Country> = {
   france,
@@ -26,7 +33,14 @@ export const countries: Record<string, Country> = {
   portugal,
   norway,
   turkey,
-  england
+  england,
+  laos,
+  slovenia,
+  philippines,
+  bulgaria,
+  peru,
+  cambodia,
+  montenegro
 };
 
 export type { Country, Tip, TipType } from "./types";
