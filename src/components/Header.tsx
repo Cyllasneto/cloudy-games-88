@@ -1,10 +1,11 @@
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from "@/components/ui/navigation-menu"
 import { Link } from "react-router-dom"
-import { Cloud, Menu, X } from "lucide-react"
+import { Cloud, Menu, X, Route } from "lucide-react"
 import { useState } from "react"
 import LanguageSelector from "./LanguageSelector"
 import { useTranslations } from "@/hooks/useTranslations"
 import SearchBar from "./SearchBar"
+import { Button } from "@/components/ui/button"
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,6 +40,14 @@ const Header = () => {
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <Link to="/privacy" className="text-sm font-medium hover:text-primary ml-6">{t.privacy}</Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link to="/itineraries" className="text-sm font-medium hover:text-primary ml-6">
+                    <Button variant="outline" size="sm" className="flex items-center gap-2">
+                      <Route size={16} />
+                      Roteiros
+                    </Button>
+                  </Link>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
@@ -80,6 +89,13 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t.privacy}
+              </Link>
+              <Link 
+                to="/itineraries" 
+                className="text-sm font-medium hover:text-primary"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Roteiros
               </Link>
               <div className="pt-2">
                 <LanguageSelector />
