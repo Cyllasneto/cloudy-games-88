@@ -7,6 +7,15 @@ export const preferences = [
   { id: "family", label: "Familiar" },
   { id: "gastronomy", label: "Gastronômico" },
   { id: "shopping", label: "Compras" },
+  { id: "party", label: "Festas" },
+  { id: "history", label: "História" },
+  { id: "art", label: "Arte" },
+  { id: "nature", label: "Natureza" },
+  { id: "sports", label: "Esportes" },
+  { id: "drinks", label: "Bebidas" },
+  { id: "photography", label: "Fotografia" },
+  { id: "soccer", label: "Futebol" },
+  { id: "music", label: "Música" }
 ];
 
 const thematicActivities = {
@@ -147,6 +156,213 @@ const thematicActivities = {
       "Tour em mercados noturnos",
       "Shopping em ruas comerciais iluminadas"
     ]
+  },
+  party: {
+    morning: [
+      "Recuperação do dia anterior",
+      "Yoga ou meditação",
+      "Brunch em restaurante famoso",
+      "Spa day",
+      "Passeio leve pela cidade"
+    ],
+    afternoon: [
+      "Pool party",
+      "Festa na praia",
+      "Festival de música",
+      "Bar crawl",
+      "Festa em barco"
+    ],
+    evening: [
+      "Balada famosa local",
+      "Festa temática",
+      "Show ao vivo",
+      "Clube noturno",
+      "Festa na cobertura"
+    ]
+  },
+  history: {
+    morning: [
+      "Visita a sítios arqueológicos",
+      "Tour por castelos históricos",
+      "Visita a museus de história",
+      "Caminhada histórica guiada",
+      "Exploração de ruínas antigas"
+    ],
+    afternoon: [
+      "Visita a palácios",
+      "Tour de história militar",
+      "Visita a bibliotecas históricas",
+      "Exploração de bairros antigos",
+      "Tour de arquitetura histórica"
+    ],
+    evening: [
+      "Jantar em restaurante histórico",
+      "Tour noturno de fantasmas",
+      "Apresentação histórica",
+      "Cinema em prédio histórico",
+      "Sarau em local histórico"
+    ]
+  },
+  art: {
+    morning: [
+      "Visita a museus de arte",
+      "Tour por galerias",
+      "Aula de pintura",
+      "Visita a ateliês de artistas",
+      "Workshop de arte local"
+    ],
+    afternoon: [
+      "Tour de street art",
+      "Visita a feiras de arte",
+      "Workshop de artesanato",
+      "Exposições temporárias",
+      "Tour fotográfico artístico"
+    ],
+    evening: [
+      "Vernissage",
+      "Performance artística",
+      "Teatro experimental",
+      "Galeria noturna",
+      "Show de arte multimídia"
+    ]
+  },
+  nature: {
+    morning: [
+      "Trilha em parque nacional",
+      "Observação de pássaros",
+      "Passeio de canoa",
+      "Visita a jardim botânico",
+      "Safari fotográfico"
+    ],
+    afternoon: [
+      "Mergulho em recifes",
+      "Caminhada ecológica",
+      "Visita a cachoeiras",
+      "Passeio de barco na natureza",
+      "Piquenique ao ar livre"
+    ],
+    evening: [
+      "Observação de estrelas",
+      "Camping na natureza",
+      "Tour noturno na floresta",
+      "Luau na praia",
+      "Jantar ao ar livre"
+    ]
+  },
+  sports: {
+    morning: [
+      "Aula de surfe",
+      "Partida de tênis",
+      "Corrida no parque",
+      "Aula de yoga",
+      "Treino funcional"
+    ],
+    afternoon: [
+      "Partida de golfe",
+      "Escalada indoor",
+      "Aluguel de bicicleta",
+      "Aula de mergulho",
+      "Esportes aquáticos"
+    ],
+    evening: [
+      "Jogo em estádio local",
+      "Boliche",
+      "Patinação no gelo",
+      "Assistir jogo em sports bar",
+      "Partida de basquete"
+    ]
+  },
+  drinks: {
+    morning: [
+      "Tour em cafeteria especial",
+      "Visita a destilaria",
+      "Aula de mixologia",
+      "Brunch com mimosas",
+      "Degustação de chás"
+    ],
+    afternoon: [
+      "Tour em vinícola",
+      "Degustação de cervejas artesanais",
+      "Workshop de drinks",
+      "Tour em cervejaria",
+      "Wine tasting"
+    ],
+    evening: [
+      "Bar hopping",
+      "Jantar harmonizado",
+      "Cocktail experience",
+      "Visita a speakeasy",
+      "Festa de vinhos"
+    ]
+  },
+  photography: {
+    morning: [
+      "Tour fotográfico ao nascer do sol",
+      "Workshop de fotografia",
+      "Foto safari urbano",
+      "Tour em locais instagramáveis",
+      "Sessão fotográfica profissional"
+    ],
+    afternoon: [
+      "Tour fotográfico arquitetônico",
+      "Fotografia de rua",
+      "Workshop de edição",
+      "Tour em pontos panorâmicos",
+      "Fotografia de natureza"
+    ],
+    evening: [
+      "Fotografia noturna",
+      "Light painting workshop",
+      "Tour de fotografia urbana noturna",
+      "Fotografia de eventos",
+      "Sunset photography"
+    ]
+  },
+  soccer: {
+    morning: [
+      "Tour em estádio famoso",
+      "Visita a museu do futebol",
+      "Treino em escolinha local",
+      "Visita a centro de treinamento",
+      "Partida amadora"
+    ],
+    afternoon: [
+      "Jogo em estádio local",
+      "Encontro com torcida organizada",
+      "Visita a loja oficial",
+      "Pelada com locais",
+      "Tour em bar temático"
+    ],
+    evening: [
+      "Partida importante no estádio",
+      "Assistir jogo em sports bar",
+      "Encontro com torcedores",
+      "Show de freestyle football",
+      "Jantar temático de futebol"
+    ]
+  },
+  music: {
+    morning: [
+      "Aula de instrumento local",
+      "Visita a loja de discos",
+      "Tour em estúdio de gravação",
+      "Workshop de música",
+      "Visita a museu da música"
+    ],
+    afternoon: [
+      "Show ao vivo em praça",
+      "Jam session",
+      "Festival de música",
+      "Aula de dança local",
+      "Tour musical pela cidade"
+    ],
+    evening: [
+      "Show em casa noturna",
+      "Concerto",
+      "Karaokê",
+      "Jazz club",
+      "Festival noturno"
+    ]
   }
 };
 
@@ -163,13 +379,12 @@ export const generateDailyItinerary = (country: string, days: number, preference
   const activities = [];
 
   for (let day = 1; day <= days; day++) {
-    // Escolhe uma preferência aleatória entre as selecionadas para o tema do dia
     const dayTheme = preferences[Math.floor(Math.random() * preferences.length)];
     const themeActivities = thematicActivities[dayTheme as keyof typeof thematicActivities];
 
     if (!themeActivities) {
       console.error(`Theme activities not found for: ${dayTheme}`);
-      continue; // Skip this iteration if theme activities are not found
+      continue;
     }
 
     const dailyActivities = {
@@ -182,7 +397,16 @@ export const generateDailyItinerary = (country: string, days: number, preference
           dayTheme === 'adventure' ? 'Aventura' : 
           dayTheme === 'romantic' ? 'Romance' : 
           dayTheme === 'family' ? 'Família' : 
-          dayTheme === 'gastronomy' ? 'Gastronomia' : 'Compras'}` : 
+          dayTheme === 'gastronomy' ? 'Gastronomia' : 
+          dayTheme === 'party' ? 'Festas' : 
+          dayTheme === 'history' ? 'História' : 
+          dayTheme === 'art' ? 'Arte' : 
+          dayTheme === 'nature' ? 'Natureza' : 
+          dayTheme === 'sports' ? 'Esportes' : 
+          dayTheme === 'drinks' ? 'Bebidas' : 
+          dayTheme === 'photography' ? 'Fotografia' : 
+          dayTheme === 'soccer' ? 'Futebol' : 
+          dayTheme === 'music' ? 'Música' : ''}` : 
         `Explorando ${countryData.title}`}`
     };
     activities.push(dailyActivities);
