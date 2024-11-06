@@ -5,7 +5,8 @@ import { Card } from "@/components/ui/card"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import { countries } from "@/data/countries"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, Calendar, MapPin, Clock } from "lucide-react"
+import CountryItinerary from "@/components/country/CountryItinerary"
 
 interface DailyActivity {
   day: number
@@ -45,59 +46,123 @@ const ItineraryDetails = () => {
   }, [id])
 
   if (!itinerary) {
-    return <div>Roteiro não encontrado</div>
+    return (
+      <div className="container max-w-4xl mx-auto px-4 py-8">
+        <div className="text-center">Roteiro não encontrado</div>
+      </div>
+    )
   }
 
+  const country = countries[itinerary.country]
+
   return (
-    <div className="container max-w-4xl mx-auto px-4 py-8">
-      <Button
-        variant="outline"
-        className="mb-6"
-        onClick={() => navigate(-1)}
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <div 
+        className="relative h-[300px] bg-cover bg-center"
+        style={{ backgroundImage: `url(${country.heroImage})` }}
       >
-        <ArrowLeft className="h-4 w-4 mr-2" />
-        Voltar
-      </Button>
-
-      <h1 className="text-3xl font-bold mb-2">{countries[itinerary.country].title}</h1>
-      <p className="text-gray-500 mb-6">
-        {format(new Date(itinerary.date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}
-      </p>
-
-      <div className="space-y-6">
-        {itinerary.dailyActivities.map((activity) => (
-          <Card key={activity.day} className="p-6">
-            <h3 className="text-xl font-semibold mb-4">Dia {activity.day}</h3>
-            <div className="space-y-4">
-              <div>
-                <h4 className="font-medium text-primary">Manhã</h4>
-                <p className="text-gray-600">{activity.morning}</p>
+        <div className="absolute inset-0 bg-black/50">
+          <div className="container max-w-4xl mx-auto px-4 h-full flex flex-col justify-end pb-8">
+            <Button
+              variant="outline"
+              className="absolute top-4 left-4 bg-white/90 hover:bg-white"
+              onClick={() => navigate(-1)}
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Voltar
+            </Button>
+            <h1 className="text-4xl font-bold text-white mb-2">{country.title}</h1>
+            <div className="flex items-center gap-4 text-white/90">
+              <div className="flex items-center gap-2">
+                <Calendar className="h-4 w-4" />
+                <span>
+                  {format(new Date(itinerary.date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}
+                </span>
               </div>
-              <div>
-                <h4 className="font-medium text-primary">Tarde</h4>
-                <p className="text-gray-600">{activity.afternoon}</p>
-              </div>
-              <div>
-                <h4 className="font-medium text-primary">Noite</h4>
-                <p className="text-gray-600">{activity.evening}</p>
+              <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4" />
+                <span>{itinerary.days} dias</span>
               </div>
             </div>
-          </Card>
-        ))}
+          </div>
+        </div>
       </div>
 
-      <div className="mt-6">
-        <h3 className="font-medium mb-2">Preferências da Viagem</h3>
-        <div className="flex flex-wrap gap-2">
-          {itinerary.preferences.map((pref) => (
-            <span
-              key={pref}
-              className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm"
-            >
-              {pref}
-            </span>
+      <div className="container max-w-4xl mx-auto px-4 py-8">
+        {/* Preferences Section */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">Preferências da Viagem</h2>
+          <div className="flex flex-wrap gap-2">
+            {itinerary.preferences.map((pref) => (
+              <span
+                key={pref}
+                className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium"
+              >
+                {pref}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Country Info */}
+        <Card className="p-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div>
+              <h3 className="text-sm font-medium text-gray-500">Moeda</h3>
+              <p className="mt-1 font-medium">{country.currency}</p>
+            </div>
+            <div>
+              <h3 className="text-sm font-medium text-gray-500">Idioma</h3>
+              <p className="mt-1 font-medium">{country.language}</p>
+            </div>
+            <div>
+              <h3 className="text-sm font-medium text-gray-500">Clima</h3>
+              <p className="mt-1 font-medium">{country.climate}</p>
+            </div>
+            <div>
+              <h3 className="text-sm font-medium text-gray-500">Melhor época</h3>
+              <p className="mt-1 font-medium">{country.bestTimeToVisit}</p>
+            </div>
+          </div>
+        </Card>
+
+        {/* Daily Activities */}
+        <div className="space-y-6">
+          {itinerary.dailyActivities.map((activity) => (
+            <Card key={activity.day} className="p-6">
+              <h3 className="text-xl font-semibold mb-4 text-primary">Dia {activity.day}</h3>
+              <div className="space-y-6">
+                <div className="relative pl-6 border-l-2 border-primary/30">
+                  <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary/20 border-2 border-primary"></div>
+                  <h4 className="font-medium text-primary">Manhã</h4>
+                  <p className="mt-1 text-gray-600">{activity.morning}</p>
+                </div>
+                <div className="relative pl-6 border-l-2 border-primary/30">
+                  <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary/20 border-2 border-primary"></div>
+                  <h4 className="font-medium text-primary">Tarde</h4>
+                  <p className="mt-1 text-gray-600">{activity.afternoon}</p>
+                </div>
+                <div className="relative pl-6 border-l-2 border-primary/30">
+                  <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary/20 border-2 border-primary"></div>
+                  <h4 className="font-medium text-primary">Noite</h4>
+                  <p className="mt-1 text-gray-600">{activity.evening}</p>
+                </div>
+              </div>
+            </Card>
           ))}
         </div>
+
+        {/* Map Section */}
+        {country.itinerary && (
+          <div className="mt-8">
+            <CountryItinerary 
+              itinerary={country.itinerary.routes}
+              center={country.itinerary.mapCenter}
+              zoom={country.itinerary.mapZoom}
+            />
+          </div>
+        )}
       </div>
     </div>
   )
