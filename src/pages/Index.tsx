@@ -3,7 +3,6 @@ import FeaturedDestination from "@/components/FeaturedDestination"
 import DestinationCard from "@/components/DestinationCard"
 import CurrencyConverter from "@/components/CurrencyConverter"
 import DestinationGuides from "@/components/destinations/DestinationGuides"
-import { useTranslations } from "@/hooks/useTranslations"
 
 const destinations = [
   {
@@ -95,27 +94,25 @@ const destinations = [
 ];
 
 const Index = () => {
-  const { rawTranslations: t } = useTranslations();
-
   return (
     <div className="min-h-screen">
       <FeaturedDestination
-        title={t.discoverWorld}
+        title="Descubra o Mundo"
         country="Cloudy Trip"
-        description={t.aboutDescription}
+        description="Sua jornada começa aqui. Explore destinos incríveis, planeje suas viagens e descubra experiências únicas ao redor do mundo."
         imageUrl="https://images.unsplash.com/photo-1433086966358-54859d0ed716"
       />
 
       <main className="container max-w-6xl mx-auto py-16 px-4">
         <section className="text-center mb-16">
-          <h2 className="text-3xl font-bold mb-6">{t.aboutCloudyTrip}</h2>
+          <h2 className="text-3xl font-bold mb-6">Sobre a Cloudy Trip</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            {t.aboutDescription}
+            Sua jornada começa aqui. Explore destinos incríveis, planeje suas viagens e descubra experiências únicas ao redor do mundo.
           </p>
         </section>
 
         <section id="featured-destinations" className="mb-16">
-          <h2 className="text-3xl font-bold mb-8">{t.featuredDestinations}</h2>
+          <h2 className="text-3xl font-bold mb-8">Destinos em Destaque</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {destinations.map((destination) => (
               <Link key={destination.id} to={`/country/${destination.id}`}>
