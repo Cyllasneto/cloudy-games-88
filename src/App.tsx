@@ -10,7 +10,6 @@ import Index from "./pages/Index"
 import CountryPage from "./pages/CountryPage"
 import Privacy from "./pages/Privacy"
 import Contact from "./pages/Contact"
-import Itineraries from "./pages/Itineraries"
 import ItineraryDetails from "./pages/ItineraryDetails"
 
 // Create a client
@@ -29,7 +28,6 @@ const App = () => {
                 <Route path="/country/:countryId" element={<CountryPage />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/itineraries" element={<Itineraries />} />
                 <Route path="/itinerary/:id" element={<ItineraryDetails />} />
               </Routes>
             </div>

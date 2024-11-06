@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { MapPin, Cloud } from "lucide-react";
+import { Cloud } from "lucide-react";
 import { TripPlanner } from "./TripPlanner";
 import { MyItineraries } from "./MyItineraries";
 
@@ -21,12 +21,6 @@ const Header = () => {
             <Button variant="ghost" asChild>
               <Link to="/destinations">Destinos</Link>
             </Button>
-            <Button variant="outline" asChild className="gap-2">
-              <Link to="/itineraries">
-                <MapPin className="h-4 w-4" />
-                Roteiros
-              </Link>
-            </Button>
             <Button variant="ghost" asChild>
               <Link to="/contact">Contato</Link>
             </Button>
@@ -35,7 +29,6 @@ const Header = () => {
           </div>
 
           <div className="md:hidden flex items-center gap-4">
-            <Link to="/itineraries">Roteiros</Link>
             <TripPlanner />
           </div>
         </nav>
