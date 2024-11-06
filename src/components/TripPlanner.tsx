@@ -13,6 +13,7 @@ import { TripPlannerActions } from "./trip-planner/TripPlannerActions";
 import { CalendarDays } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { generateDailyItinerary } from "./trip-planner/tripPlannerUtils";
+import { countries } from "@/data/countries";
 
 export function TripPlanner() {
   const [open, setOpen] = useState(false);
