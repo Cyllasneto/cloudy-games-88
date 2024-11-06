@@ -5,16 +5,31 @@ import { MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const tripTypes = {
-  cultural: "Cultural",
-  adventure: "Aventura",
-  romantic: "Romântico",
-  family: "Família",
+  cultural: {
+    label: "Cultural",
+    countries: ["france", "japan", "italy", "greece", "turkey", "morocco"]
+  },
+  adventure: {
+    label: "Aventura",
+    countries: ["brazil", "norway", "thailand", "morocco", "philippines", "cambodia"]
+  },
+  romantic: {
+    label: "Romântico",
+    countries: ["france", "italy", "greece", "portugal", "spain", "montenegro"]
+  },
+  family: {
+    label: "Família",
+    countries: ["usa", "england", "spain", "brazil", "portugal", "slovenia"]
+  }
 };
 
 const Itineraries = () => {
-  const countriesWithItineraries = Object.entries(countries).filter(
-    ([_, country]) => country.itinerary
-  );
+  const getCountriesForType = (type: keyof typeof tripTypes) => {
+    return tripTypes[type].countries.map(countryId => ({
+      id: countryId,
+      ...countries[countryId]
+    })).filter(country => country.itinerary); // Filtra apenas países com roteiros
+  };
 
   return (
     <div className="container max-w-6xl mx-auto px-4 py-8">
@@ -22,7 +37,7 @@ const Itineraries = () => {
       
       <Tabs defaultValue="cultural" className="mb-8">
         <TabsList className="mb-4">
-          {Object.entries(tripTypes).map(([key, label]) => (
+          {Object.entries(tripTypes).map(([key, { label }]) => (
             <TabsTrigger key={key} value={key}>
               {label}
             </TabsTrigger>
@@ -32,8 +47,8 @@ const Itineraries = () => {
         {Object.keys(tripTypes).map((type) => (
           <TabsContent key={type} value={type}>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {countriesWithItineraries.map(([countryId, country]) => (
-                <Link key={countryId} to={`/country/${countryId}`}>
+              {getCountriesForType(type as keyof typeof tripTypes).map((country) => (
+                <Link key={country.id} to={`/country/${country.id}`}>
                   <Card className="overflow-hidden group cursor-pointer transition-transform duration-300 hover:scale-105">
                     <div className="relative h-48">
                       <img
