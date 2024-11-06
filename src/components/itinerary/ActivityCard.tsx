@@ -74,6 +74,22 @@ export const ActivityCard = ({ activity, period }: ActivityCardProps) => {
           </div>
         )}
 
+        {activity.website && (
+          <div className="mt-4">
+            <a
+              href={activity.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex"
+            >
+              <Button variant="default" size="sm" className="gap-2">
+                Consulte valores
+                <ExternalLink className="h-4 w-4" />
+              </Button>
+            </a>
+          </div>
+        )}
+
         {activity.tips && activity.tips.length > 0 && (
           <div className="mt-4 space-y-2">
             <h5 className="font-medium flex items-center gap-2">
