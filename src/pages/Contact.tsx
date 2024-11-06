@@ -4,6 +4,7 @@ import * as z from "zod"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/components/ui/use-toast"
 import { contactFormData } from "@/data/contactForm"
 import { CheckCircle2, XCircle } from "lucide-react"
@@ -18,6 +19,7 @@ const formSchema = z.object({
   email: z.string().email({
     message: "Formato de email inválido (exemplo: exemplo@exemplo.com)"
   }),
+  comment: z.string().optional(),
 })
 
 const Contact = () => {
@@ -29,6 +31,7 @@ const Contact = () => {
       name: "",
       phone: "",
       email: "",
+      comment: "",
     },
   })
 
@@ -39,6 +42,7 @@ const Contact = () => {
 <b>Nome:</b> ${values.name}
 <b>Telefone:</b> ${values.phone}
 <b>Email:</b> ${values.email}
+${values.comment ? `<b>Comentário:</b> ${values.comment}` : ''}
       `.trim()
 
       const response = await fetch(`https://api.telegram.org/bot${import.meta.env.VITE_TELEGRAM_BOT_TOKEN}/sendMessage`, {
@@ -111,6 +115,24 @@ const Contact = () => {
               )}
             />
           ))}
+
+          <FormField
+            control={form.control}
+            name="comment"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Comentário (opcional)</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Digite seu comentário aqui..."
+                    className="resize-none"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           <Button type="submit" className="w-full">
             Enviar Mensagem
