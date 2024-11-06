@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { MapPin, Cloud } from "lucide-react";
 import { TripPlanner } from "./TripPlanner";
+import { MyItineraries } from "./MyItineraries";
 
 const Header = () => {
   return (
@@ -29,6 +30,7 @@ const Header = () => {
             <Button variant="ghost" asChild>
               <Link to="/contact">Contato</Link>
             </Button>
+            <MyItineraries />
             <TripPlanner />
           </div>
 

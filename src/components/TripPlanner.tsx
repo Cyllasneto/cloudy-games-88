@@ -19,6 +19,7 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar } from "@/components/ui/calendar";
 import { CalendarDays, MapPin } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { countries } from "@/data/countries";
 
 const preferences = [
   { id: "cultural", label: "Cultural" },
@@ -33,6 +34,7 @@ export function TripPlanner() {
   const [selectedDays, setSelectedDays] = useState(3);
   const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
   const [date, setDate] = useState<Date>();
+  const [selectedCountry, setSelectedCountry] = useState<string>();
   const { toast } = useToast();
 
   const handlePreferenceToggle = (prefId: string) => {
@@ -53,6 +55,15 @@ export function TripPlanner() {
       return;
     }
 
+    if (!selectedCountry) {
+      toast({
+        title: "Selecione um país",
+        description: "Por favor, escolha um país para seu roteiro.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     if (selectedPreferences.length === 0) {
       toast({
         title: "Selecione suas preferências",
@@ -62,9 +73,21 @@ export function TripPlanner() {
       return;
     }
 
+    const itinerary = {
+      country: selectedCountry,
+      days: selectedDays,
+      date: date,
+      preferences: selectedPreferences,
+    };
+
+    // Salvar no localStorage
+    const savedItineraries = JSON.parse(localStorage.getItem('myItineraries') || '[]');
+    savedItineraries.push(itinerary);
+    localStorage.setItem('myItineraries', JSON.stringify(savedItineraries));
+
     toast({
       title: "Roteiro Personalizado Gerado!",
-      description: `${selectedDays} dias de viagem com foco em ${selectedPreferences.join(", ")}`,
+      description: `${selectedDays} dias em ${countries[selectedCountry].title} com foco em ${selectedPreferences.join(", ")}`,
     });
   };
 
@@ -81,6 +104,22 @@ export function TripPlanner() {
           <DialogTitle>Planeje sua Viagem</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
+          <div className="space-y-2">
+            <h4 className="font-medium">Para qual país você quer ir?</h4>
+            <Select onValueChange={setSelectedCountry}>
+              <SelectTrigger>
+                <SelectValue placeholder="Selecione um país" />
+              </SelectTrigger>
+              <SelectContent>
+                {Object.entries(countries).map(([id, country]) => (
+                  <SelectItem key={id} value={id}>
+                    {country.title}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
           <div className="space-y-2">
             <h4 className="font-medium">Quando você pretende viajar?</h4>
             <Calendar
