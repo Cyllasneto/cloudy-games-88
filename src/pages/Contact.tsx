@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
-import { useTranslations } from "@/hooks/useTranslations"
 import { contactFormData } from "@/data/contactForm"
 import { CheckCircle2, XCircle } from "lucide-react"
 
@@ -23,7 +22,6 @@ const formSchema = z.object({
 
 const Contact = () => {
   const { toast } = useToast()
-  const { rawTranslations: t } = useTranslations()
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -65,10 +63,10 @@ const Contact = () => {
         title: (
           <div className="flex items-center gap-2">
             <CheckCircle2 className="h-5 w-5 text-green-500" />
-            <span>{String(t.messageSent)}</span>
+            <span>Mensagem enviada!</span>
           </div>
         ) as unknown as string,
-        description: String(t.messageSuccess),
+        description: "Sua mensagem foi enviada com sucesso. Entraremos em contato em breve!",
         className: "bg-green-50 border-green-200",
       })
       form.reset()
@@ -78,10 +76,10 @@ const Contact = () => {
         title: (
           <div className="flex items-center gap-2">
             <XCircle className="h-5 w-5" />
-            <span>{String(t.messageError)}</span>
+            <span>Erro ao enviar mensagem</span>
           </div>
         ) as unknown as string,
-        description: String(t.tryAgain),
+        description: "Por favor, tente novamente mais tarde.",
         variant: "destructive",
       })
     }
@@ -89,7 +87,7 @@ const Contact = () => {
 
   return (
     <div className="container max-w-2xl mx-auto py-16 px-4">
-      <h1 className="text-4xl font-bold mb-8 text-center">{String(t.contact)}</h1>
+      <h1 className="text-4xl font-bold mb-8 text-center">Contato</h1>
       
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -100,7 +98,7 @@ const Contact = () => {
               name={field.id as keyof z.infer<typeof formSchema>}
               render={({ field: formField }) => (
                 <FormItem>
-                  <FormLabel>{String(t[field.translationKey as keyof typeof t])}</FormLabel>
+                  <FormLabel>{field.placeholder}</FormLabel>
                   <FormControl>
                     <Input 
                       type={field.type} 
@@ -115,7 +113,7 @@ const Contact = () => {
           ))}
 
           <Button type="submit" className="w-full">
-            {String(t[contactFormData.submitButton.translationKey])}
+            Enviar Mensagem
           </Button>
         </form>
       </Form>
