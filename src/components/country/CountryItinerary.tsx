@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import { LatLngExpression } from 'leaflet';
 
 // Fix for default marker icons in react-leaflet
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -36,20 +37,20 @@ const CountryItinerary = ({ itinerary, center, zoom }: CountryItineraryProps) =>
       
       <div className="h-[400px] w-full rounded-lg overflow-hidden mb-6">
         <MapContainer 
-          center={center as [number, number]}
+          center={center as LatLngExpression}
           zoom={zoom}
           scrollWheelZoom={false}
           style={{ height: '100%', width: '100%' }}
         >
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
           {itinerary.map(day => 
             day.locations.map((location, index) => (
               <Marker 
                 key={`${day.day}-${index}`}
-                position={location.coordinates as [number, number]}
+                position={location.coordinates as LatLngExpression}
               >
                 <Popup>
                   <div className="p-2">
