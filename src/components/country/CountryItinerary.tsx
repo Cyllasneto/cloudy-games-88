@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import type { LatLngExpression } from 'leaflet';
+import { useEffect } from "react";
 
 // Fix for default marker icons in react-leaflet
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -37,9 +37,8 @@ const CountryItinerary = ({ itinerary, center, zoom }: CountryItineraryProps) =>
       
       <div className="h-[400px] w-full rounded-lg overflow-hidden mb-6">
         <MapContainer 
-          center={center}
-          zoom={zoom}
-          scrollWheelZoom={false}
+          center={center} 
+          zoom={zoom} 
           style={{ height: '100%', width: '100%' }}
         >
           <TileLayer
