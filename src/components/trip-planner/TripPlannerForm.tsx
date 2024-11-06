@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
@@ -15,13 +15,14 @@ import { preferences } from "./tripPlannerUtils";
 
 interface TripPlannerFormProps {
   onSubmit: (formData: any) => void;
+  initialData?: any;
 }
 
-export function TripPlannerForm({ onSubmit }: TripPlannerFormProps) {
-  const [selectedDays, setSelectedDays] = useState(3);
-  const [selectedPreferences, setSelectedPreferences] = useState<string[]>([]);
-  const [date, setDate] = useState<Date>();
-  const [selectedCountry, setSelectedCountry] = useState<string>();
+export function TripPlannerForm({ onSubmit, initialData }: TripPlannerFormProps) {
+  const [selectedDays, setSelectedDays] = useState(initialData?.days || 3);
+  const [selectedPreferences, setSelectedPreferences] = useState<string[]>(initialData?.preferences || []);
+  const [date, setDate] = useState<Date>(initialData?.date ? new Date(initialData.date) : undefined);
+  const [selectedCountry, setSelectedCountry] = useState<string>(initialData?.country || undefined);
 
   const handlePreferenceToggle = (prefId: string) => {
     setSelectedPreferences((current) =>
@@ -44,7 +45,7 @@ export function TripPlannerForm({ onSubmit }: TripPlannerFormProps) {
     <div className="grid gap-4 py-4">
       <div className="space-y-2">
         <h4 className="font-medium">Para qual país você quer ir?</h4>
-        <Select onValueChange={setSelectedCountry}>
+        <Select value={selectedCountry} onValueChange={setSelectedCountry}>
           <SelectTrigger>
             <SelectValue placeholder="Selecione um país" />
           </SelectTrigger>
@@ -101,7 +102,7 @@ export function TripPlannerForm({ onSubmit }: TripPlannerFormProps) {
       </div>
 
       <Button onClick={handleSubmit} className="w-full">
-        Gerar Roteiro
+        {initialData ? 'Atualizar Roteiro' : 'Gerar Roteiro'}
       </Button>
     </div>
   );

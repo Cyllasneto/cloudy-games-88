@@ -15,7 +15,13 @@ import { generateDailyItinerary } from "./trip-planner/tripPlannerUtils";
 import { countries } from "@/data/countries";
 import { useNavigate } from "react-router-dom";
 
-export function TripPlanner() {
+interface TripPlannerProps {
+  isEditing?: boolean;
+  editData?: any;
+  onClose?: () => void;
+}
+
+export function TripPlanner({ isEditing, editData, onClose }: TripPlannerProps) {
   const [open, setOpen] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -26,7 +32,7 @@ export function TripPlanner() {
     // Gerar roteiro detalhado
     const dailyActivities = generateDailyItinerary(selectedCountry, selectedDays, selectedPreferences);
 
-    const itineraryId = crypto.randomUUID();
+    const itineraryId = editData?.id || crypto.randomUUID();
     const itinerary = {
       id: itineraryId,
       country: selectedCountry,
@@ -38,37 +44,43 @@ export function TripPlanner() {
 
     // Salvar no localStorage
     const savedItineraries = JSON.parse(localStorage.getItem('myItineraries') || '[]');
-    savedItineraries.push(itinerary);
-    localStorage.setItem('myItineraries', JSON.stringify(savedItineraries));
+    const updatedItineraries = editData 
+      ? savedItineraries.map((it: any) => it.id === editData.id ? itinerary : it)
+      : [...savedItineraries, itinerary];
+    
+    localStorage.setItem('myItineraries', JSON.stringify(updatedItineraries));
 
     // Disparar evento para atualizar MyItineraries
     window.dispatchEvent(new Event('storage'));
 
     toast({
-      title: "Roteiro Personalizado Gerado!",
+      title: editData ? "Roteiro Atualizado!" : "Roteiro Personalizado Gerado!",
       description: `${selectedDays} dias em ${countries[selectedCountry].title}`,
     });
 
     setOpen(false);
+    if (onClose) onClose();
     navigate(`/itinerary/${itineraryId}`);
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline" className="gap-2">
-          <CalendarDays className="h-4 w-4" />
-          Planejar Viagem
-        </Button>
-      </DialogTrigger>
+    <Dialog open={isEditing ? true : open} onOpenChange={isEditing ? onClose : setOpen}>
+      {!isEditing && (
+        <DialogTrigger asChild>
+          <Button variant="outline" className="gap-2">
+            <CalendarDays className="h-4 w-4" />
+            Planejar Viagem
+          </Button>
+        </DialogTrigger>
+      )}
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Planeje sua Viagem</DialogTitle>
+          <DialogTitle>{isEditing ? 'Editar Roteiro' : 'Planejar sua Viagem'}</DialogTitle>
           <DialogDescription>
-            Crie um roteiro personalizado para sua próxima aventura.
+            {isEditing ? 'Atualize os detalhes do seu roteiro.' : 'Crie um roteiro personalizado para sua próxima aventura.'}
           </DialogDescription>
         </DialogHeader>
-        <TripPlannerForm onSubmit={handleGenerateItinerary} />
+        <TripPlannerForm onSubmit={handleGenerateItinerary} initialData={editData} />
       </DialogContent>
     </Dialog>
   );
