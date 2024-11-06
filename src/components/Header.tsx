@@ -8,8 +8,8 @@ const Header = () => {
     <header className="border-b">
       <div className="container max-w-6xl mx-auto px-4 py-4">
         <nav className="flex items-center justify-between">
-          <Link to="/" className="text-xl font-bold flex items-center gap-2">
-            <Cloud className="h-6 w-6" />
+          <Link to="/" className="text-2xl font-bold flex items-center gap-2">
+            <Cloud className="h-7 w-7" />
             <span>Cloudy <span className="text-[#E8C547]">Trip</span></span>
           </Link>
 
