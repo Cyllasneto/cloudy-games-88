@@ -1,16 +1,19 @@
 import { Clock, MapPin, Info, Star, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 export interface ActivityDetail {
   time?: string;
   title: string;
   description: string;
   location?: string;
+  address?: string;
   duration?: string;
   tips?: string[];
   links?: Array<{ title: string; url: string }>;
   price?: string;
   rating?: number;
+  website?: string;
 }
 
 interface ActivityCardProps {
@@ -52,10 +55,15 @@ export const ActivityCard = ({ activity, period }: ActivityCardProps) => {
         <h4 className="text-lg font-semibold">{activity.title}</h4>
         <p className="text-gray-600">{activity.description}</p>
 
-        {activity.location && (
+        {(activity.location || activity.address) && (
           <div className="flex items-start gap-2 text-gray-600">
             <MapPin className="h-4 w-4 mt-1 shrink-0" />
-            <span>{activity.location}</span>
+            <div className="flex flex-col">
+              {activity.location && <span>{activity.location}</span>}
+              {activity.address && (
+                <span className="text-sm text-gray-500">{activity.address}</span>
+              )}
+            </div>
           </div>
         )}
 
@@ -66,11 +74,26 @@ export const ActivityCard = ({ activity, period }: ActivityCardProps) => {
           </div>
         )}
 
-        {activity.price && (
-          <Badge variant="secondary" className="mt-2">
-            {activity.price}
-          </Badge>
-        )}
+        <div className="flex items-center justify-between mt-4">
+          {activity.price && (
+            <Badge variant="secondary" className="mr-2">
+              {activity.price}
+            </Badge>
+          )}
+          {activity.website && (
+            <a
+              href={activity.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex"
+            >
+              <Button variant="outline" size="sm" className="gap-2">
+                Consulte valores
+                <ExternalLink className="h-4 w-4" />
+              </Button>
+            </a>
+          )}
+        </div>
 
         {activity.tips && activity.tips.length > 0 && (
           <div className="mt-4 space-y-2">

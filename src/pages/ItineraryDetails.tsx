@@ -37,7 +37,9 @@ const ItineraryDetails = () => {
         const itineraries = JSON.parse(saved);
         const found = itineraries.find((it: Itinerary) => it.id === id);
         if (found) {
-          // Convert string activities to detailed activities
+          const countryData = countries[found.country.toLowerCase()];
+          
+          // Convert string activities to detailed activities with location data
           const enhancedItinerary = {
             ...found,
             dailyActivities: found.dailyActivities.map((day: DailyActivity) => ({
@@ -46,25 +48,52 @@ const ItineraryDetails = () => {
                 time: "09:00",
                 title: day.morning,
                 description: "Atividade programada com guia local.",
+                location: "Centro Histórico",
+                address: "Rua Principal, 123",
                 duration: "2-3 horas",
-                tips: ["Confirme o horário com antecedência", "Verifique as condições climáticas"],
-                price: "Consulte valores"
+                tips: [
+                  "Confirme o horário com antecedência",
+                  "Verifique as condições climáticas",
+                  "Leve documento de identificação",
+                  "Use roupas e calçados confortáveis"
+                ],
+                price: "Consulte valores",
+                website: countryData?.tips[0]?.link || "https://www.viator.com",
+                rating: 4.5
               },
               afternoonDetails: {
                 time: "14:00",
                 title: day.afternoon,
-                description: "Atividade programada com guia local.",
-                duration: "2-3 horas",
-                tips: ["Confirme o horário com antecedência", "Verifique as condições climáticas"],
-                price: "Consulte valores"
+                description: "Passeio guiado com experiência local.",
+                location: "Região Turística",
+                address: "Avenida do Turismo, 456",
+                duration: "3-4 horas",
+                tips: [
+                  "Reserve com antecedência",
+                  "Leve protetor solar",
+                  "Câmera fotográfica recomendada",
+                  "Disponível em vários idiomas"
+                ],
+                price: "Consulte valores",
+                website: countryData?.tips[1]?.link || "https://www.getyourguide.com",
+                rating: 4.8
               },
               eveningDetails: {
                 time: "19:00",
                 title: day.evening,
-                description: "Atividade programada com guia local.",
+                description: "Experiência gastronômica local.",
+                location: "Bairro Gastronômico",
+                address: "Praça da Gastronomia, 789",
                 duration: "2-3 horas",
-                tips: ["Confirme o horário com antecedência", "Verifique as condições climáticas"],
-                price: "Consulte valores"
+                tips: [
+                  "Reserva antecipada necessária",
+                  "Menu degustação disponível",
+                  "Dress code: Smart casual",
+                  "Opções vegetarianas disponíveis"
+                ],
+                price: "Consulte valores",
+                website: countryData?.tips[2]?.link || "https://www.thefork.com",
+                rating: 4.7
               }
             }))
           };
@@ -97,19 +126,19 @@ const ItineraryDetails = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div>
               <h3 className="text-sm font-medium text-gray-500">Moeda</h3>
-              <p className="mt-1 font-medium">{countries[itinerary.country].currency}</p>
+              <p className="mt-1 font-medium">{countries[itinerary.country.toLowerCase()]?.currency}</p>
             </div>
             <div>
               <h3 className="text-sm font-medium text-gray-500">Idioma</h3>
-              <p className="mt-1 font-medium">{countries[itinerary.country].language}</p>
+              <p className="mt-1 font-medium">{countries[itinerary.country.toLowerCase()]?.language}</p>
             </div>
             <div>
               <h3 className="text-sm font-medium text-gray-500">Clima</h3>
-              <p className="mt-1 font-medium">{countries[itinerary.country].climate}</p>
+              <p className="mt-1 font-medium">{countries[itinerary.country.toLowerCase()]?.climate}</p>
             </div>
             <div>
               <h3 className="text-sm font-medium text-gray-500">Melhor época</h3>
-              <p className="mt-1 font-medium">{countries[itinerary.country].bestTimeToVisit}</p>
+              <p className="mt-1 font-medium">{countries[itinerary.country.toLowerCase()]?.bestTimeToVisit}</p>
             </div>
           </div>
         </Card>
