@@ -97,7 +97,7 @@ export function TripPlannerForm({ onSubmit, initialData }: TripPlannerFormProps)
       </div>
 
       <div className="space-y-2">
-        <h4 className="font-medium">O que você gosta? (máximo 5)</h4>
+        <h4 className="font-medium">O que você procura? (máximo 5)</h4>
         <div className="flex flex-wrap gap-2">
           {preferences.map((pref) => (
             <Badge
