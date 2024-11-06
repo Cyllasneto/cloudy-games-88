@@ -36,20 +36,20 @@ const CountryItinerary = ({ itinerary, center, zoom }: CountryItineraryProps) =>
       
       <div className="h-[400px] w-full rounded-lg overflow-hidden mb-6">
         <MapContainer 
-          center={center as L.LatLngExpression} 
-          zoom={zoom} 
+          center={center}
+          zoom={zoom}
           scrollWheelZoom={false}
           style={{ height: '100%', width: '100%' }}
         >
           <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {itinerary.map(day => 
             day.locations.map((location, index) => (
               <Marker 
                 key={`${day.day}-${index}`}
-                position={location.coordinates as L.LatLngExpression}
+                position={location.coordinates}
               >
                 <Popup>
                   <div className="p-2">
