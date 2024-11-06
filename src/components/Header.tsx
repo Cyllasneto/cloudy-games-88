@@ -21,6 +21,9 @@ const Header = () => {
             <Button variant="ghost" asChild>
               <Link to="/contact">Contato</Link>
             </Button>
+            <Button variant="ghost" asChild>
+              <Link to="/privacy">Políticas de Privacidade</Link>
+            </Button>
             <MyItineraries />
             <TripPlanner />
           </div>
