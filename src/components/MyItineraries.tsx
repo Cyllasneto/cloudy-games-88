@@ -7,6 +7,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { format } from "date-fns"
@@ -14,8 +24,9 @@ import { ptBR } from "date-fns/locale"
 import { countries } from "@/data/countries"
 import { Card } from "./ui/card"
 import { useNavigate } from "react-router-dom"
-import { Edit, Eye } from "lucide-react"
+import { Edit, Eye, Trash2 } from "lucide-react"
 import { TripPlanner } from "./TripPlanner"
+import { useToast } from "./ui/use-toast"
 
 interface DailyActivity {
   day: number
@@ -37,7 +48,9 @@ interface Itinerary {
 export function MyItineraries() {
   const [itineraries, setItineraries] = useState<Itinerary[]>([])
   const [editingItinerary, setEditingItinerary] = useState<Itinerary | null>(null)
+  const [deleteItineraryId, setDeleteItineraryId] = useState<string | null>(null)
   const navigate = useNavigate()
+  const { toast } = useToast()
   
   useEffect(() => {
     const loadItineraries = () => {
@@ -55,6 +68,18 @@ export function MyItineraries() {
     window.addEventListener('storage', loadItineraries)
     return () => window.removeEventListener('storage', loadItineraries)
   }, [])
+
+  const handleDeleteItinerary = (id: string) => {
+    const updatedItineraries = itineraries.filter(itinerary => itinerary.id !== id)
+    localStorage.setItem('myItineraries', JSON.stringify(updatedItineraries))
+    window.dispatchEvent(new Event('storage'))
+    setDeleteItineraryId(null)
+    
+    toast({
+      title: "Roteiro excluído",
+      description: "Seu roteiro foi excluído com sucesso.",
+    })
+  }
 
   if (itineraries.length === 0) {
     return null
@@ -103,6 +128,15 @@ export function MyItineraries() {
                         <Eye className="h-4 w-4 mr-1" />
                         Visualizar
                       </Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => setDeleteItineraryId(itinerary.id)}
+                        className="text-red-500 hover:text-red-600"
+                      >
+                        <Trash2 className="h-4 w-4 mr-1" />
+                        Excluir
+                      </Button>
                     </div>
                   </div>
                 </Card>
@@ -119,6 +153,26 @@ export function MyItineraries() {
           onClose={() => setEditingItinerary(null)}
         />
       )}
+
+      <AlertDialog open={!!deleteItineraryId} onOpenChange={() => setDeleteItineraryId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Excluir Roteiro</AlertDialogTitle>
+            <AlertDialogDescription>
+              Tem certeza que deseja excluir este roteiro? Esta ação não pode ser desfeita.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => deleteItineraryId && handleDeleteItinerary(deleteItineraryId)}
+              className="bg-red-500 hover:bg-red-600"
+            >
+              Excluir
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   )
 }
