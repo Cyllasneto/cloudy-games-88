@@ -87,7 +87,7 @@ export const ActivityCard = ({ activity, period }: ActivityCardProps) => {
               rel="noopener noreferrer"
               className="inline-flex"
             >
-              <Button variant="outline" size="sm" className="gap-2">
+              <Button variant="default" size="sm" className="gap-2">
                 Consulte valores
                 <ExternalLink className="h-4 w-4" />
               </Button>
