@@ -76,7 +76,7 @@ export function TripPlannerForm({ onSubmit, initialData }: TripPlannerFormProps)
           <Slider
             value={[selectedDays]}
             onValueChange={([days]) => setSelectedDays(days)}
-            max={15}
+            max={20}
             min={1}
             step={1}
             className="flex-1"
