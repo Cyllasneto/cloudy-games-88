@@ -33,16 +33,28 @@ const Header = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <Link to="/" className="text-sm font-medium hover:text-primary">{t.home}</Link>
+                  <Link to="/" className="text-sm font-medium hover:text-primary">
+                    <Button variant="ghost" size="sm">
+                      {t.home}
+                    </Button>
+                  </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Link to="/contact" className="text-sm font-medium hover:text-primary ml-6">{t.contact}</Link>
+                  <Link to="/contact" className="text-sm font-medium hover:text-primary">
+                    <Button variant="ghost" size="sm">
+                      {t.contact}
+                    </Button>
+                  </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Link to="/privacy" className="text-sm font-medium hover:text-primary ml-6">{t.privacy}</Link>
+                  <Link to="/privacy" className="text-sm font-medium hover:text-primary">
+                    <Button variant="ghost" size="sm">
+                      {t.privacy}
+                    </Button>
+                  </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Link to="/itineraries" className="text-sm font-medium hover:text-primary ml-6">
+                  <Link to="/itineraries" className="text-sm font-medium hover:text-primary">
                     <Button variant="outline" size="sm" className="flex items-center gap-2">
                       <Route size={16} />
                       Roteiros
