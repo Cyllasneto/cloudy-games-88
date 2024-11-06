@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Box, Cloud, Home, MapPin, Mail } from "lucide-react";
+import { MapPin, Cloud } from "lucide-react";
 import { TripPlanner } from "./TripPlanner";
 import { MyItineraries } from "./MyItineraries";
 
@@ -15,53 +15,27 @@ const Header = () => {
           </Link>
 
           <div className="hidden md:flex items-center gap-4">
-            <Box className="p-2 border rounded-lg flex items-center">
-              <Button variant="ghost" asChild className="flex items-center gap-2">
-                <Link to="/">
-                  <Home className="h-4 w-4" />
-                  <span>🏠 Home</span>
-                </Link>
-              </Button>
-            </Box>
-
-            <Box className="p-2 border rounded-lg flex items-center">
-              <Button variant="ghost" asChild className="flex items-center gap-2">
-                <Link to="/destinations">
-                  <MapPin className="h-4 w-4" />
-                  <span>🌎 Destinos</span>
-                </Link>
-              </Button>
-            </Box>
-
-            <Box className="p-2 border rounded-lg flex items-center">
-              <Button variant="outline" asChild className="flex items-center gap-2">
-                <Link to="/itineraries">
-                  <MapPin className="h-4 w-4" />
-                  <span>📍 Roteiros</span>
-                </Link>
-              </Button>
-            </Box>
-
-            <Box className="p-2 border rounded-lg flex items-center">
-              <Button variant="ghost" asChild className="flex items-center gap-2">
-                <Link to="/contact">
-                  <Mail className="h-4 w-4" />
-                  <span>✉️ Contato</span>
-                </Link>
-              </Button>
-            </Box>
-
-            <Box className="p-2 border rounded-lg flex items-center">
-              <MyItineraries />
-            </Box>
-
-            <Box className="p-2 border rounded-lg flex items-center">
-              <TripPlanner />
-            </Box>
+            <Button variant="ghost" asChild>
+              <Link to="/">Home</Link>
+            </Button>
+            <Button variant="ghost" asChild>
+              <Link to="/destinations">Destinos</Link>
+            </Button>
+            <Button variant="outline" asChild className="gap-2">
+              <Link to="/itineraries">
+                <MapPin className="h-4 w-4" />
+                Roteiros
+              </Link>
+            </Button>
+            <Button variant="ghost" asChild>
+              <Link to="/contact">Contato</Link>
+            </Button>
+            <MyItineraries />
+            <TripPlanner />
           </div>
 
           <div className="md:hidden flex items-center gap-4">
-            <Link to="/itineraries">📍 Roteiros</Link>
+            <Link to="/itineraries">Roteiros</Link>
             <TripPlanner />
           </div>
         </nav>
