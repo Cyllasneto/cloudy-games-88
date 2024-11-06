@@ -131,7 +131,7 @@ ${values.comment ? `<b>Comentário:</b> ${values.comment}` : ''}
                 name={field.id as keyof z.infer<typeof formSchema>}
                 render={({ field: formField }) => (
                   <FormItem>
-                    <FormLabel>{field.placeholder}</FormLabel>
+                    <FormLabel>{field.id === 'email' ? 'E-mail' : field.placeholder}</FormLabel>
                     <FormControl>
                       <Input 
                         type={field.type} 
