@@ -5,24 +5,15 @@ import { Country } from "@/data/types";
 
 interface CountryContentProps {
   country: Country;
-  translations: any;
-  translatedInfo: {
-    bestTimeToVisit: string;
-    currency: string;
-    language: string;
-    timeZone: string;
-    climate: string;
-    transportation: string;
-  };
 }
 
-const CountryContent = ({ country, translations, translatedInfo }: CountryContentProps) => {
+const CountryContent = ({ country }: CountryContentProps) => {
   const flightTips = country.tips.filter(tip => tip.type === "flight");
 
   return (
     <main className="container max-w-6xl mx-auto py-16 px-4">
       <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8">{translations.generalInfo}</h2>
+        <h2 className="text-3xl font-bold mb-8">Informações Gerais</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Card className="p-6">
             <div className="flex items-start gap-4">
@@ -30,8 +21,8 @@ const CountryContent = ({ country, translations, translatedInfo }: CountryConten
                 <Globe2 className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-semibold mb-2">{translations.bestTimeToVisit}</h3>
-                <p className="text-gray-600">{translatedInfo.bestTimeToVisit || country.bestTimeToVisit}</p>
+                <h3 className="font-semibold mb-2">Melhor Época para Visitar</h3>
+                <p className="text-gray-600">{country.bestTimeToVisit}</p>
               </div>
             </div>
           </Card>
@@ -41,8 +32,8 @@ const CountryContent = ({ country, translations, translatedInfo }: CountryConten
                 <Plane className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-semibold mb-2">{translations.currency}</h3>
-                <p className="text-gray-600">{translatedInfo.currency || country.currency}</p>
+                <h3 className="font-semibold mb-2">Moeda</h3>
+                <p className="text-gray-600">{country.currency}</p>
               </div>
             </div>
           </Card>
@@ -52,8 +43,8 @@ const CountryContent = ({ country, translations, translatedInfo }: CountryConten
                 <Plane className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-semibold mb-2">{translations.language}</h3>
-                <p className="text-gray-600">{translatedInfo.language || country.language}</p>
+                <h3 className="font-semibold mb-2">Idioma</h3>
+                <p className="text-gray-600">{country.language}</p>
               </div>
             </div>
           </Card>
@@ -63,8 +54,8 @@ const CountryContent = ({ country, translations, translatedInfo }: CountryConten
                 <Plane className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-semibold mb-2">{translations.timeZone}</h3>
-                <p className="text-gray-600">{translatedInfo.timeZone || country.timeZone}</p>
+                <h3 className="font-semibold mb-2">Fuso Horário</h3>
+                <p className="text-gray-600">{country.timeZone}</p>
               </div>
             </div>
           </Card>
@@ -74,8 +65,8 @@ const CountryContent = ({ country, translations, translatedInfo }: CountryConten
                 <Plane className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-semibold mb-2">{translations.climate}</h3>
-                <p className="text-gray-600">{translatedInfo.climate || country.climate}</p>
+                <h3 className="font-semibold mb-2">Clima</h3>
+                <p className="text-gray-600">{country.climate}</p>
               </div>
             </div>
           </Card>
@@ -85,8 +76,8 @@ const CountryContent = ({ country, translations, translatedInfo }: CountryConten
                 <Plane className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="font-semibold mb-2">{translations.transportation}</h3>
-                <p className="text-gray-600">{translatedInfo.transportation || country.transportation}</p>
+                <h3 className="font-semibold mb-2">Transporte</h3>
+                <p className="text-gray-600">{country.transportation}</p>
               </div>
             </div>
           </Card>
@@ -94,7 +85,7 @@ const CountryContent = ({ country, translations, translatedInfo }: CountryConten
       </section>
 
       <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8">{translations.flightTickets}</h2>
+        <h2 className="text-3xl font-bold mb-8">Passagens Aéreas</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {flightTips.map((tip, index) => (
             <Card key={index} className="p-6">
@@ -112,7 +103,7 @@ const CountryContent = ({ country, translations, translatedInfo }: CountryConten
                     rel="noopener noreferrer"
                     className="text-primary hover:underline flex items-center gap-2"
                   >
-                    {translations.buyTickets}
+                    Comprar Passagens
                     <Globe2 className="w-4 h-4" />
                   </a>
                 )}
@@ -123,7 +114,7 @@ const CountryContent = ({ country, translations, translatedInfo }: CountryConten
       </section>
 
       <section className="mb-16">
-        <h2 className="text-3xl font-bold mb-8">{translations.tipsAndRecommendations}</h2>
+        <h2 className="text-3xl font-bold mb-8">Dicas e Recomendações</h2>
         <div className="space-y-8">
           {country.tips.filter(tip => tip.type !== "flight").map((tip, index) => (
             <Card key={index} className="p-6">
@@ -136,7 +127,7 @@ const CountryContent = ({ country, translations, translatedInfo }: CountryConten
                   <p className="text-gray-600 mb-4">{tip.description}</p>
                   {tip.highlights && (
                     <div className="mt-4">
-                      <h4 className="font-semibold mb-2">{translations.highlights}:</h4>
+                      <h4 className="font-semibold mb-2">Destaques:</h4>
                       <ul className="list-disc pl-5 space-y-1">
                         {tip.highlights.map((highlight, idx) => (
                           <li key={idx}>{highlight}</li>
@@ -146,7 +137,7 @@ const CountryContent = ({ country, translations, translatedInfo }: CountryConten
                   )}
                   {tip.address && (
                     <p className="text-sm text-gray-500 mt-4">
-                      {translations.address}: {tip.address}
+                      Endereço: {tip.address}
                     </p>
                   )}
                 </div>
@@ -156,7 +147,7 @@ const CountryContent = ({ country, translations, translatedInfo }: CountryConten
                   </div>
                   {tip.duration && (
                     <div className="text-sm text-gray-500">
-                      {translations.duration}: {tip.duration}
+                      Duração: {tip.duration}
                     </div>
                   )}
                   {tip.link && (
@@ -166,7 +157,7 @@ const CountryContent = ({ country, translations, translatedInfo }: CountryConten
                       rel="noopener noreferrer"
                       className="text-primary hover:underline mt-4"
                     >
-                      {translations.book}
+                      Reservar
                     </a>
                   )}
                 </div>
