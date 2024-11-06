@@ -8,7 +8,7 @@ import {
 import { Globe } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-export const LanguageSelector = () => {
+const LanguageSelector = () => {
   const { language, setLanguage } = useLanguage();
 
   const languages = {

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { MapPin } from "lucide-react";
-import LanguageSelector from "./LanguageSelector";
+import { LanguageSelector } from "./LanguageSelector";
 import { TripPlanner } from "./TripPlanner";
 
 const Header = () => {
