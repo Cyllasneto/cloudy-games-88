@@ -13,6 +13,8 @@ import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import { countries } from "@/data/countries"
 import { Card } from "./ui/card"
+import { useNavigate } from "react-router-dom"
+import { Edit, Eye } from "lucide-react"
 
 interface DailyActivity {
   day: number
@@ -23,6 +25,7 @@ interface DailyActivity {
 }
 
 interface Itinerary {
+  id?: string
   country: string
   days: number
   date: string
@@ -32,12 +35,17 @@ interface Itinerary {
 
 export function MyItineraries() {
   const [itineraries, setItineraries] = useState<Itinerary[]>([])
-
+  const navigate = useNavigate()
+  
   useEffect(() => {
     const loadItineraries = () => {
       const saved = localStorage.getItem('myItineraries')
       if (saved) {
-        setItineraries(JSON.parse(saved))
+        const parsedItineraries = JSON.parse(saved).map((itinerary: Itinerary) => ({
+          ...itinerary,
+          id: crypto.randomUUID()
+        }))
+        setItineraries(parsedItineraries)
       }
     }
 
@@ -64,32 +72,35 @@ export function MyItineraries() {
         </DialogHeader>
         <ScrollArea className="h-[500px] pr-4">
           <div className="space-y-4">
-            {itineraries.map((itinerary, index) => (
-              <Card key={index} className="p-4">
-                <h3 className="text-lg font-semibold mb-2">
-                  {countries[itinerary.country].title}
-                </h3>
-                <p className="text-sm text-gray-500 mb-4">
-                  {format(new Date(itinerary.date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}
-                </p>
-                <div className="space-y-4">
-                  {itinerary.dailyActivities?.map((activity, idx) => (
-                    <div key={idx} className="border-l-2 border-primary pl-4">
-                      <h4 className="font-medium">{activity.description}</h4>
-                      <ul className="mt-2 space-y-2 text-sm">
-                        <li><span className="font-medium">Manhã:</span> {activity.morning}</li>
-                        <li><span className="font-medium">Tarde:</span> {activity.afternoon}</li>
-                        <li><span className="font-medium">Noite:</span> {activity.evening}</li>
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {itinerary.preferences.map((pref, idx) => (
-                    <span key={idx} className="text-xs bg-secondary text-secondary-foreground px-2 py-1 rounded-full">
-                      {pref}
-                    </span>
-                  ))}
+            {itineraries.map((itinerary) => (
+              <Card key={itinerary.id} className="p-4">
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h3 className="text-lg font-semibold">
+                      {countries[itinerary.country].title}
+                    </h3>
+                    <p className="text-sm text-gray-500">
+                      {format(new Date(itinerary.date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}
+                    </p>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => navigate(`/itinerary/${itinerary.id}/edit`)}
+                    >
+                      <Edit className="h-4 w-4 mr-1" />
+                      Editar
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      onClick={() => navigate(`/itinerary/${itinerary.id}`)}
+                    >
+                      <Eye className="h-4 w-4 mr-1" />
+                      Visualizar
+                    </Button>
+                  </div>
                 </div>
               </Card>
             ))}
