@@ -155,6 +155,10 @@ const getRandomActivity = (activities: string[]) => {
 };
 
 export const generateDailyItinerary = (country: string, days: number, preferences: string[]) => {
+  if (!preferences || preferences.length === 0) {
+    preferences = ["cultural"]; // Default to cultural if no preferences are selected
+  }
+
   const countryData = countries[country];
   const activities = [];
 
@@ -162,6 +166,11 @@ export const generateDailyItinerary = (country: string, days: number, preference
     // Escolhe uma preferência aleatória entre as selecionadas para o tema do dia
     const dayTheme = preferences[Math.floor(Math.random() * preferences.length)];
     const themeActivities = thematicActivities[dayTheme as keyof typeof thematicActivities];
+
+    if (!themeActivities) {
+      console.error(`Theme activities not found for: ${dayTheme}`);
+      continue; // Skip this iteration if theme activities are not found
+    }
 
     const dailyActivities = {
       day,
