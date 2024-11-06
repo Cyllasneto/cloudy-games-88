@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 import {
   Dialog,
   DialogContent,
@@ -6,98 +6,96 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { MapPin } from "lucide-react";
-import { countries } from "@/data/countries";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { format } from "date-fns"
+import { ptBR } from "date-fns/locale"
+import { countries } from "@/data/countries"
+import { Card } from "./ui/card"
+
+interface DailyActivity {
+  day: number
+  morning: string
+  afternoon: string
+  evening: string
+  description: string
+}
 
 interface Itinerary {
-  country: string;
-  days: number;
-  date: string;
-  preferences: string[];
+  country: string
+  days: number
+  date: string
+  preferences: string[]
+  dailyActivities: DailyActivity[]
 }
 
 export function MyItineraries() {
-  const [itineraries, setItineraries] = useState<Itinerary[]>([]);
-  const [open, setOpen] = useState(false);
+  const [itineraries, setItineraries] = useState<Itinerary[]>([])
 
   useEffect(() => {
     const loadItineraries = () => {
-      const savedItineraries = localStorage.getItem('myItineraries');
-      if (savedItineraries) {
-        setItineraries(JSON.parse(savedItineraries));
+      const saved = localStorage.getItem('myItineraries')
+      if (saved) {
+        setItineraries(JSON.parse(saved))
       }
-    };
+    }
 
-    loadItineraries();
-    // Adiciona um event listener para atualizar os roteiros quando houver mudanças
-    window.addEventListener('storage', loadItineraries);
+    loadItineraries()
+    window.addEventListener('storage', loadItineraries)
+    return () => window.removeEventListener('storage', loadItineraries)
+  }, [])
 
-    return () => {
-      window.removeEventListener('storage', loadItineraries);
-    };
-  }, []);
+  if (itineraries.length === 0) {
+    return null
+  }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog>
       <DialogTrigger asChild>
-        <Button variant="ghost" className="gap-2">
-          <MapPin className="h-4 w-4" />
-          Meus Roteiros
-        </Button>
+        <Button variant="outline">Meus Roteiros</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[525px]">
+      <DialogContent className="sm:max-w-[625px]">
         <DialogHeader>
-          <DialogTitle>Meus Roteiros</DialogTitle>
+          <DialogTitle>Meus Roteiros de Viagem</DialogTitle>
           <DialogDescription>
-            Aqui estão todos os seus roteiros personalizados.
+            Aqui estão seus roteiros personalizados
           </DialogDescription>
         </DialogHeader>
-        <ScrollArea className="h-[400px] pr-4">
-          {itineraries.length === 0 ? (
-            <p className="text-center text-gray-500 py-8">
-              Você ainda não tem roteiros salvos.
-            </p>
-          ) : (
-            <div className="space-y-4">
-              {itineraries.map((itinerary, index) => (
-                <div
-                  key={index}
-                  className="border rounded-lg p-4 hover:bg-accent transition-colors"
-                >
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-semibold text-lg">
-                      {countries[itinerary.country]?.title}
-                    </h3>
-                    <span className="text-sm text-gray-500">
-                      {format(new Date(itinerary.date), "dd 'de' MMMM 'de' yyyy", {
-                        locale: ptBR,
-                      })}
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-600 mb-2">
-                    {itinerary.days} dias de viagem
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {itinerary.preferences.map((pref) => (
-                      <span
-                        key={pref}
-                        className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full"
-                      >
-                        {pref}
-                      </span>
-                    ))}
-                  </div>
+        <ScrollArea className="h-[500px] pr-4">
+          <div className="space-y-4">
+            {itineraries.map((itinerary, index) => (
+              <Card key={index} className="p-4">
+                <h3 className="text-lg font-semibold mb-2">
+                  {countries[itinerary.country].title}
+                </h3>
+                <p className="text-sm text-gray-500 mb-4">
+                  {format(new Date(itinerary.date), "dd 'de' MMMM 'de' yyyy", { locale: ptBR })}
+                </p>
+                <div className="space-y-4">
+                  {itinerary.dailyActivities?.map((activity, idx) => (
+                    <div key={idx} className="border-l-2 border-primary pl-4">
+                      <h4 className="font-medium">{activity.description}</h4>
+                      <ul className="mt-2 space-y-2 text-sm">
+                        <li><span className="font-medium">Manhã:</span> {activity.morning}</li>
+                        <li><span className="font-medium">Tarde:</span> {activity.afternoon}</li>
+                        <li><span className="font-medium">Noite:</span> {activity.evening}</li>
+                      </ul>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          )}
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {itinerary.preferences.map((pref, idx) => (
+                    <span key={idx} className="text-xs bg-secondary text-secondary-foreground px-2 py-1 rounded-full">
+                      {pref}
+                    </span>
+                  ))}
+                </div>
+              </Card>
+            ))}
+          </div>
         </ScrollArea>
       </DialogContent>
     </Dialog>
-  );
+  )
 }
