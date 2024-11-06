@@ -11,8 +11,8 @@ import CountryPage from "./pages/CountryPage"
 import Privacy from "./pages/Privacy"
 import Contact from "./pages/Contact"
 import ItineraryDetails from "./pages/ItineraryDetails"
+import Register from "./pages/Register"
 
-// Create a client
 const queryClient = new QueryClient()
 
 const App = () => {
@@ -29,6 +29,7 @@ const App = () => {
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/itinerary/:id" element={<ItineraryDetails />} />
+                <Route path="/register" element={<Register />} />
               </Routes>
             </div>
             <Footer />
