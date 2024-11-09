@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Slider } from "@/components/ui/slider";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
 import {
   Select,
   SelectContent,
@@ -13,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import { countries } from "@/data/countries";
 import { preferences } from "./tripPlannerUtils";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface TripPlannerFormProps {
   onSubmit: (formData: any) => void;
@@ -20,69 +20,75 @@ interface TripPlannerFormProps {
 }
 
 export function TripPlannerForm({ onSubmit, initialData }: TripPlannerFormProps) {
-  const [selectedDays, setSelectedDays] = useState(initialData?.days || 3);
-  const [selectedPreferences, setSelectedPreferences] = useState<string[]>(initialData?.preferences || []);
-  const [date, setDate] = useState<Date>(initialData?.date ? new Date(initialData.date) : undefined);
-  const [selectedCountry, setSelectedCountry] = useState<string>(initialData?.country || undefined);
-  const { toast } = useToast();
+  const [selectedCountry, setSelectedCountry] = useState<string>(
+    initialData?.country || ""
+  );
+  const [date, setDate] = useState<Date | undefined>(
+    initialData?.date ? new Date(initialData.date) : undefined
+  );
+  const [selectedDays, setSelectedDays] = useState<number>(
+    initialData?.days || 3
+  );
+  const [selectedPreferences, setSelectedPreferences] = useState<string[]>(
+    initialData?.preferences || []
+  );
 
   const handlePreferenceToggle = (prefId: string) => {
-    setSelectedPreferences((current) => {
-      if (current.includes(prefId)) {
-        return current.filter((id) => id !== prefId);
-      } else {
-        if (current.length >= 5) {
-          toast({
-            title: "Limite atingido",
-            description: "Você pode selecionar no máximo 5 preferências",
-          });
-          return current;
-        }
-        return [...current, prefId];
-      }
-    });
+    setSelectedPreferences((current) =>
+      current.includes(prefId)
+        ? current.filter((id) => id !== prefId)
+        : current.length < 5
+        ? [...current, prefId]
+        : current
+    );
   };
 
   const handleSubmit = () => {
+    if (!selectedCountry || !date) return;
+
     onSubmit({
       selectedCountry,
       date,
       selectedDays,
-      selectedPreferences
+      selectedPreferences,
     });
   };
 
   return (
-    <div className="grid gap-4 py-4">
+    <div className="space-y-6">
       <div className="space-y-2">
-        <h4 className="font-medium">Para qual país você quer ir?</h4>
+        <label className="text-sm font-medium">País</label>
         <Select value={selectedCountry} onValueChange={setSelectedCountry}>
-          <SelectTrigger>
+          <SelectTrigger className="w-full">
             <SelectValue placeholder="Selecione um país" />
           </SelectTrigger>
           <SelectContent>
-            {Object.entries(countries).map(([id, country]) => (
-              <SelectItem key={id} value={id}>
-                {country.title}
-              </SelectItem>
-            ))}
+            <ScrollArea className="h-[200px]">
+              {Object.entries(countries).map(([id, country]) => (
+                <SelectItem key={id} value={id}>
+                  {country.title}
+                </SelectItem>
+              ))}
+            </ScrollArea>
           </SelectContent>
         </Select>
       </div>
 
       <div className="space-y-2">
-        <h4 className="font-medium">Quando você pretende viajar?</h4>
-        <Calendar
-          mode="single"
-          selected={date}
-          onSelect={setDate}
-          className="rounded-md border"
-          disabled={(date) => date < new Date()}
-        />
+        <label className="text-sm font-medium">Data da Viagem</label>
+        <div className="border rounded-lg p-2 sm:p-4">
+          <Calendar
+            mode="single"
+            selected={date}
+            onSelect={setDate}
+            className="w-full"
+            disabled={(date) => date < new Date()}
+          />
+        </div>
       </div>
 
       <div className="space-y-2">
-        <h4 className="font-medium">Quantos dias?</h4>
+        <label className="text-sm font-medium">Duração (dias)</label>
         <div className="flex items-center gap-4">
           <Slider
             value={[selectedDays]}
@@ -92,18 +98,18 @@ export function TripPlannerForm({ onSubmit, initialData }: TripPlannerFormProps)
             step={1}
             className="flex-1"
           />
-          <span className="w-12 text-center">{selectedDays}d</span>
+          <span className="w-12 text-center text-sm">{selectedDays}d</span>
         </div>
       </div>
 
       <div className="space-y-2">
-        <h4 className="font-medium">O que você procura? (máximo 5)</h4>
+        <label className="text-sm font-medium">Preferências (máx. 5)</label>
         <div className="flex flex-wrap gap-2">
           {preferences.map((pref) => (
             <Badge
               key={pref.id}
               variant={selectedPreferences.includes(pref.id) ? "default" : "outline"}
-              className="cursor-pointer"
+              className="cursor-pointer text-xs sm:text-sm"
               onClick={() => handlePreferenceToggle(pref.id)}
             >
               {pref.label}
@@ -112,8 +118,12 @@ export function TripPlannerForm({ onSubmit, initialData }: TripPlannerFormProps)
         </div>
       </div>
 
-      <Button onClick={handleSubmit} className="w-full">
-        {initialData ? 'Atualizar Roteiro' : 'Gerar Roteiro'}
+      <Button
+        onClick={handleSubmit}
+        className="w-full"
+        disabled={!selectedCountry || !date}
+      >
+        {initialData ? "Atualizar Roteiro" : "Gerar Roteiro"}
       </Button>
     </div>
   );

@@ -29,7 +29,6 @@ export function TripPlanner({ isEditing, editData, onClose }: TripPlannerProps) 
   const handleGenerateItinerary = (formData: any) => {
     const { selectedCountry, date, selectedDays, selectedPreferences } = formData;
     
-    // Gerar roteiro detalhado
     const dailyActivities = generateDailyItinerary(selectedCountry, selectedDays, selectedPreferences);
 
     const itineraryId = editData?.id || crypto.randomUUID();
@@ -42,15 +41,12 @@ export function TripPlanner({ isEditing, editData, onClose }: TripPlannerProps) 
       dailyActivities: dailyActivities
     };
 
-    // Salvar no localStorage
     const savedItineraries = JSON.parse(localStorage.getItem('myItineraries') || '[]');
     const updatedItineraries = editData 
       ? savedItineraries.map((it: any) => it.id === editData.id ? itinerary : it)
       : [...savedItineraries, itinerary];
     
     localStorage.setItem('myItineraries', JSON.stringify(updatedItineraries));
-
-    // Disparar evento para atualizar MyItineraries
     window.dispatchEvent(new Event('storage'));
 
     toast({
@@ -67,16 +63,16 @@ export function TripPlanner({ isEditing, editData, onClose }: TripPlannerProps) 
     <Dialog open={isEditing ? true : open} onOpenChange={isEditing ? onClose : setOpen}>
       {!isEditing && (
         <DialogTrigger asChild>
-          <Button variant="outline" className="gap-2">
+          <Button variant="outline" className="gap-2 w-full sm:w-auto">
             <CalendarDays className="h-4 w-4" />
             Planejar Viagem
           </Button>
         </DialogTrigger>
       )}
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="w-[95vw] max-w-[425px] p-4 sm:p-6">
         <DialogHeader>
-          <DialogTitle>{isEditing ? 'Editar Roteiro' : 'Planejar sua Viagem'}</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-lg sm:text-xl">{isEditing ? 'Editar Roteiro' : 'Planejar sua Viagem'}</DialogTitle>
+          <DialogDescription className="text-sm sm:text-base">
             {isEditing ? 'Atualize os detalhes do seu roteiro.' : 'Crie um roteiro personalizado para sua próxima aventura.'}
           </DialogDescription>
         </DialogHeader>

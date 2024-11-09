@@ -2,7 +2,6 @@ import { Card } from "@/components/ui/card";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { useEffect } from "react";
 
 // Fix for default marker icons in react-leaflet
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -37,8 +36,9 @@ const CountryItinerary = ({ itinerary, center, zoom }: CountryItineraryProps) =>
       
       <div className="h-[400px] w-full rounded-lg overflow-hidden mb-6">
         <MapContainer 
-          center={center} 
+          center={center as [number, number]} 
           zoom={zoom} 
+          scrollWheelZoom={false}
           style={{ height: '100%', width: '100%' }}
         >
           <TileLayer
@@ -66,13 +66,13 @@ const CountryItinerary = ({ itinerary, center, zoom }: CountryItineraryProps) =>
 
       <div className="grid gap-4">
         {itinerary.map((day) => (
-          <Card key={day.day} className="p-6">
-            <h3 className="text-xl font-semibold mb-4">Dia {day.day}</h3>
-            <p className="text-gray-600 mb-4">{day.description}</p>
+          <Card key={day.day} className="p-4 sm:p-6">
+            <h3 className="text-lg sm:text-xl font-semibold mb-4">Dia {day.day}</h3>
+            <p className="text-gray-600 mb-4 text-sm sm:text-base">{day.description}</p>
             <div className="space-y-3">
               {day.locations.map((location, index) => (
                 <div key={index} className="pl-4 border-l-2 border-primary">
-                  <h4 className="font-medium">{location.name}</h4>
+                  <h4 className="font-medium text-sm sm:text-base">{location.name}</h4>
                   <p className="text-sm text-gray-600">{location.description}</p>
                 </div>
               ))}
