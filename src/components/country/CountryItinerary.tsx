@@ -2,7 +2,6 @@ import { Card } from "@/components/ui/card";
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import { LatLngTuple } from 'leaflet';
 
 // Fix for default marker icons in react-leaflet
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -26,7 +25,7 @@ interface DayItinerary {
 
 interface CountryItineraryProps {
   itinerary: DayItinerary[];
-  center: LatLngTuple;
+  center: [number, number];
   zoom: number;
 }
 
@@ -43,8 +42,8 @@ const CountryItinerary = ({ itinerary, center, zoom }: CountryItineraryProps) =>
           scrollWheelZoom={false}
         >
           <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {itinerary.map(day => 
             day.locations.map((location, index) => (
