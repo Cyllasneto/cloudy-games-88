@@ -3,7 +3,7 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -19,9 +19,8 @@ const Login = () => {
     });
 
     // Listen for auth errors
-    const handleAuthError = supabase.auth.onAuthStateChange(async (event) => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user && event === "SIGNED_OUT") {
+    const handleAuthError = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === "USER_NOT_FOUND" || (event === "SIGNED_OUT" && !session)) {
         setView("sign_up");
         toast({
           title: "Usuário não encontrado",
@@ -44,15 +43,45 @@ const Login = () => {
             Bem-vindo ao Cloudy Trip
           </h2>
           <p className="mt-2 text-sm text-gray-600">
-            Faça login ou crie sua conta
+            {view === "sign_in" ? "Faça login na sua conta" : "Crie sua conta"}
           </p>
         </div>
         <Auth
           supabaseClient={supabase}
-          appearance={{ theme: ThemeSupa }}
+          appearance={{ 
+            theme: ThemeSupa,
+            variables: {
+              default: {
+                colors: {
+                  brand: '#2563eb',
+                  brandAccent: '#1d4ed8',
+                }
+              }
+            }
+          }}
           theme="light"
           providers={[]}
           view={view}
+          localization={{
+            variables: {
+              sign_in: {
+                email_label: 'Email',
+                password_label: 'Senha',
+                button_label: 'Entrar',
+                loading_button_label: 'Entrando...',
+                social_provider_text: 'Entrar com {{provider}}',
+                link_text: 'Já tem uma conta? Entre',
+              },
+              sign_up: {
+                email_label: 'Email',
+                password_label: 'Senha',
+                button_label: 'Criar conta',
+                loading_button_label: 'Criando conta...',
+                social_provider_text: 'Criar conta com {{provider}}',
+                link_text: 'Não tem uma conta? Cadastre-se',
+              },
+            },
+          }}
           showLinks={true}
         />
       </div>
