@@ -26,6 +26,14 @@ const Login = () => {
           variant: "destructive",
         });
       }
+
+      if (event === 'USER_DELETED') {
+        toast({
+          title: "Erro de autenticação",
+          description: "Credenciais inválidas. Por favor, tente novamente.",
+          variant: "destructive",
+        });
+      }
     });
 
     return () => subscription.unsubscribe();
