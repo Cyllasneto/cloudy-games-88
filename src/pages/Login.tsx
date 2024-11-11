@@ -17,10 +17,8 @@ const Login = () => {
       if (session) {
         navigate("/");
       }
-    });
 
-    // Listen for auth errors
-    const handleAuthError = supabase.auth.onAuthStateChange(async (event, session) => {
+      // Handle authentication errors
       if (!session && (event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED')) {
         setView("sign_up");
         toast({
@@ -30,10 +28,6 @@ const Login = () => {
         });
       }
     });
-
-    return () => {
-      handleAuthError.data.subscription.unsubscribe();
-    };
   }, [navigate, toast]);
 
   return (
@@ -84,13 +78,6 @@ const Login = () => {
             },
           }}
           showLinks={true}
-          onError={(error: AuthError) => {
-            toast({
-              title: "Erro de autenticação",
-              description: "Credenciais inválidas. Por favor, tente novamente ou crie uma nova conta.",
-              variant: "destructive",
-            });
-          }}
         />
       </div>
     </div>
