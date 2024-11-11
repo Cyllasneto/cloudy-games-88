@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { AuthError } from "@supabase/supabase-js";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Login = () => {
 
     // Listen for auth errors
     const handleAuthError = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === "USER_NOT_FOUND" || (event === "SIGNED_OUT" && !session)) {
+      if (!session && (event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED')) {
         setView("sign_up");
         toast({
           title: "Usuário não encontrado",
