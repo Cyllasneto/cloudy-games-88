@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-import { AuthChangeEvent } from "@supabase/supabase-js";
+import { AuthError, AuthChangeEvent } from "@supabase/supabase-js";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,15 +26,16 @@ const Login = () => {
           variant: "destructive",
         });
       }
-
-      if (event === 'INVALID_CREDENTIALS') {
-        toast({
-          title: "Erro de autenticação",
-          description: "Credenciais inválidas. Por favor, tente novamente.",
-          variant: "destructive",
-        });
-      }
     });
+
+    // Handle authentication errors
+    const handleAuthError = (error: AuthError) => {
+      toast({
+        title: "Erro de autenticação",
+        description: "Credenciais inválidas. Por favor, tente novamente.",
+        variant: "destructive",
+      });
+    };
 
     return () => subscription.unsubscribe();
   }, [navigate, toast]);
