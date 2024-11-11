@@ -1,6 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 
-const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+const RESEND_API_KEY = "re_cswzCXu9_JmiZMJ63iunEkXB47yY15FCv";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -11,6 +11,7 @@ const corsHeaders = {
 interface EmailRequest {
   to: string[];
   resetLink: string;
+  username?: string;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -19,10 +20,10 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { to, resetLink }: EmailRequest = await req.json();
+    const { to, resetLink, username = "Usuário" }: EmailRequest = await req.json();
     
     const emailContent = `
-      <h2>Olá,</h2>
+      <h2>Olá ${username},</h2>
       
       <p>Recebemos uma solicitação para redefinir sua senha no Cloudy Trip. Se você não fez essa solicitação, por favor, ignore este e-mail.</p>
       

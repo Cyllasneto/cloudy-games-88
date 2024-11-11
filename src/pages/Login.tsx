@@ -13,7 +13,7 @@ const Login = () => {
   useEffect(() => {
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event: AuthChangeEvent, session) => {
+    } = supabase.auth.onAuthStateChange(async (event: AuthChangeEvent, session) => {
       if (session) {
         navigate("/");
       }
@@ -27,10 +27,26 @@ const Login = () => {
       }
 
       if (event === "PASSWORD_RECOVERY") {
-        toast({
-          title: "Email enviado",
-          description: "Verifique seu email para redefinir sua senha.",
+        const { error } = await supabase.functions.invoke("send-reset-password-email", {
+          body: {
+            to: [session?.user?.email || ""],
+            resetLink: window.location.href,
+          },
         });
+
+        if (error) {
+          console.error("Error sending reset password email:", error);
+          toast({
+            title: "Erro ao enviar email",
+            description: "Houve um problema ao enviar o email de redefinição de senha.",
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Email enviado",
+            description: "Verifique seu email para redefinir sua senha.",
+          });
+        }
       }
     });
 
