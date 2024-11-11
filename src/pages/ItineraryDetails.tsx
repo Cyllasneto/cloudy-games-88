@@ -144,3 +144,6 @@ const ItineraryDetails = () => {
       </div>
     </div>
   );
+};
+
+export default ItineraryDetails;
