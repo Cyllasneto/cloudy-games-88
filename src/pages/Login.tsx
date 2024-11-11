@@ -1,7 +1,7 @@
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "@/integrations/supabase/client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { AuthChangeEvent } from "@supabase/supabase-js";
@@ -9,7 +9,6 @@ import { AuthChangeEvent } from "@supabase/supabase-js";
 const Login = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [view, setView] = useState<"sign_in" | "sign_up">("sign_in");
 
   useEffect(() => {
     const {
@@ -19,11 +18,18 @@ const Login = () => {
         navigate("/");
       }
 
-      if (event === 'SIGNED_OUT') {
+      if (event === "SIGNED_OUT") {
         toast({
           title: "Sessão encerrada",
           description: "Você foi desconectado da sua conta.",
           variant: "destructive",
+        });
+      }
+
+      if (event === "PASSWORD_RECOVERY") {
+        toast({
+          title: "Email enviado",
+          description: "Verifique seu email para redefinir sua senha.",
         });
       }
     });
@@ -57,7 +63,6 @@ const Login = () => {
           }}
           theme="light"
           providers={[]}
-          view={view}
           localization={{
             variables: {
               sign_in: {
@@ -76,9 +81,15 @@ const Login = () => {
                 social_provider_text: 'Criar conta com {{provider}}',
                 link_text: 'Não tem uma conta? Cadastre-se',
               },
+              forgotten_password: {
+                email_label: 'Email',
+                password_label: 'Senha',
+                button_label: 'Enviar instruções',
+                loading_button_label: 'Enviando instruções...',
+                link_text: 'Esqueceu sua senha?',
+              },
             },
           }}
-          showLinks={true}
         />
       </div>
     </div>
