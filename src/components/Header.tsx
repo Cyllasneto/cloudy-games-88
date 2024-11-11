@@ -13,17 +13,15 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
-      // First check if we have a session
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      if (!session) {
-        // If no session exists, just redirect to login
-        navigate("/login");
-        return;
-      }
+      // Clear local storage and session
+      localStorage.clear();
+      sessionStorage.clear();
 
-      // Proceed with logout if we have a session
-      const { error } = await supabase.auth.signOut();
+      // Sign out from Supabase
+      const { error } = await supabase.auth.signOut({
+        scope: 'local'
+      });
+
       if (error) {
         console.error("Error logging out:", error);
         toast({
@@ -36,7 +34,6 @@ const Header = () => {
           title: "Logout realizado com sucesso",
           description: "Até logo!",
         });
-        navigate("/login");
       }
     } catch (error) {
       console.error("Error during logout:", error);
@@ -45,7 +42,8 @@ const Header = () => {
         description: "Ocorreu um erro inesperado ao tentar sair.",
         variant: "destructive",
       });
-      // On error, still try to redirect to login
+    } finally {
+      // Always navigate to login page regardless of success/failure
       navigate("/login");
     }
   };
