@@ -27,6 +27,9 @@ const Login = () => {
       }
 
       if (event === "PASSWORD_RECOVERY") {
+        console.log("Password recovery event triggered");
+        console.log("User email:", session?.user?.email);
+        
         const { error } = await supabase.functions.invoke("send-reset-password-email", {
           body: {
             to: [session?.user?.email || ""],
