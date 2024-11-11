@@ -4,6 +4,8 @@ import { Card } from "@/components/ui/card";
 import { countries } from "@/data/countries";
 import { ActivityCard, ActivityDetail } from "@/components/itinerary/ActivityCard";
 import { ItineraryHeader } from "@/components/itinerary/ItineraryHeader";
+import { supabase } from "@/integrations/supabase/client";
+import { useQuery } from "@tanstack/react-query";
 
 interface DailyActivity {
   day: number;
@@ -28,87 +30,87 @@ interface Itinerary {
 const ItineraryDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [itinerary, setItinerary] = useState<Itinerary | null>(null);
 
-  useEffect(() => {
-    const loadItinerary = () => {
-      const saved = localStorage.getItem("myItineraries");
-      if (saved) {
-        const itineraries = JSON.parse(saved);
-        const found = itineraries.find((it: Itinerary) => it.id === id);
-        if (found) {
-          const countryData = countries[found.country.toLowerCase()];
-          
-          // Convert string activities to detailed activities with location data
-          const enhancedItinerary = {
-            ...found,
-            dailyActivities: found.dailyActivities.map((day: DailyActivity) => ({
-              ...day,
-              morningDetails: {
-                time: "09:00",
-                title: day.morning,
-                description: "Atividade programada com guia local.",
-                location: "Centro Histórico",
-                address: "Rua Principal, 123",
-                duration: "2-3 horas",
-                tips: [
-                  "Confirme o horário com antecedência",
-                  "Verifique as condições climáticas",
-                  "Leve documento de identificação",
-                  "Use roupas e calçados confortáveis"
-                ],
-                price: "Consulte valores",
-                website: countryData?.tips[0]?.link || "https://www.viator.com",
-                rating: 4.5
-              },
-              afternoonDetails: {
-                time: "14:00",
-                title: day.afternoon,
-                description: "Passeio guiado com experiência local.",
-                location: "Região Turística",
-                address: "Avenida do Turismo, 456",
-                duration: "3-4 horas",
-                tips: [
-                  "Reserve com antecedência",
-                  "Leve protetor solar",
-                  "Câmera fotográfica recomendada",
-                  "Disponível em vários idiomas"
-                ],
-                price: "Consulte valores",
-                website: countryData?.tips[1]?.link || "https://www.getyourguide.com",
-                rating: 4.8
-              },
-              eveningDetails: {
-                time: "19:00",
-                title: day.evening,
-                description: "Experiência gastronômica local.",
-                location: "Bairro Gastronômico",
-                address: "Praça da Gastronomia, 789",
-                duration: "2-3 horas",
-                tips: [
-                  "Reserva antecipada necessária",
-                  "Menu degustação disponível",
-                  "Dress code: Smart casual",
-                  "Opções vegetarianas disponíveis"
-                ],
-                price: "Consulte valores",
-                website: countryData?.tips[2]?.link || "https://www.thefork.com",
-                rating: 4.7
-              }
-            }))
-          };
-          setItinerary(enhancedItinerary);
-        }
+  const { data: itinerary, isLoading } = useQuery({
+    queryKey: ['itinerary', id],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('itineraries')
+        .select('*')
+        .eq('id', id)
+        .single()
+
+      if (error) throw error
+
+      const countryData = countries[data.country.toLowerCase()]
+      
+      // Convert database format to component format
+      const enhancedItinerary = {
+        ...data,
+        dailyActivities: data.daily_activities.map((day: DailyActivity) => ({
+          ...day,
+          morningDetails: {
+            time: "09:00",
+            title: day.morning,
+            description: "Atividade programada com guia local.",
+            location: "Centro Histórico",
+            address: "Rua Principal, 123",
+            duration: "2-3 horas",
+            tips: [
+              "Confirme o horário com antecedência",
+              "Verifique as condições climáticas",
+              "Leve documento de identificação",
+              "Use roupas e calçados confortáveis"
+            ],
+            price: "Consulte valores",
+            website: countryData?.tips[0]?.link || "https://www.viator.com",
+            rating: 4.5
+          },
+          afternoonDetails: {
+            time: "14:00",
+            title: day.afternoon,
+            description: "Passeio guiado com experiência local.",
+            location: "Região Turística",
+            address: "Avenida do Turismo, 456",
+            duration: "3-4 horas",
+            tips: [
+              "Reserve com antecedência",
+              "Leve protetor solar",
+              "Câmera fotográfica recomendada",
+              "Disponível em vários idiomas"
+            ],
+            price: "Consulte valores",
+            website: countryData?.tips[1]?.link || "https://www.getyourguide.com",
+            rating: 4.8
+          },
+          eveningDetails: {
+            time: "19:00",
+            title: day.evening,
+            description: "Experiência gastronômica local.",
+            location: "Bairro Gastronômico",
+            address: "Praça da Gastronomia, 789",
+            duration: "2-3 horas",
+            tips: [
+              "Reserva antecipada necessária",
+              "Menu degustação disponível",
+              "Dress code: Smart casual",
+              "Opções vegetarianas disponíveis"
+            ],
+            price: "Consulte valores",
+            website: countryData?.tips[2]?.link || "https://www.thefork.com",
+            rating: 4.7
+          }
+        }))
       }
-    };
 
-    loadItinerary();
-  }, [id]);
+      return enhancedItinerary
+    }
+  })
 
-  if (!itinerary) {
+  if (isLoading || !itinerary) {
     return (
       <div className="container max-w-4xl mx-auto px-4 py-8">
-        <div className="text-center">Roteiro não encontrado</div>
+        <div className="text-center">Carregando roteiro...</div>
       </div>
     );
   }

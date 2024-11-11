@@ -27,6 +27,8 @@ import { useNavigate } from "react-router-dom"
 import { Edit, Eye, Trash2 } from "lucide-react"
 import { TripPlanner } from "./TripPlanner"
 import { useToast } from "./ui/use-toast"
+import { supabase } from "@/integrations/supabase/client"
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
 
 interface DailyActivity {
   day: number
@@ -46,42 +48,55 @@ interface Itinerary {
 }
 
 export function MyItineraries() {
-  const [itineraries, setItineraries] = useState<Itinerary[]>([])
   const [editingItinerary, setEditingItinerary] = useState<Itinerary | null>(null)
   const [deleteItineraryId, setDeleteItineraryId] = useState<string | null>(null)
   const navigate = useNavigate()
   const { toast } = useToast()
-  
-  useEffect(() => {
-    const loadItineraries = () => {
-      const saved = localStorage.getItem('myItineraries')
-      if (saved) {
-        const parsedItineraries = JSON.parse(saved).map((itinerary: Itinerary) => ({
-          ...itinerary,
-          id: itinerary.id || crypto.randomUUID()
-        }))
-        setItineraries(parsedItineraries)
-      }
+  const queryClient = useQueryClient()
+
+  const { data: itineraries = [], isLoading } = useQuery({
+    queryKey: ['itineraries'],
+    queryFn: async () => {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return []
+
+      const { data, error } = await supabase
+        .from('itineraries')
+        .select('*')
+        .order('created_at', { ascending: false })
+
+      if (error) throw error
+      return data || []
     }
+  })
 
-    loadItineraries()
-    window.addEventListener('storage', loadItineraries)
-    return () => window.removeEventListener('storage', loadItineraries)
-  }, [])
+  const deleteMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase
+        .from('itineraries')
+        .delete()
+        .eq('id', id)
+      
+      if (error) throw error
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['itineraries'] })
+      toast({
+        title: "Roteiro excluído",
+        description: "Seu roteiro foi excluído com sucesso.",
+      })
+      setDeleteItineraryId(null)
+    },
+    onError: () => {
+      toast({
+        title: "Erro ao excluir",
+        description: "Não foi possível excluir o roteiro. Tente novamente.",
+        variant: "destructive",
+      })
+    }
+  })
 
-  const handleDeleteItinerary = (id: string) => {
-    const updatedItineraries = itineraries.filter(itinerary => itinerary.id !== id)
-    localStorage.setItem('myItineraries', JSON.stringify(updatedItineraries))
-    window.dispatchEvent(new Event('storage'))
-    setDeleteItineraryId(null)
-    
-    toast({
-      title: "Roteiro excluído",
-      description: "Seu roteiro foi excluído com sucesso.",
-    })
-  }
-
-  if (itineraries.length === 0) {
+  if (isLoading) {
     return null
   }
 
@@ -165,7 +180,7 @@ export function MyItineraries() {
           <AlertDialogFooter>
             <AlertDialogCancel>Cancelar</AlertDialogCancel>
             <AlertDialogAction
-              onClick={() => deleteItineraryId && handleDeleteItinerary(deleteItineraryId)}
+              onClick={() => deleteItineraryId && deleteMutation.mutate(deleteItineraryId)}
               className="bg-red-500 hover:bg-red-600"
             >
               Excluir

@@ -14,6 +14,8 @@ import { useToast } from "@/components/ui/use-toast";
 import { generateDailyItinerary } from "./trip-planner/tripPlannerUtils";
 import { countries } from "@/data/countries";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface TripPlannerProps {
   isEditing?: boolean;
@@ -25,38 +27,78 @@ export function TripPlanner({ isEditing, editData, onClose }: TripPlannerProps) 
   const [open, setOpen] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
-  const handleGenerateItinerary = (formData: any) => {
+  const saveItineraryMutation = useMutation({
+    mutationFn: async (itinerary: any) => {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) throw new Error('User not authenticated')
+
+      if (editData?.id) {
+        const { error } = await supabase
+          .from('itineraries')
+          .update({
+            country: itinerary.country,
+            days: itinerary.days,
+            date: itinerary.date,
+            preferences: itinerary.preferences,
+            daily_activities: itinerary.dailyActivities,
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', editData.id)
+
+        if (error) throw error
+        return editData.id
+      } else {
+        const { data, error } = await supabase
+          .from('itineraries')
+          .insert({
+            country: itinerary.country,
+            days: itinerary.days,
+            date: itinerary.date,
+            preferences: itinerary.preferences,
+            daily_activities: itinerary.dailyActivities
+          })
+          .select()
+          .single()
+
+        if (error) throw error
+        return data.id
+      }
+    },
+    onSuccess: (itineraryId) => {
+      queryClient.invalidateQueries({ queryKey: ['itineraries'] })
+      toast({
+        title: editData ? "Roteiro Atualizado!" : "Roteiro Personalizado Gerado!",
+        description: "Seu roteiro foi salvo com sucesso.",
+      })
+      setOpen(false)
+      if (onClose) onClose()
+      navigate(`/itinerary/${itineraryId}`)
+    },
+    onError: () => {
+      toast({
+        title: "Erro ao salvar",
+        description: "Não foi possível salvar o roteiro. Tente novamente.",
+        variant: "destructive",
+      })
+    }
+  })
+
+  const handleGenerateItinerary = async (formData: any) => {
     const { selectedCountry, date, selectedDays, selectedPreferences } = formData;
     
     const dailyActivities = generateDailyItinerary(selectedCountry, selectedDays, selectedPreferences);
 
-    const itineraryId = editData?.id || crypto.randomUUID();
     const itinerary = {
-      id: itineraryId,
       country: selectedCountry,
       days: selectedDays,
       date: date.toISOString(),
       preferences: selectedPreferences,
-      dailyActivities: dailyActivities
+      dailyActivities
     };
 
-    const savedItineraries = JSON.parse(localStorage.getItem('myItineraries') || '[]');
-    const updatedItineraries = editData 
-      ? savedItineraries.map((it: any) => it.id === editData.id ? itinerary : it)
-      : [...savedItineraries, itinerary];
-    
-    localStorage.setItem('myItineraries', JSON.stringify(updatedItineraries));
-    window.dispatchEvent(new Event('storage'));
-
-    toast({
-      title: editData ? "Roteiro Atualizado!" : "Roteiro Personalizado Gerado!",
-      description: `${selectedDays} dias em ${countries[selectedCountry].title}`,
-    });
-
-    setOpen(false);
-    if (onClose) onClose();
-    navigate(`/itinerary/${itineraryId}`);
+    saveItineraryMutation.mutate(itinerary)
   };
 
   return (
