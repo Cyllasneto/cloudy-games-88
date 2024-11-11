@@ -12,19 +12,29 @@ const Header = () => {
   const { toast } = useToast();
 
   const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        console.error("Error logging out:", error);
+        toast({
+          title: "Erro ao sair",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Logout realizado com sucesso",
+          description: "Até logo!",
+        });
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
       toast({
         title: "Erro ao sair",
-        description: error.message,
+        description: "Ocorreu um erro inesperado ao tentar sair.",
         variant: "destructive",
       });
-    } else {
-      toast({
-        title: "Logout realizado com sucesso",
-        description: "Até logo!",
-      });
-      navigate("/login");
     }
   };
 
