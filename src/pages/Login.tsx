@@ -27,7 +27,7 @@ const Login = () => {
         });
       }
 
-      if (event === 'USER_DELETED') {
+      if (event === 'INVALID_CREDENTIALS') {
         toast({
           title: "Erro de autenticação",
           description: "Credenciais inválidas. Por favor, tente novamente.",
