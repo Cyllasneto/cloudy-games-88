@@ -4,7 +4,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
-import { AuthError } from "@supabase/supabase-js";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,22 +11,23 @@ const Login = () => {
   const [view, setView] = useState<"sign_in" | "sign_up">("sign_in");
 
   useEffect(() => {
-    // Check if user is already logged in
-    supabase.auth.onAuthStateChange((event, session) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
       if (session) {
         navigate("/");
       }
 
-      // Handle authentication errors
-      if (!session && (event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED')) {
-        setView("sign_up");
+      if (event === 'USER_DELETED' || event === 'SIGNED_OUT') {
         toast({
-          title: "Erro de autenticação",
-          description: "Credenciais inválidas. Por favor, tente novamente ou crie uma nova conta.",
+          title: "Sessão encerrada",
+          description: "Você foi desconectado da sua conta.",
           variant: "destructive",
         });
       }
     });
+
+    return () => subscription.unsubscribe();
   }, [navigate, toast]);
 
   return (
