@@ -8,6 +8,7 @@ import { useToast } from "@/components/ui/use-toast";
 const Login = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [view, setView] = useState<"sign_in" | "sign_up">("sign_in");
 
   useEffect(() => {
     // Check if user is already logged in
@@ -18,9 +19,10 @@ const Login = () => {
     });
 
     // Listen for auth errors
-    const handleAuthError = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === "USER_NOT_FOUND") {
-        Auth.signUp(); // Switch to sign up view
+    const handleAuthError = supabase.auth.onAuthStateChange(async (event) => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user && event === "SIGNED_OUT") {
+        setView("sign_up");
         toast({
           title: "Usuário não encontrado",
           description: "Por favor, crie uma nova conta.",
@@ -50,7 +52,7 @@ const Login = () => {
           appearance={{ theme: ThemeSupa }}
           theme="light"
           providers={[]}
-          view="sign_in"
+          view={view}
           showLinks={true}
         />
       </div>
