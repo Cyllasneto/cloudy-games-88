@@ -8,6 +8,10 @@ import Contact from "@/pages/Contact";
 import Privacy from "@/pages/Privacy";
 import Login from "@/pages/Login";
 import { supabase } from "./integrations/supabase/client";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+// Create a client
+const queryClient = new QueryClient();
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
@@ -23,31 +27,33 @@ function App() {
   }
 
   return (
-    <Router>
-      <div className="flex flex-col min-h-screen">
-        {isAuthenticated && <Header />}
-        <Routes>
-          <Route
-            path="/"
-            element={isAuthenticated ? <Index /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/contact"
-            element={isAuthenticated ? <Contact /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/privacy"
-            element={isAuthenticated ? <Privacy /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/login"
-            element={!isAuthenticated ? <Login /> : <Navigate to="/" />}
-          />
-        </Routes>
-        {isAuthenticated && <Footer />}
-        <Toaster />
-      </div>
-    </Router>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <div className="flex flex-col min-h-screen">
+          {isAuthenticated && <Header />}
+          <Routes>
+            <Route
+              path="/"
+              element={isAuthenticated ? <Index /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/contact"
+              element={isAuthenticated ? <Contact /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/privacy"
+              element={isAuthenticated ? <Privacy /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/login"
+              element={!isAuthenticated ? <Login /> : <Navigate to="/" />}
+            />
+          </Routes>
+          {isAuthenticated && <Footer />}
+          <Toaster />
+        </div>
+      </Router>
+    </QueryClientProvider>
   );
 }
 
