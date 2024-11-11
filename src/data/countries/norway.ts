@@ -73,48 +73,48 @@ export const norway: Country = {
     }
   ],
   itinerary: {
-    mapCenter: [59.9139, 10.7522], // Coordenadas de Oslo
+    mapCenter: [59.9139, 10.7522], // Oslo coordinates
     mapZoom: 12,
     routes: [
       {
         day: 1,
-        description: "Descubra Oslo e sua cultura",
+        description: "Oslo Clássica",
         locations: [
           {
             name: "Opera House",
             coordinates: [59.9074, 10.7526],
-            description: "Visite o icônico edifício à beira-mar"
+            description: "Ícone arquitetônico à beira-mar"
           },
           {
             name: "Parque Vigeland",
             coordinates: [59.9270, 10.7001],
-            description: "Explore o maior parque de esculturas do mundo"
+            description: "Maior parque de esculturas do mundo"
           },
           {
             name: "Museu Viking",
             coordinates: [59.9044, 10.6843],
-            description: "Conheça a história dos vikings"
+            description: "História viking com navios originais"
           }
         ]
       },
       {
         day: 2,
-        description: "Explore os fiordes noruegueses",
+        description: "Natureza e Cultura",
         locations: [
           {
-            name: "Geirangerfjord",
-            coordinates: [62.1049, 7.0752],
-            description: "Um dos fiordes mais espetaculares da Noruega"
+            name: "Holmenkollen",
+            coordinates: [59.9632, 10.6654],
+            description: "Famoso salto de esqui com vista panorâmica"
           },
           {
-            name: "Trolltunga",
-            coordinates: [60.1241, 6.7400],
-            description: "Vista panorâmica impressionante"
+            name: "Museu Munch",
+            coordinates: [59.9161, 10.7516],
+            description: "Obras do famoso pintor Edvard Munch"
           },
           {
-            name: "Bergen",
-            coordinates: [60.3913, 5.3221],
-            description: "Cidade histórica dos fiordes"
+            name: "Aker Brygge",
+            coordinates: [59.9111, 10.7289],
+            description: "Área portuária moderna com restaurantes"
           }
         ]
       }

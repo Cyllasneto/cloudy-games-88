@@ -77,7 +77,7 @@ export const italy: Country = {
       type: "activity",
       title: "Museus Vaticanos",
       description: "Explore uma das maiores coleções de arte do mundo, incluindo a Capela Sistina.",
-      price: "€€€",
+      price: "€€",
       link: "https://www.museivaticani.va/",
       image: "https://images.unsplash.com/photo-1525874684015-58379d421a52",
       highlights: [
@@ -101,5 +101,53 @@ export const italy: Country = {
         "Alta gastronomia italiana"
       ]
     }
-  ]
+  ],
+  itinerary: {
+    mapCenter: [41.9028, 12.4964], // Rome coordinates
+    mapZoom: 13,
+    routes: [
+      {
+        day: 1,
+        description: "Roma Antiga e Clássica",
+        locations: [
+          {
+            name: "Coliseu",
+            coordinates: [41.8902, 12.4922],
+            description: "Anfiteatro mais famoso do mundo antigo"
+          },
+          {
+            name: "Fórum Romano",
+            coordinates: [41.8925, 12.4853],
+            description: "Centro da vida pública na Roma antiga"
+          },
+          {
+            name: "Pantheon",
+            coordinates: [41.8986, 12.4769],
+            description: "Templo romano bem preservado"
+          }
+        ]
+      },
+      {
+        day: 2,
+        description: "Vaticano e Roma Barroca",
+        locations: [
+          {
+            name: "Museus Vaticanos",
+            coordinates: [41.9067, 12.4526],
+            description: "Uma das maiores coleções de arte do mundo"
+          },
+          {
+            name: "Fontana di Trevi",
+            coordinates: [41.9009, 12.4833],
+            description: "A mais famosa fonte de Roma"
+          },
+          {
+            name: "Praça Navona",
+            coordinates: [41.8992, 12.4731],
+            description: "Praça barroca com três fontes"
+          }
+        ]
+      }
+    ]
+  }
 };

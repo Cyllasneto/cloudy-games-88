@@ -101,5 +101,53 @@ export const spain: Country = {
         "Ambiente futurista"
       ]
     }
-  ]
+  ],
+  itinerary: {
+    mapCenter: [38.9067, 1.4206], // Ibiza coordinates
+    mapZoom: 12,
+    routes: [
+      {
+        day: 1,
+        description: "Praias e História",
+        locations: [
+          {
+            name: "Dalt Vila",
+            coordinates: [38.9067, 1.4331],
+            description: "Cidade antiga fortificada, Patrimônio da UNESCO"
+          },
+          {
+            name: "Playa d'en Bossa",
+            coordinates: [38.8875, 1.4061],
+            description: "Praia mais longa de Ibiza"
+          },
+          {
+            name: "Cala Salada",
+            coordinates: [38.9833, 1.2833],
+            description: "Praia cristalina cercada por pinheiros"
+          }
+        ]
+      },
+      {
+        day: 2,
+        description: "Cultura e Vida Noturna",
+        locations: [
+          {
+            name: "Mercado Las Dalias",
+            coordinates: [39.0167, 1.5833],
+            description: "Famoso mercado hippie"
+          },
+          {
+            name: "Café del Mar",
+            coordinates: [38.9803, 1.2989],
+            description: "Local icônico para ver o pôr do sol"
+          },
+          {
+            name: "Pacha Ibiza",
+            coordinates: [38.9181, 1.4433],
+            description: "Uma das casas noturnas mais famosas do mundo"
+          }
+        ]
+      }
+    ]
+  }
 };
