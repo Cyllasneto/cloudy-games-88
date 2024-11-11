@@ -30,24 +30,43 @@ const Login = () => {
         console.log("Password recovery event triggered");
         console.log("User email:", session?.user?.email);
         
-        const { error } = await supabase.functions.invoke("send-reset-password-email", {
-          body: {
-            to: [session?.user?.email || ""],
-            resetLink: window.location.href,
-          },
-        });
-
-        if (error) {
-          console.error("Error sending reset password email:", error);
-          toast({
-            title: "Erro ao enviar email",
-            description: "Houve um problema ao enviar o email de redefinição de senha.",
-            variant: "destructive",
+        try {
+          const { error } = await supabase.functions.invoke("send-reset-password-email", {
+            body: {
+              to: [session?.user?.email || ""],
+              resetLink: window.location.href,
+            },
           });
-        } else {
+
+          if (error) {
+            console.error("Error sending reset password email:", error);
+            
+            // Check if it's a rate limit error
+            if (error.message?.includes('429') || error.message?.includes('rate_limit')) {
+              toast({
+                title: "Aguarde um momento",
+                description: "Por razões de segurança, você precisa aguardar 42 segundos antes de solicitar outro email de redefinição.",
+                variant: "destructive",
+              });
+            } else {
+              toast({
+                title: "Erro ao enviar email",
+                description: "Houve um problema ao enviar o email de redefinição de senha.",
+                variant: "destructive",
+              });
+            }
+          } else {
+            toast({
+              title: "Email enviado",
+              description: "Verifique seu email para redefinir sua senha.",
+            });
+          }
+        } catch (err) {
+          console.error("Error in password recovery:", err);
           toast({
-            title: "Email enviado",
-            description: "Verifique seu email para redefinir sua senha.",
+            title: "Erro no processo",
+            description: "Ocorreu um erro ao processar sua solicitação. Tente novamente mais tarde.",
+            variant: "destructive",
           });
         }
       }
