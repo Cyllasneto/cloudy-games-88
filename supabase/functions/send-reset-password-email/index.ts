@@ -24,8 +24,6 @@ const handler = async (req: Request): Promise<Response> => {
     
     const emailContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <h1 style="color: #2563eb; margin-bottom: 24px;">Redefinição de Senha - Cloudy Trip</h1>
-        
         <p style="margin-bottom: 16px;">Olá ${username},</p>
         
         <p style="margin-bottom: 16px;">Recebemos uma solicitação para redefinir sua senha no Cloudy Trip. Se você não fez essa solicitação, por favor, ignore este e-mail.</p>
@@ -44,23 +42,22 @@ const handler = async (req: Request): Promise<Response> => {
           </a>
         </div>
         
-        <p style="margin-bottom: 16px; color: #666;">Este link será válido por 30 minutos. Após esse tempo, será necessário solicitar uma nova redefinição de senha.</p>
+        <p style="margin-bottom: 16px;">Este link será válido por 30 minutos. Após esse tempo, será necessário solicitar uma nova redefinição de senha.</p>
         
-        <div style="background-color: #f3f4f6; padding: 16px; border-radius: 6px; margin: 24px 0;">
-          <h3 style="color: #1f2937; margin-bottom: 12px;">Dicas para manter sua conta segura:</h3>
-          <ul style="color: #4b5563; margin: 0; padding-left: 20px;">
+        <div style="margin: 24px 0;">
+          <p style="margin-bottom: 12px;"><strong>Dicas para manter sua conta segura:</strong></p>
+          <ul style="margin: 0; padding-left: 20px;">
             <li>Use uma senha forte, com letras, números e símbolos</li>
             <li>Evite reutilizar senhas de outros sites</li>
-            <li>Nunca compartilhe sua senha com outras pessoas</li>
+            <li>Ative a autenticação de dois fatores, se disponível</li>
           </ul>
         </div>
         
-        <p style="color: #666; margin-top: 24px;">Se precisar de ajuda, entre em contato com nosso suporte pelo e-mail suporte@cloudytrip.netlify.app</p>
+        <p style="margin-top: 24px;">Se precisar de mais ajuda, entre em contato com nosso suporte pelo e-mail suporte@cloudytrip.netlify.app</p>
         
-        <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 24px 0;">
-        
-        <p style="color: #9ca3af; font-size: 14px; text-align: center;">
-          Esta é uma mensagem automática. Por favor, não responda a este e-mail.
+        <p style="margin-top: 24px;">
+          Atenciosamente,<br>
+          Equipe Cloudy Trip
         </p>
       </div>
     `;
