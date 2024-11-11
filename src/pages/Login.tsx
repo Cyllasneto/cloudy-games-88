@@ -45,7 +45,7 @@ const Login = () => {
             Bem-vindo ao Cloudy Trip
           </h2>
           <p className="mt-2 text-sm text-gray-600">
-            {view === "sign_in" ? "Faça login na sua conta" : "Crie sua conta"}
+            Faça login ou crie sua conta
           </p>
         </div>
         <Auth
