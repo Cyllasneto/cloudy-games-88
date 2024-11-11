@@ -1,6 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 
-const RESEND_API_KEY = "re_cswzCXu9_JmiZMJ63iunEkXB47yY15FCv";
+const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -23,26 +23,46 @@ const handler = async (req: Request): Promise<Response> => {
     const { to, resetLink, username = "Usuário" }: EmailRequest = await req.json();
     
     const emailContent = `
-      <h2>Olá ${username},</h2>
-      
-      <p>Recebemos uma solicitação para redefinir sua senha no Cloudy Trip. Se você não fez essa solicitação, por favor, ignore este e-mail.</p>
-      
-      <p>Para redefinir sua senha e recuperar o acesso à sua conta, clique no botão abaixo:</p>
-      
-      <a href="${resetLink}" style="display: inline-block; padding: 10px 20px; background-color: #2563eb; color: white; text-decoration: none; border-radius: 5px; margin: 15px 0;">Redefinir Senha</a>
-      
-      <p>Este link será válido por 30 minutos. Após esse tempo, será necessário solicitar uma nova redefinição de senha.</p>
-      
-      <h3>Dicas para manter sua conta segura:</h3>
-      <ul>
-        <li>Use uma senha forte, com letras, números e símbolos.</li>
-        <li>Evite reutilizar senhas de outros sites.</li>
-        <li>Ative a autenticação de dois fatores, se disponível.</li>
-      </ul>
-      
-      <p>Se precisar de mais ajuda, entre em contato com nosso suporte pelo e-mail suporte@cloudytrip.netlify.app.</p>
-      
-      <p>Atenciosamente,<br>Equipe Cloudy Trip</p>
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h1 style="color: #2563eb; margin-bottom: 24px;">Redefinição de Senha - Cloudy Trip</h1>
+        
+        <p style="margin-bottom: 16px;">Olá ${username},</p>
+        
+        <p style="margin-bottom: 16px;">Recebemos uma solicitação para redefinir sua senha no Cloudy Trip. Se você não fez essa solicitação, por favor, ignore este e-mail.</p>
+        
+        <p style="margin-bottom: 16px;">Para redefinir sua senha e recuperar o acesso à sua conta, clique no botão abaixo:</p>
+        
+        <div style="text-align: center; margin: 32px 0;">
+          <a href="${resetLink}" 
+             style="background-color: #2563eb; 
+                    color: white; 
+                    padding: 12px 24px; 
+                    text-decoration: none; 
+                    border-radius: 6px; 
+                    font-weight: bold;">
+            Redefinir Senha
+          </a>
+        </div>
+        
+        <p style="margin-bottom: 16px; color: #666;">Este link será válido por 30 minutos. Após esse tempo, será necessário solicitar uma nova redefinição de senha.</p>
+        
+        <div style="background-color: #f3f4f6; padding: 16px; border-radius: 6px; margin: 24px 0;">
+          <h3 style="color: #1f2937; margin-bottom: 12px;">Dicas para manter sua conta segura:</h3>
+          <ul style="color: #4b5563; margin: 0; padding-left: 20px;">
+            <li>Use uma senha forte, com letras, números e símbolos</li>
+            <li>Evite reutilizar senhas de outros sites</li>
+            <li>Nunca compartilhe sua senha com outras pessoas</li>
+          </ul>
+        </div>
+        
+        <p style="color: #666; margin-top: 24px;">Se precisar de ajuda, entre em contato com nosso suporte pelo e-mail suporte@cloudytrip.netlify.app</p>
+        
+        <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 24px 0;">
+        
+        <p style="color: #9ca3af; font-size: 14px; text-align: center;">
+          Esta é uma mensagem automática. Por favor, não responda a este e-mail.
+        </p>
+      </div>
     `;
 
     console.log("Sending email to:", to);
