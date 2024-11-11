@@ -16,10 +16,13 @@ import { countries } from "@/data/countries";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import type { Database } from "@/integrations/supabase/types";
+
+type Itinerary = Database['public']['Tables']['itineraries']['Row']
 
 interface TripPlannerProps {
   isEditing?: boolean;
-  editData?: any;
+  editData?: Itinerary;
   onClose?: () => void;
 }
 
@@ -30,7 +33,7 @@ export function TripPlanner({ isEditing, editData, onClose }: TripPlannerProps) 
   const queryClient = useQueryClient();
 
   const saveItineraryMutation = useMutation({
-    mutationFn: async (itinerary: any) => {
+    mutationFn: async (itinerary: Omit<Database['public']['Tables']['itineraries']['Insert'], 'id' | 'user_id'>) => {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) throw new Error('User not authenticated')
 
@@ -42,7 +45,7 @@ export function TripPlanner({ isEditing, editData, onClose }: TripPlannerProps) 
             days: itinerary.days,
             date: itinerary.date,
             preferences: itinerary.preferences,
-            daily_activities: itinerary.dailyActivities,
+            daily_activities: itinerary.daily_activities,
             updated_at: new Date().toISOString()
           })
           .eq('id', editData.id)
@@ -53,11 +56,12 @@ export function TripPlanner({ isEditing, editData, onClose }: TripPlannerProps) 
         const { data, error } = await supabase
           .from('itineraries')
           .insert({
+            user_id: user.id,
             country: itinerary.country,
             days: itinerary.days,
             date: itinerary.date,
             preferences: itinerary.preferences,
-            daily_activities: itinerary.dailyActivities
+            daily_activities: itinerary.daily_activities
           })
           .select()
           .single()
@@ -95,7 +99,7 @@ export function TripPlanner({ isEditing, editData, onClose }: TripPlannerProps) 
       days: selectedDays,
       date: date.toISOString(),
       preferences: selectedPreferences,
-      dailyActivities
+      daily_activities: dailyActivities
     };
 
     saveItineraryMutation.mutate(itinerary)

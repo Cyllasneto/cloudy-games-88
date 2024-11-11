@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { countries } from "@/data/countries";
@@ -6,26 +5,9 @@ import { ActivityCard, ActivityDetail } from "@/components/itinerary/ActivityCar
 import { ItineraryHeader } from "@/components/itinerary/ItineraryHeader";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
+import type { Database } from "@/integrations/supabase/types";
 
-interface DailyActivity {
-  day: number;
-  morning: string;
-  afternoon: string;
-  evening: string;
-  description: string;
-  morningDetails?: ActivityDetail;
-  afternoonDetails?: ActivityDetail;
-  eveningDetails?: ActivityDetail;
-}
-
-interface Itinerary {
-  id?: string;
-  country: string;
-  days: number;
-  date: string;
-  preferences: string[];
-  dailyActivities: DailyActivity[];
-}
+type Itinerary = Database['public']['Tables']['itineraries']['Row']
 
 const ItineraryDetails = () => {
   const { id } = useParams();
@@ -47,7 +29,7 @@ const ItineraryDetails = () => {
       // Convert database format to component format
       const enhancedItinerary = {
         ...data,
-        dailyActivities: data.daily_activities.map((day: DailyActivity) => ({
+        dailyActivities: (data.daily_activities as any[]).map((day: any) => ({
           ...day,
           morningDetails: {
             time: "09:00",
@@ -103,7 +85,7 @@ const ItineraryDetails = () => {
         }))
       }
 
-      return enhancedItinerary
+      return enhancedItinerary as Itinerary & { dailyActivities: any[] }
     }
   })
 
@@ -162,6 +144,3 @@ const ItineraryDetails = () => {
       </div>
     </div>
   );
-};
-
-export default ItineraryDetails;

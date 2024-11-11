@@ -29,23 +29,9 @@ import { TripPlanner } from "./TripPlanner"
 import { useToast } from "./ui/use-toast"
 import { supabase } from "@/integrations/supabase/client"
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import type { Database } from "@/integrations/supabase/types"
 
-interface DailyActivity {
-  day: number
-  morning: string
-  afternoon: string
-  evening: string
-  description: string
-}
-
-interface Itinerary {
-  id?: string
-  country: string
-  days: number
-  date: string
-  preferences: string[]
-  dailyActivities: DailyActivity[]
-}
+type Itinerary = Database['public']['Tables']['itineraries']['Row']
 
 export function MyItineraries() {
   const [editingItinerary, setEditingItinerary] = useState<Itinerary | null>(null)
@@ -66,7 +52,7 @@ export function MyItineraries() {
         .order('created_at', { ascending: false })
 
       if (error) throw error
-      return data || []
+      return data as Itinerary[]
     }
   })
 
