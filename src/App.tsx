@@ -1,44 +1,54 @@
-import React from "react"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { Toaster } from "@/components/ui/toaster"
-import { Toaster as Sonner } from "@/components/ui/sonner"
-import { TooltipProvider } from "@/components/ui/tooltip"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import Header from "./components/Header"
-import Footer from "./components/Footer"
-import Index from "./pages/Index"
-import CountryPage from "./pages/CountryPage"
-import Privacy from "./pages/Privacy"
-import Contact from "./pages/Contact"
-import ItineraryDetails from "./pages/ItineraryDetails"
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Toaster } from "@/components/ui/toaster";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Index from "@/pages/Index";
+import Contact from "@/pages/Contact";
+import Privacy from "@/pages/Privacy";
+import Login from "@/pages/Login";
+import { supabase } from "./integrations/supabase/client";
 
-// Create a client
-const queryClient = new QueryClient()
+function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
-const App = () => {
+  useEffect(() => {
+    supabase.auth.onAuthStateChange((event, session) => {
+      setIsAuthenticated(!!session);
+    });
+  }, []);
+
+  if (isAuthenticated === null) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <BrowserRouter>
-          <div className="min-h-screen flex flex-col">
-            <Header />
-            <div className="flex-1">
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/country/:countryId" element={<CountryPage />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/itinerary/:id" element={<ItineraryDetails />} />
-              </Routes>
-            </div>
-            <Footer />
-          </div>
-          <Toaster />
-          <Sonner />
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  )
+    <Router>
+      <div className="flex flex-col min-h-screen">
+        {isAuthenticated && <Header />}
+        <Routes>
+          <Route
+            path="/"
+            element={isAuthenticated ? <Index /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/contact"
+            element={isAuthenticated ? <Contact /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/privacy"
+            element={isAuthenticated ? <Privacy /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/login"
+            element={!isAuthenticated ? <Login /> : <Navigate to="/" />}
+          />
+        </Routes>
+        {isAuthenticated && <Footer />}
+        <Toaster />
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
