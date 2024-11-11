@@ -24,8 +24,8 @@ const Login = () => {
       if (!session && (event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED')) {
         setView("sign_up");
         toast({
-          title: "Usuário não encontrado",
-          description: "Por favor, crie uma nova conta.",
+          title: "Erro de autenticação",
+          description: "Credenciais inválidas. Por favor, tente novamente ou crie uma nova conta.",
           variant: "destructive",
         });
       }
@@ -84,6 +84,13 @@ const Login = () => {
             },
           }}
           showLinks={true}
+          onError={(error: AuthError) => {
+            toast({
+              title: "Erro de autenticação",
+              description: "Credenciais inválidas. Por favor, tente novamente ou crie uma nova conta.",
+              variant: "destructive",
+            });
+          }}
         />
       </div>
     </div>
