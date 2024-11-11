@@ -32,6 +32,7 @@ const Login = () => {
           appearance={{ theme: ThemeSupa }}
           theme="light"
           providers={[]}
+          view="magic_link"
         />
       </div>
     </div>
