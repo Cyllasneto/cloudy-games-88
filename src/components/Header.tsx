@@ -13,6 +13,16 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
+      // First check if we have a session
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session) {
+        // If no session exists, just redirect to login
+        navigate("/login");
+        return;
+      }
+
+      // Proceed with logout if we have a session
       const { error } = await supabase.auth.signOut();
       if (error) {
         console.error("Error logging out:", error);
@@ -35,6 +45,8 @@ const Header = () => {
         description: "Ocorreu um erro inesperado ao tentar sair.",
         variant: "destructive",
       });
+      // On error, still try to redirect to login
+      navigate("/login");
     }
   };
 
