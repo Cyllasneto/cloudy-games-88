@@ -13,11 +13,8 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
-      // Clear local storage and session
       localStorage.clear();
       sessionStorage.clear();
-
-      // Sign out from Supabase
       const { error } = await supabase.auth.signOut({
         scope: 'local'
       });
@@ -43,7 +40,6 @@ const Header = () => {
         variant: "destructive",
       });
     } finally {
-      // Always navigate to login page regardless of success/failure
       navigate("/login");
     }
   };

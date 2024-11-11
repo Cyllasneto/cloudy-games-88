@@ -7,10 +7,11 @@ import Index from "@/pages/Index";
 import Contact from "@/pages/Contact";
 import Privacy from "@/pages/Privacy";
 import Login from "@/pages/Login";
+import CountryPage from "@/pages/CountryPage";
+import ItineraryDetails from "@/pages/ItineraryDetails";
 import { supabase } from "./integrations/supabase/client";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-// Create a client
 const queryClient = new QueryClient();
 
 function App() {
@@ -47,6 +48,14 @@ function App() {
             <Route
               path="/login"
               element={!isAuthenticated ? <Login /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/country/:countryId"
+              element={isAuthenticated ? <CountryPage /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/itinerary/:id"
+              element={isAuthenticated ? <ItineraryDetails /> : <Navigate to="/login" />}
             />
           </Routes>
           {isAuthenticated && <Footer />}
