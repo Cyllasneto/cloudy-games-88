@@ -69,7 +69,7 @@ export function TripPlanner({ isEditing, editData, onClose }: TripPlannerProps) 
           </Button>
         </DialogTrigger>
       )}
-      <DialogContent className="w-[95vw] max-w-[425px] p-4 sm:p-6">
+      <DialogContent className="w-[95vw] max-w-[425px] p-4 sm:p-6 max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-lg sm:text-xl">{isEditing ? 'Editar Roteiro' : 'Planejar sua Viagem'}</DialogTitle>
           <DialogDescription className="text-sm sm:text-base">
