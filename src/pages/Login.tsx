@@ -40,6 +40,7 @@ const Login = () => {
             }
           }}
           theme="light"
+          providers={[]}
         />
       </Card>
     </div>
