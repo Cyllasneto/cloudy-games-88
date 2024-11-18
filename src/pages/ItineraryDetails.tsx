@@ -38,7 +38,7 @@ const ItineraryDetails = () => {
             location: "Centro Histórico",
             address: "Rua Principal, 123",
             duration: "2-3 horas",
-            tips: [
+            tips: day.morningTips || [
               "Confirme o horário com antecedência",
               "Verifique as condições climáticas",
               "Leve documento de identificação",
@@ -55,7 +55,7 @@ const ItineraryDetails = () => {
             location: "Região Turística",
             address: "Avenida do Turismo, 456",
             duration: "3-4 horas",
-            tips: [
+            tips: day.afternoonTips || [
               "Reserve com antecedência",
               "Leve protetor solar",
               "Câmera fotográfica recomendada",
@@ -72,7 +72,7 @@ const ItineraryDetails = () => {
             location: "Bairro Gastronômico",
             address: "Praça da Gastronomia, 789",
             duration: "2-3 horas",
-            tips: [
+            tips: day.eveningTips || [
               "Reserva antecipada necessária",
               "Menu degustação disponível",
               "Dress code: Smart casual",
