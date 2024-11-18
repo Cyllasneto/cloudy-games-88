@@ -14,7 +14,7 @@ const DestinationCard = ({ title, country, imageUrl, description, highlight }: D
     <Card className={`overflow-hidden group cursor-pointer transition-transform duration-300 hover:scale-105 ${
       highlight ? 'ring-2 ring-secondary ring-offset-2' : ''
     }`}>
-      <div className="relative h-48 sm:h-52 overflow-hidden">
+      <div className="relative h-40 sm:h-48 md:h-52 overflow-hidden">
         <img
           src={imageUrl}
           alt={title}
@@ -33,25 +33,25 @@ const DestinationCard = ({ title, country, imageUrl, description, highlight }: D
               <img 
                 src="https://i.etsystatic.com/37030538/r/il/26ebc3/4843127416/il_1080xN.4843127416_tacl.jpg" 
                 alt="Mickey Mouse"
-                className="w-8 h-8 object-contain mix-blend-multiply"
+                className="w-6 h-6 sm:w-8 sm:h-8 object-contain mix-blend-multiply"
               />
             ) : title === "Paris" ? (
               <img 
                 src="https://png.pngtree.com/png-clipart/20190617/original/pngtree-delicious-baguette-hand-painted-baguette-cartoon-baguette-nutrition-stick-png-image_3864759.jpg" 
                 alt="Baguette"
-                className="w-8 h-8 object-contain mix-blend-multiply"
+                className="w-6 h-6 sm:w-8 sm:h-8 object-contain mix-blend-multiply"
               />
             ) : null}
           </div>
         )}
       </div>
-      <div className="p-4">
-        <div className="flex items-center gap-2 text-primary mb-2">
-          <MapPin size={16} />
-          <span className="text-sm font-medium">{country}</span>
+      <div className="p-3 sm:p-4">
+        <div className="flex items-center gap-1 sm:gap-2 text-primary mb-1 sm:mb-2">
+          <MapPin className="h-3 w-3 sm:h-4 sm:w-4" />
+          <span className="text-xs sm:text-sm font-medium">{country}</span>
         </div>
-        <h3 className="text-lg font-semibold mb-2">{title}</h3>
-        <p className="text-sm text-gray-600 line-clamp-2">{description}</p>
+        <h3 className="text-base sm:text-lg font-semibold mb-1 sm:mb-2">{title}</h3>
+        <p className="text-xs sm:text-sm text-gray-600 line-clamp-2">{description}</p>
       </div>
     </Card>
   );
