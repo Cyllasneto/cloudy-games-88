@@ -39,7 +39,6 @@ const Login = () => {
               label: 'text-sm font-medium text-gray-700',
             }
           }}
-          providers={['google']}
           theme="light"
         />
       </Card>
